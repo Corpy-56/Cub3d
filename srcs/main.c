@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/03 12:33:46 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/03 12:56:48 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,6 @@ int	check_args(int argc, char **argv)
 	}
 	return (0);
 }
-
-// int main(int argc, char **argv)
-// {
-// 	t_game	game;
-
-// 	check_args(argc, argv);
-// 	parse_header_file(game.line, game.config, game.mode);
-// 	return (0);
-// }
 
 int	main(int argc, char **argv)
 {
