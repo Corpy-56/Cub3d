@@ -6,7 +6,7 @@
 #    By: skuor <skuor@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 16:18:45 by skuor             #+#    #+#              #
-#    Updated: 2026/01/02 17:35:51 by skuor            ###   ########.fr        #
+#    Updated: 2026/01/03 12:34:05 by skuor            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,10 @@ LIBFT_DIR = ./libft/
 
 SRC_FILES = init.c main.c
 
-UTILS_FILES = utils.c free.c
+UTILS_FILES = utils.c free.c utils_parsing.c
 
-PARSING_FILES = parsing.c parsing_color.c utils_parsing.c
+PARSING_FILES = parsing_header.c parsing_color.c parsing_map.c \
+				parsing_file.c
 
 
 OBJ = 	$(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o)) \
