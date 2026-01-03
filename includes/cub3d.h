@@ -31,8 +31,9 @@ void	init_config(t_config *config);
 void	init_tex(t_tex *tex);
 
 /* ********* parsing ********* */
-void	parse_header_file(const char *line, t_config *config, int *mode);
+void	parse_header(const char *line, t_config *config, int *mode);
 bool	parse_color(const char *line, int i, t_config *config);
+bool	parsing_file(const char *path, t_config *config);
 
 /* ******************************** UTILS ********************************** */
 
