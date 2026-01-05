@@ -34,6 +34,8 @@ void	init_tex(t_tex *tex);
 void	parse_header(const char *line, t_config *config, int *mode);
 bool	parse_color(const char *line, int i, t_config *config);
 bool	parsing_file(const char *path, t_config *config);
+int		parse_map(char *line, int fd, t_map map);
+
 
 /* ******************************** UTILS ********************************** */
 

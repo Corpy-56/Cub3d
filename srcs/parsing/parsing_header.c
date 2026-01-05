@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_header.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 08:57:38 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/03 12:09:37 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/05 09:36:43 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	parse_texture(const char *line, const char *id, char **dest)
 	t_tex	tex;
 	int		after;
 
-	tex.path = NULL;	
+	tex.path = NULL;
 	if (!line)
 		return ;
 	tex.i = skip_ws(line, 0);

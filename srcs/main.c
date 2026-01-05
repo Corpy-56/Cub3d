@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/03 12:33:46 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/05 09:37:30 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ int	main(int argc, char **argv)
 	if (!parsing_file(argv[1], &config))
 		return (ft_printf("Error parsing file\n"), 1);
 	return (0);
-	
+
 }

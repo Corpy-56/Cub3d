@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 13:52:37 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/02 17:35:26 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/05 09:37:23 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ bool	is_whitespace(char ws)
 		return (true);
 	return (false);
 }
+
 bool	no_digit(char *str)
 {
 	int	i;

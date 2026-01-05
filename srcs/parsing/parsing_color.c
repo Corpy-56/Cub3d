@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 15:08:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/02 17:29:46 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/05 09:36:14 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	parse_numbers(char *part, int *value)
 {
 	char	*trimmed;
 	int		tmp;
-	
+
 	trimmed = ft_strtrim(part, " \t");
 	if (!trimmed)
 		return (false);
@@ -46,8 +46,8 @@ bool	parse_3_rgb(char **parts, int *r, int *g, int *b)
 
 size_t	line_len(const char *line, int start)
 {
-	size_t len;
-	
+	size_t	len;
+
 	len = 0;
 	while (line[start + len] != '\n' && line[start + len] != '\0')
 		len++;
@@ -56,12 +56,12 @@ size_t	line_len(const char *line, int start)
 
 bool	parse_rgb_values(const char *line, int i, int *r, int *g, int *b)
 {
-	size_t len;
-	char *rgb_str;
-	char **parts;
-	int count;
+	size_t	len;
+	char	*rgb_str;
+	char	**parts;
+	int		count;
 
-	len = line_len(line, i);	
+	len = line_len(line, i);
 	rgb_str = ft_substr(line, i, len);
 	if (!rgb_str)
 		return (false);
@@ -98,11 +98,11 @@ void	set_color(t_config *config, char id, int r, int g, int b)
 
 bool	parse_color(const char *line, int i, t_config *config)
 {
-	char id;
-	int r;
-	int g;
-	int b;
-	
+	char	id;
+	int		r;
+	int		g;
+	int		b;
+
 	id = line[i];
 	if (id != 'F' && id != 'C')
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:14:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/03 12:30:23 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/05 11:21:38 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ bool	parsing_file(const char *path, t_config *config)
 	if (fd == -1)
 		return (false);
 	mode = HEADER;
-
-	// char	*line = "NO ./textures/north.xpm";
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -31,12 +29,7 @@ bool	parsing_file(const char *path, t_config *config)
 		{
 			parse_header(line, config, &mode);
 			if (mode == MAP)
-			{
-				ft_printf("MAP MODE\n");
-				free(line);
-				close (fd);
-				return (true);
-			}
+				parse_map(line, fd, config->map);
 		}
 		else
 		{
