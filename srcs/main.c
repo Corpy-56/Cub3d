@@ -3,48 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/03 12:56:48 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/05 17:16:59 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_args(int argc, char **argv)
-{
-	int	len;
 
-	len = ft_strlen(argv[1]);
-	if (argc > 2)
-	{
-		ft_printf("Error : Too many arguments !\n");
-		exit (1);
-	}
-	if (argc < 2)
-	{
-		ft_printf("Error : No map file !\n");
-		exit (1);
-	}
-	if (!ft_strnstr(&argv[1][len - 4], ".cub", 4))
-	{
-		ft_printf("Error : Map file extension must be .cub\n");
-		exit (1);
-	}
+int	on_destroy(t_config *game)
+{
+	//free_image(game);
+	mlx_destroy_window(game->screen.mlx_ptr, game->screen.win_ptr);
+	mlx_destroy_display(game->screen.mlx_ptr);
+	//free(game.screen.mlx_ptr);
+	//if (game->big_map != NULL || game->big_map->map != NULL)
+	//{
+	//	ft_free_tab(game->big_map->map);
+	//	free(game->big_map);
+	//	free(game);
+	//}
+	exit(0);
 	return (0);
+}
+
+int	keyboard_key(int keycode, t_config *game)//ici ca va etre les touches jouer
+{
+	if (keycode == 65307)
+		on_destroy(game);
+	//else if (keycode == 119)
+	//	ft_move_w(game);
+	//else if (keycode == 115)
+	//	ft_move_s(game);
+	//else if (keycode == 97)
+	//	ft_move_a(game);
+	//else if (keycode == 100)
+	//	ft_move_d(game);
+	return (-1);
+}
+
+void	ft_init_screen(t_mlx *screen)
+{
+	screen->mlx_ptr = mlx_init();
+	if (screen->mlx_ptr == NULL)
+		ft_error(0, NULL, "Mlx_init failed\n");
+	mlx_get_screen_size(screen->mlx_ptr, &screen->screen_size_width,
+		&screen->screen_size_height);
+	screen->win_ptr = mlx_new_window(screen->mlx_ptr, screen->screen_size_width, screen->screen_size_height, "Cub3d");
 }
 
 int	main(int argc, char **argv)
 {
 	t_config	config;
 
-	if (argc != 2)
-		return (1);
-
 	init_config(&config);
-	if (!parsing_file(argv[1], &config))
-		return (ft_printf("Error parsing file\n"), 1);
+	check_args(argc, argv);
+	//if (!parsing_file(argv[1], &config))
+	//	return (ft_printf("Error parsing file\n"), 1);
+	ft_init_screen(&config.screen);
+	mlx_key_hook(config.screen.win_ptr, keyboard_key, &config);
+	mlx_hook(&config.screen.win_ptr, 17, 0, on_destroy, &config);
+	mlx_loop(config.screen.mlx_ptr);
 	return (0);
-	
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skuor <skuor@student.42.fr>                +#+  +:+       +#+         #
+#    By: agouin <agouin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 16:18:45 by skuor             #+#    #+#              #
-#    Updated: 2026/01/03 12:34:05 by skuor            ###   ########.fr        #
+#    Updated: 2026/01/05 17:02:04 by agouin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ PARSING_DIR = $(SRC_DIR)parsing/
 
 LIBFT_DIR = ./libft/
 
-SRC_FILES = init.c main.c
+SRC_FILES = init.c main.c check_args.c
 
 UTILS_FILES = utils.c free.c utils_parsing.c
 
@@ -36,6 +36,10 @@ OBJ = 	$(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o)) \
 		$(addprefix $(OBJ_DIR), $(PARSING_FILES:.c=.o)) \
 
 INC_H = -I $(INC_DIR) -I $(LIBFT_DIR)/includes/
+
+MLX_DIR = minilibx-linux
+MLX_LIB = $(MLX_DIR)/libmlx.a
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 DEFAULT = \033[0m
 DEF_COLOR = \033[0;90m
@@ -52,7 +56,7 @@ $(OBJ_DIR):
 $(NAME): $(OBJ)
 	@echo "$(GREEN)$(NAME) compiled!$(DEFAULT)"
 	@$(MAKE) -C $(LIBFT_DIR)
-	@$(CC) $(CFLAGS) $(INC_H) $(OBJ) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
+	@$(CC) $(CFLAGS) $(INC_H) $(OBJ) -L$(LIBFT_DIR) -lft -lreadline  $(MLX_FLAGS) -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"

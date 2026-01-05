@@ -17,9 +17,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <math.h>
 
 #include "../libft/includes/libft.h"
 #include "structs.h"
+#include "../minilibx-linux/mlx.h"
 
 # define HEADER 0
 # define MAP 1
@@ -34,6 +36,14 @@ void	init_tex(t_tex *tex);
 void	parse_header(const char *line, t_config *config, int *mode);
 bool	parse_color(const char *line, int i, t_config *config);
 bool	parsing_file(const char *path, t_config *config);
+int		parse_map(char *line, int fd, t_map map);
+
+/* ********* parsing ********* */
+int	check_args(int argc, char **argv);
+int	check_cub(char *temp, int i);
+int	ft_find_point(char *temp, int k);
+int	ft_error(int i, t_config *game, char *string);
+
 
 /* ******************************** UTILS ********************************** */
 

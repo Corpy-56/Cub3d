@@ -3,18 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2025/12/30 21:36:10 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/05 16:48:15 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+typedef struct s_tex
+{
+	int		i;
+	int		j;
+	int		start;
+	char	*path;
+	int		fd;
+}			t_tex;
+
+typedef struct s_mlx
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*imag_player;
+	void	*image_coin;
+	void	*image_wall;
+	void	*image_exit;
+	void	*image_back;
+	int		screen_size_width;
+	int		screen_size_height;
+}			t_mlx;
+
+typedef struct s_map
+{
+	char	**big_map;
+	int		map_height;
+	int		map_width;
+	int		player_x;
+	int		player_y;
+}			t_map;
+
 typedef struct s_config
 {
+	t_map	map;
+	t_mlx	screen;
 	char	*no_path;
 	char	*so_path;
 	char	*we_path;
@@ -25,21 +58,7 @@ typedef struct s_config
 	int		ceiling_r;
 	int		ceiling_g;
 	int		ceiling_b;
-	char	**map;
-	int		map_height;
-	int		map_width;
-	int		player_x;
-	int		player_y;
 }			t_config;
-
-typedef struct s_tex
-{
-	int		i;
-	int		j;
-	int		start;
-	char 	*path;
-	int		fd;
-}			t_tex;
 
 typedef struct s_game
 {
