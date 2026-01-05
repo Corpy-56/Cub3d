@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:14:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/05 11:21:38 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/05 15:31:19 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	parsing_file(const char *path, t_config *config)
 		{
 			parse_header(line, config, &mode);
 			if (mode == MAP)
-				parse_map(line, fd, config->map);
+				parse_map(line, fd, &config->map);
 		}
 		else
 		{
@@ -38,8 +38,6 @@ bool	parsing_file(const char *path, t_config *config)
 			close (fd);
 			return (true);
 		}
-		free(line);
-		line = get_next_line(fd);
 	}
 	close(fd);
 	ft_printf("config.no_path = %s\n", config->no_path);
