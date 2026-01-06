@@ -31,10 +31,11 @@ void	init_config(t_config *config);
 void	init_tex(t_tex *tex);
 
 /* ********* parsing ********* */
-void	parse_header(const char *line, t_config *config, int *mode);
+int		parse_header(const char *line, t_config *config, int *mode);
 bool	parse_color(const char *line, int i, t_config *config);
 bool	parsing_file(const char *path, t_config *config);
 int		parse_map(char *line, int fd, t_map *map);
+bool	is_map_line(const char *line);
 
 
 /* ******************************** UTILS ********************************** */

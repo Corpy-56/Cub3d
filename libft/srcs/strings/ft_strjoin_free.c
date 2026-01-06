@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 17:22:27 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/05 16:38:16 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/06 10:27:02 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strjoin_free(char *s1, char const *s2)
 
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	str = ft_malloc(len1 + len2 + 1);
+	str = malloc(len1 + len2 + 1);
 	if (!str)
 		return (free(s1), NULL);
 	if (s1)

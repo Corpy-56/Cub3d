@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 08:57:38 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/05 09:36:43 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/06 13:22:11 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	parse_texture(const char *line, const char *id, char **dest)
 	t_tex	tex;
 	int		after;
 
-	tex.path = NULL;
+	init_tex(&tex);
 	if (!line)
 		return ;
 	tex.i = skip_ws(line, 0);
@@ -64,52 +64,59 @@ bool	search_texture(const char *line, int i, t_config *config)
 	}
 	if (match_id(line, i, "SO"))
 	{
+		ft_printf("MATCH S0\n");
 		parse_texture(line, "SO", &config->so_path);
 		return (true);
 	}
 	if (match_id(line, i, "WE"))
 	{
+		ft_printf("MATCH WE\n");
 		parse_texture(line, "WE", &config->we_path);
 		return (true);
 	}
 	if (match_id(line, i, "EA"))
 	{
+		ft_printf("MATCH EA\n");
 		parse_texture(line, "EA", &config->ea_path);
 		return (true);
 	}
 	return (false);
 }
 
-void	parse_header(const char *line, t_config *config, int *mode)
+int	parse_header(const char *line, t_config *config, int *mode)
 {
 	int	i;
 
 	if (!line)
-		return ;
+		return (1);
 	i = skip_ws(line, 0);
-	ft_printf("i = %d\nline[i] = %c\n", i, line[i]);
+	ft_printf("line[i] = %c\n", line[i]);
 	if (line[i] == '\n' || line[i] == '\0')
-		return ;
+		return (0);
 	if (search_texture(line, i, config))
 	{
 		*mode = HEADER;
-		return ;
+		return (0);
 	}
 	if (line[i] == 'F' || line[i] == 'C')
 	{
 		if (!parse_color(line, i, config))
 		{
 			ft_printf("Error : invalid color line\n");
-			return ;
+			return (1);
 		}
 		*mode = HEADER;
-		return ;
+		return (0);
 	}
-	if (line[i] == '1' || line[i] == '0')
+	if (line[i] == '1' || line[i] == '0' || line[i] == 'N' || line[i] == 'W' || line[i] == 'E' || line[i] == 'S')
 	{
+		if (is_map_line(line) == false)
+			return (ft_printf("Error in map_line\n"), 1);
+		ft_printf("mode map activated\n");
 		*mode = MAP;
-		return ;
+		return (0);
 	}
-	ft_printf("Error : invalid identifier in header\n");
-	return ;
+	else 
+		return (ft_printf("Error : invalid identifier in header\n"), 1);
+	return (0);
 }

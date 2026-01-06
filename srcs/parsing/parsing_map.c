@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:11:02 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/05 20:08:37 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/06 11:42:25 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,25 @@ int	parse_map(char *line, int fd, t_map *map)
 
 bool	is_map_line(const char *line)
 {
-	int	i;
+	int		i;
+	bool	found_char;
 
+	found_char = false;
 	if (!line)
 		return (false);
 	i = skip_ws(line, 0);
-	while (line[i] != '\n' || line[i] != '\0')
+	if (line[i] == '\n' || line[i] == '\0')
+		return (false);
+	while (line[i] != '\n' && line[i] != '\0')
 	{
 		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'W' && line[i] != 'E' && line[i] != 'S' && line[i] != ' ')
-			return (false);
+			return (ft_printf("Unknown character in map\n"), false);
+		if (line[i] == '1' || line[i] == '0' || line[i] == 'N' || line[i] == 'W' || line[i] == 'E' || line[i] == 'S')
+		{
+			ft_printf("Found %c\n", line[i]);
+			found_char = true;
+		}
 		i++;
 	}
-	
-	return (true);
+	return (found_char);
 }
