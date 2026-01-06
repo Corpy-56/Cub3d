@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/05 17:16:59 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/06 15:52:20 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,22 @@ void	ft_init_screen(t_mlx *screen)
 	screen->win_ptr = mlx_new_window(screen->mlx_ptr, screen->screen_size_width, screen->screen_size_height, "Cub3d");
 }
 
+void	test_raycast(t_config config)
+{
+	int i;
+	double camera;
+
+	i = 0;
+	camera = 0;
+	while(i < config.screen.screen_size_width)
+	{
+		camera = 2.0 * i / (double)config.screen.screen_size_width - 1.0;
+		printf("%f\n", camera);
+		i++;
+	}
+	return ;
+}
+
 int	main(int argc, char **argv)
 {
 	t_config	config;
@@ -63,6 +79,7 @@ int	main(int argc, char **argv)
 	//if (!parsing_file(argv[1], &config))
 	//	return (ft_printf("Error parsing file\n"), 1);
 	ft_init_screen(&config.screen);
+	test_raycast(config);
 	mlx_key_hook(config.screen.win_ptr, keyboard_key, &config);
 	mlx_hook(&config.screen.win_ptr, 17, 0, on_destroy, &config);
 	mlx_loop(config.screen.mlx_ptr);
