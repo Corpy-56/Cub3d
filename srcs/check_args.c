@@ -72,6 +72,7 @@ int	check_args(int argc, char **argv)
 {
 	if (argc > 2)
 		ft_error(0, NULL, "Error : Too many arguments !\n");
+	//printf("%d\n", argc);
 	if (argc < 2)
 		ft_error(0, NULL, "Error : No map file !\n");
 	check_cub(argv[1], ft_strlen(argv[1]));
