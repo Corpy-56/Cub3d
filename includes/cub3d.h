@@ -36,6 +36,9 @@ bool	parse_color(const char *line, int i, t_config *config);
 bool	parsing_file(const char *path, t_config *config);
 int		parse_map(char *line, int fd, t_map *map);
 bool	is_map_line(const char *line);
+bool	check_end_header(const char *line);
+void	check_empty_line_map(char *map);
+int		validate_map(t_config *config);
 
 
 /* ******************************** UTILS ********************************** */

@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 08:57:38 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/06 13:22:11 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/07 16:50:14 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,25 @@ bool	search_texture(const char *line, int i, t_config *config)
 {
 	if (match_id(line, i, "NO"))
 	{
-		ft_printf("MATCH NO\n");
+		ft_printf("MATCH NO\n"); // a retirer
 		parse_texture(line, "NO", &config->no_path);
 		return (true);
 	}
 	if (match_id(line, i, "SO"))
 	{
-		ft_printf("MATCH S0\n");
+		ft_printf("MATCH S0\n"); // a retirer
 		parse_texture(line, "SO", &config->so_path);
 		return (true);
 	}
 	if (match_id(line, i, "WE"))
 	{
-		ft_printf("MATCH WE\n");
+		ft_printf("MATCH WE\n"); // a retirer
 		parse_texture(line, "WE", &config->we_path);
 		return (true);
 	}
 	if (match_id(line, i, "EA"))
 	{
-		ft_printf("MATCH EA\n");
+		ft_printf("MATCH EA\n"); // a retirer
 		parse_texture(line, "EA", &config->ea_path);
 		return (true);
 	}
@@ -90,7 +90,7 @@ int	parse_header(const char *line, t_config *config, int *mode)
 	if (!line)
 		return (1);
 	i = skip_ws(line, 0);
-	ft_printf("line[i] = %c\n", line[i]);
+	// ft_printf("line[i] = %c\n", line[i]); // a retirer
 	if (line[i] == '\n' || line[i] == '\0')
 		return (0);
 	if (search_texture(line, i, config))
@@ -108,15 +108,34 @@ int	parse_header(const char *line, t_config *config, int *mode)
 		*mode = HEADER;
 		return (0);
 	}
-	if (line[i] == '1' || line[i] == '0' || line[i] == 'N' || line[i] == 'W' || line[i] == 'E' || line[i] == 'S')
+	if (line[i] == '1' || line[i] == '0' || line[i] == 'N'
+		|| line[i] == 'W' || line[i] == 'E' || line[i] == 'S')
 	{
 		if (is_map_line(line) == false)
 			return (ft_printf("Error in map_line\n"), 1);
-		ft_printf("mode map activated\n");
+		ft_printf("mode map activated\n"); // a retirer
 		*mode = MAP;
 		return (0);
 	}
-	else 
+	else
 		return (ft_printf("Error : invalid identifier in header\n"), 1);
 	return (0);
+}
+
+bool	check_end_header(const char *line)
+{
+	int	i;
+
+	i = 0;
+	if (match_id(line, i, "NO"))
+		return (false);
+	if (match_id(line, i, "SO"))
+		return (false);
+	if (match_id(line, i, "WE"))
+		return (false);
+	if (match_id(line, i, "EA"))
+		return (false);
+	if (line[i] == 'F' || line[i] == 'C')
+		return (false);
+	return (true);
 }

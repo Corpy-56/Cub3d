@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/05 10:36:12 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/07 16:40:56 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ typedef struct s_config
 
 typedef struct s_game
 {
-	t_config	*config;
-	const char	*line;
-	int			*mode;
+	t_config	config;
+	t_map		map;
 }			t_game;
 
 

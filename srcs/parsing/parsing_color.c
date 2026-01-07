@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 15:08:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/05 09:36:14 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/07 16:50:51 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,16 @@ void	set_color(t_config *config, char id, int r, int g, int b)
 		config->floor_r = r;
 		config->floor_g = g;
 		config->floor_b = b;
+		ft_printf("floor_r : %d, floor_g : %d, floor_b : %d\n", config->floor_r, config->floor_g, config->floor_b); // a retirer 
+		
 	}
 	else
 	{
 		config->ceiling_r = r;
 		config->ceiling_g = g;
 		config->ceiling_b = b;
+		ft_printf("ceiling_r : %d, ceiling_g : %d, ceiling_b : %d\n", config->ceiling_r, config->ceiling_g, config->ceiling_b); // a retirer
+
 	}
 }
 
