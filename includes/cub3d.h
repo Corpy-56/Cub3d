@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/08 12:26:56 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/08 17:28:02 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@
 
 # define HEADER 0
 # define MAP 1
+# define DEFAULT "\033[0m"
+# define RED "\033[31m"
+# define GREEN "\033[92m"
+
+
 
 /* ******************************** SOURCES ******************************** */
 
@@ -30,6 +35,7 @@
 void	init_config(t_config *config);
 void	init_tex(t_tex *tex);
 void	init_game(t_game *game);
+void	init_color(t_color *color);
 
 /* ********* parsing ********* */
 int		parse_header(const char *line, t_config *config, int *mode);
@@ -37,9 +43,10 @@ bool	parse_color(const char *line, int i, t_config *config);
 bool	parsing_file(const char *path, t_game *game);
 int		parse_map(char *line, int fd, t_map *map);
 bool	is_map_line(const char *line);
-bool	check_end_header(const char *line);
-void	check_empty_line_map(char *map);
+bool	check_empty_line_map(char *map);
 bool	validate_map(t_game *game);
+bool	header_complete(t_config *config);
+
 
 
 /* ******************************** UTILS ********************************** */
@@ -58,5 +65,9 @@ int		extract_path(const char *line, int start, char **path, int *after);
 void	free_doublechar(char **to_free);
 void	free_paths(t_config *config);
 void	free_all(t_game *game);
+
+/* ********* error ********* */
+void	error_msg(char *msg);
+void	error_elem_map(char elem, int line, int col);
 
 #endif

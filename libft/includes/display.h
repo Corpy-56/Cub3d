@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:31:56 by skuor             #+#    #+#             */
-/*   Updated: 2025/05/06 11:39:12 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/08 17:06:23 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void	ft_puthex(unsigned int nb, char s);
 void	ft_puthexptr(unsigned long int n);
 void	ft_putnbr(int nb);
 void	ft_print_array(char **array);
+void	ft_print_map(char **map);
 
 #endif

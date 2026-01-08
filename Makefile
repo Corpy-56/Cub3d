@@ -6,7 +6,7 @@
 #    By: skuor <skuor@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 16:18:45 by skuor             #+#    #+#              #
-#    Updated: 2026/01/08 10:12:41 by skuor            ###   ########.fr        #
+#    Updated: 2026/01/08 16:14:46 by skuor            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBFT_DIR = ./libft/
 
 SRC_FILES = init.c main.c
 
-UTILS_FILES = utils.c free.c utils_parsing.c
+UTILS_FILES = utils.c free.c utils_parsing.c error_msg.c
 
 PARSING_FILES = parsing_header.c parsing_color.c parsing_map.c \
 				parsing_file.c

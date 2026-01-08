@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:11:02 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/08 12:24:58 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/08 17:31:53 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,16 @@ int	parse_map(char *line, int fd, t_map *map)
 		free(line);
 		line = get_next_line(fd);
 	}
-	check_empty_line_map(map_tmp);
+	if (check_empty_line_map(map_tmp) == false)
+		return (1);
 	map->big_map = ft_split(map_tmp, '\n');
 	free(map_tmp);
 	if (!map->big_map || !map->big_map[0])
 		return (free_doublechar(map->big_map), 1);
+	ft_print_map(map->big_map);
 	return (0);
 }
+
  // permet de verifier qu'on est bien dans une map -> si ok on passe en mode map
 bool	is_map_line(const char *line)
 {
@@ -52,7 +55,7 @@ bool	is_map_line(const char *line)
 	{
 		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'W'
 			&& line[i] != 'E' && line[i] != 'S' && line[i] != ' ')
-			return (ft_printf("Unknown character in map line\n"), false);
+			return (error_msg("Unknown character in map line"), false);
 		if (line[i] == '1' || line[i] == '0' || line[i] == 'N'
 			|| line[i] == 'W' || line[i] == 'E' || line[i] == 'S')
 				found_char = true;
@@ -61,7 +64,7 @@ bool	is_map_line(const char *line)
 	return (found_char);
 }
 
-void	check_empty_line_map(char *map)
+bool	check_empty_line_map(char *map)
 {
 	int	i;
 
@@ -71,17 +74,18 @@ void	check_empty_line_map(char *map)
 		if (map[i] == '\n' && map[i + 1] == '\n')
 		{
 			free(map);
-			ft_printf("Error : Empty line(s) in the map\n");
-			exit (1);
+			error_msg("Empty line(s) in the map");
+			return (false);
 		}
 		if (map[i] == ' ' && map[i + 1] == '\n')
 		{
 			free(map);
-			ft_printf("Error : Empty line(s) in the map\n");
-			exit (1);
+			error_msg("Empty line(s) in the map");
+			return (false);
 		}
 		i++;
 	}
+	return (true);
 }
 
 int	check_elements(char **map)
@@ -90,10 +94,9 @@ int	check_elements(char **map)
 	int	j;
 	int	count_p;
 
-
 	i = 0;
 	count_p = 0;
-	while (map[++i])
+	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
@@ -103,6 +106,7 @@ int	check_elements(char **map)
 				count_p++;
 			j++;
 		}
+		i++;
 	}
 	if (count_p != 1)
 		return (ft_printf("P = %d\nError : There must be exactly one player\n",
@@ -124,7 +128,7 @@ int	element_error(char **map)
 			if (map[i][j] != 'N' && map[i][j] != 'E' && map[i][j] != 'W'
 				&& map[i][j] != 'S' && map[i][j] != '0' && map[i][j] != '1'
 				&& map[i][j] != ' ')
-				return (ft_printf("Warning : Unknown element in map\n"), 1);
+				return (error_elem_map(map[i][j], i, j), 1);
 			j++;
 		}
 		i++;
@@ -138,6 +142,6 @@ bool	validate_map(t_game *game)
 		return (false);
 	if (check_elements(game->map.big_map))
 		return (false);
-	ft_printf("Valid map !\n");
+	ft_printf(GREEN"Valid map !\n"DEFAULT);
 	return (true);
 }

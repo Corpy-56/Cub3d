@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 08:57:38 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/08 12:06:10 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/08 16:50:54 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ bool	parse_texture(const char *line, const char *id, char **dest)
 		return (false);
 	if (*dest)
 	{
-		ft_printf("error texture\n");
+		ft_printf("Error : %s already loaded\n", *dest);
 		return (false);
 	}
 	tex.j = tex.i + 2;
@@ -106,41 +106,40 @@ int	parse_header(const char *line, t_config *config, int *mode)
 	if (line[i] == 'F' || line[i] == 'C')
 	{
 		if (!parse_color(line, i, config))
-		{
-			ft_printf("Error : invalid color line\n");
 			return (1);
-		}
 		*mode = HEADER;
 		return (0);
 	}
-	if (line[i] == '1' || line[i] == '0' || line[i] == 'N'
-		|| line[i] == 'W' || line[i] == 'E' || line[i] == 'S')
+	if (line[i] != '1' && line[i] != '0' && line[i] != 'N'
+		&& line[i] != 'W' && line[i] != 'E' && line[i] != 'S'
+		&& line[i] != 'F' && line[i] != 'C')
+		return (ft_printf("Unknown '%c' element in header\n", line[i]), 1);
+	if (header_complete(config))
 	{
 		if (is_map_line(line) == false)
-			return (ft_printf("Error in map_line\n"), 1);
+			return (1);
 		ft_printf("mode map activated\n"); // a retirer
 		*mode = MAP;
 		return (0);
 	}
 	else
-		return (ft_printf("Error : invalid identifier in header\n"), 1);
+		return (1);
 	return (0);
 }
 
-bool	check_end_header(const char *line)
+bool	header_complete(t_config *config)
 {
-	int	i;
-
-	i = 0;
-	if (match_id(line, i, "NO"))
-		return (false);
-	if (match_id(line, i, "SO"))
-		return (false);
-	if (match_id(line, i, "WE"))
-		return (false);
-	if (match_id(line, i, "EA"))
-		return (false);
-	if (line[i] == 'F' || line[i] == 'C')
-		return (false);
+	if (!config->no_path)
+		return (error_msg("Missing NO path"), false);
+	if (!config->so_path)
+		return (error_msg("Missing SO path"), false);
+	if (!config->we_path)
+		return (error_msg("Missing WE path"), false);
+	if (!config->ea_path)
+		return (error_msg("Missing EA path"), false);
+	if (config->floor.r == -1)
+		return (error_msg("Missing F color"), false);
+	if (config->ceiling.r == -1)
+		return (error_msg("Missing C color"), false);
 	return (true);
 }

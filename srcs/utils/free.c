@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 15:50:24 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/08 12:10:49 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/08 14:00:28 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,5 @@ void	free_all(t_game *game)
 		free_doublechar(game->map.big_map);
 		game->map.big_map = NULL;
 	}
+	get_next_line(-1);
 }
