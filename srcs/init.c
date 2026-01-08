@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/06 09:41:47 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/08 12:23:20 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	init_map(t_map *map)
 
 void	init_config(t_config *config)
 {
-	init_map(&config->map);
 	config->no_path = NULL;
 	config->so_path = NULL;
 	config->we_path = NULL;
@@ -44,4 +43,10 @@ void	init_tex(t_tex *tex)
 	tex->start = 0;
 	tex->path = NULL;
 	tex->fd = 0;
+}
+
+void	init_game(t_game *game)
+{
+	init_config(&game->config);
+	init_map(&game->map);
 }

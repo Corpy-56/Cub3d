@@ -6,13 +6,13 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:14:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/07 16:48:09 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/08 12:26:44 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	parsing_file(const char *path, t_config *config)
+bool	parsing_file(const char *path, t_game *game)
 {
 	int			mode;
 	int			fd;
@@ -27,13 +27,13 @@ bool	parsing_file(const char *path, t_config *config)
 	{
 		if (mode == HEADER)
 		{
-			if (parse_header(line, config, &mode) != 0)
+			if (parse_header(line, &game->config, &mode) != 0)
 				return (free(line), close(fd), false);
 			if (mode == MAP)
 			{
-				if (parse_map(line, fd, &config->map) != 0)
+				if (parse_map(line, fd, &game->map) != 0)
 					return (close(fd), false);
-				if (validate_map(config))
+				if (validate_map(game) == false)
 					return (close(fd), false);
 				break ;
 			}
@@ -42,7 +42,7 @@ bool	parsing_file(const char *path, t_config *config)
 		}
 		else
 		{
-			if (parse_map(line, fd, &config->map) != 0)
+			if (parse_map(line, fd, &game->map) != 0)
 				return (close(fd), false);
 			break ;
 		}

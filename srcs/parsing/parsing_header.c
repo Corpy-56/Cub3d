@@ -6,86 +6,88 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 08:57:38 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/07 16:50:14 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/08 12:06:10 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	can_open(char *path)
+bool	can_open(char *path)
 {
 	int	fd;
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printf("ERROR FD\n");
-		return (0);
+		ft_printf("ERROR FD : %s\n", path);
+		return (false);
 	}
 	close(fd);
-	return (1);
+	return (true);
 }
 
-void	parse_texture(const char *line, const char *id, char **dest)
+bool	parse_texture(const char *line, const char *id, char **dest)
 {
 	t_tex	tex;
 	int		after;
 
 	init_tex(&tex);
 	if (!line)
-		return ;
+		return (false);
 	tex.i = skip_ws(line, 0);
 	if (!match_id(line, tex.i, id))
-		return ;
+		return (false);
 	if (*dest)
 	{
 		ft_printf("error texture\n");
-		return ;
+		return (false);
 	}
 	tex.j = tex.i + 2;
 	tex.j = skip_ws(line, tex.j);
 	if (!extract_path(line, tex.j, &tex.path, &after))
-		return ;
+		return (false);
 	if (!ws_eol(line, after) || !can_open(tex.path))
 	{
 		free(tex.path);
-		return ;
+		return (false);
 	}
 	*dest = tex.path;
+	return (true);
 }
 
-bool	search_texture(const char *line, int i, t_config *config)
+int	search_texture(const char *line, int i, t_config *config)
 {
 	if (match_id(line, i, "NO"))
 	{
-		ft_printf("MATCH NO\n"); // a retirer
-		parse_texture(line, "NO", &config->no_path);
-		return (true);
+		if (parse_texture(line, "NO", &config->no_path) == false)
+			return (-1);
+		return (0);
 	}
 	if (match_id(line, i, "SO"))
 	{
-		ft_printf("MATCH S0\n"); // a retirer
-		parse_texture(line, "SO", &config->so_path);
-		return (true);
+		if (parse_texture(line, "SO", &config->so_path) == false)
+			return (-1);
+		return (0);
 	}
 	if (match_id(line, i, "WE"))
 	{
-		ft_printf("MATCH WE\n"); // a retirer
-		parse_texture(line, "WE", &config->we_path);
-		return (true);
+		if (parse_texture(line, "WE", &config->we_path) == false)
+			return (-1);
+		return (0);
 	}
 	if (match_id(line, i, "EA"))
 	{
-		ft_printf("MATCH EA\n"); // a retirer
-		parse_texture(line, "EA", &config->ea_path);
-		return (true);
+		if (parse_texture(line, "EA", &config->ea_path) == false)
+			return (-1);
+		return (0);
 	}
-	return (false);
+	return (1);
 }
 
 int	parse_header(const char *line, t_config *config, int *mode)
 {
 	int	i;
+	int	texture;
 
 	if (!line)
 		return (1);
@@ -93,7 +95,10 @@ int	parse_header(const char *line, t_config *config, int *mode)
 	// ft_printf("line[i] = %c\n", line[i]); // a retirer
 	if (line[i] == '\n' || line[i] == '\0')
 		return (0);
-	if (search_texture(line, i, config))
+	texture = search_texture(line, i, config);
+	if (texture == -1)
+		return (1);
+	else if (texture == 0)
 	{
 		*mode = HEADER;
 		return (0);
