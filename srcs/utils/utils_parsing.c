@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 17:35:03 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/09 11:21:10 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/09 12:26:37 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,25 @@ int	count_comma(char *str)
 		i++;
 	}
 	return (count);
+}
+
+bool	can_open(char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (error_fd(path), false);
+	close(fd);
+	return (true);
+}
+
+size_t	line_len(const char *line, int start)
+{
+	size_t	len;
+
+	len = 0;
+	while (line[start + len] != '\n' && line[start + len] != '\0')
+		len++;
+	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 15:08:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/09 11:23:32 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/09 12:27:34 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,6 @@ bool	parse_3_rgb(char **parts, int *r, int *g, int *b)
 		return (false);
 	return (true);
 }
-
-size_t	line_len(const char *line, int start)
-{
-	size_t	len;
-
-	len = 0;
-	while (line[start + len] != '\n' && line[start + len] != '\0')
-		len++;
-	return (len);
-}
-
 
 bool	parse_rgb_values(const char *line, int i, t_color *color)
 {

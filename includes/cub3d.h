@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/09 11:22:15 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/09 16:25:11 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 
 
+
 /* ******************************** SOURCES ******************************** */
 
 /* ********* init ********* */
@@ -37,15 +38,36 @@ void	init_tex(t_tex *tex);
 void	init_game(t_game *game);
 void	init_color(t_color *color);
 
-/* ********* parsing ********* */
-int		parse_header(const char *line, t_config *config, int *mode);
-bool	parse_color(const char *line, int i, t_config *config);
+/* ******************************* PARSING ********************************* */
+
+/* ********* file ********* */
 bool	parsing_file(const char *path, t_game *game);
+int		parse_header(const char *line, t_config *config, int *mode);
+bool	header_complete(t_config *config);
+bool	is_header_id(char *line);
+
+/* ********* texture ********* */
+bool	parse_texture(const char *line, const char *id, char **dest);
+int		search_texture(const char *line, int i, t_config *config);
+
+/* ********* color ********* */
+bool	parse_color(const char *line, int i, t_config *config);
+bool	parse_numbers(char *part, int *value);
+bool	parse_3_rgb(char **parts, int *r, int *g, int *b);
+bool	parse_rgb_values(const char *line, int i, t_color *color);
+void	set_color(t_config *config, char id, t_color color);
+
+/* ********* map ********* */
 int		parse_map(char *line, int fd, t_map *map);
 bool	is_map_line(const char *line);
-bool	check_empty_line_map(char *map);
 bool	validate_map(t_game *game);
-bool	header_complete(t_config *config);
+bool	invalid_char_map(const char *line);
+
+/* ********* map checks ********* */
+bool	check_empty_line_map(char *map);
+int		check_elements(char **map);
+bool	check_end_map(char *map);
+
 
 /* ******************************** UTILS ********************************** */
 
@@ -59,6 +81,8 @@ bool	no_digit(char *str);
 int		match_id(const char *line, int i, const char *id);
 int		extract_path(const char *line, int start, char **path, int *after);
 int		count_comma(char *str);
+bool	can_open(char *path);
+size_t	line_len(const char *line, int start);
 
 /* ********* free ********* */
 void	free_doublechar(char **to_free);
@@ -69,5 +93,8 @@ void	free_all(t_game *game);
 void	error_msg(char *msg);
 void	error_elem_map(char elem, int line, int col);
 void	error_fd(char *path);
+void	error_texture(char *dest);
+void	error_nb_player(int nb_player);
+
 
 #endif
