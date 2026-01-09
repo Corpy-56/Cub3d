@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/08 17:28:02 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/09 11:22:15 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ bool	check_empty_line_map(char *map);
 bool	validate_map(t_game *game);
 bool	header_complete(t_config *config);
 
-
-
 /* ******************************** UTILS ********************************** */
 
 /* ********* utils ********* */
@@ -60,6 +58,7 @@ bool	no_digit(char *str);
 /* ********* utils parsing ********* */
 int		match_id(const char *line, int i, const char *id);
 int		extract_path(const char *line, int start, char **path, int *after);
+int		count_comma(char *str);
 
 /* ********* free ********* */
 void	free_doublechar(char **to_free);
@@ -69,5 +68,6 @@ void	free_all(t_game *game);
 /* ********* error ********* */
 void	error_msg(char *msg);
 void	error_elem_map(char elem, int line, int col);
+void	error_fd(char *path);
 
 #endif

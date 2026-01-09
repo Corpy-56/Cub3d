@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 15:08:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/08 16:46:54 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/09 11:23:32 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ size_t	line_len(const char *line, int start)
 	return (len);
 }
 
+
 bool	parse_rgb_values(const char *line, int i, t_color *color)
 {
 	size_t	len;
@@ -65,6 +66,8 @@ bool	parse_rgb_values(const char *line, int i, t_color *color)
 	rgb_str = ft_substr(line, i, len);
 	if (!rgb_str)
 		return (false);
+	if (count_comma(rgb_str) != 2)
+		return (free(rgb_str), false);
 	parts = ft_split(rgb_str, ',');
 	free(rgb_str);
 	if (!parts)

@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 08:57:38 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/08 16:50:54 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/09 10:09:03 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ bool	can_open(char *path)
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-	{
-		ft_printf("ERROR FD : %s\n", path);
-		return (false);
-	}
+		return (error_fd(path), false);
 	close(fd);
 	return (true);
 }

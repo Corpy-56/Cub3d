@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 17:35:03 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/08 17:06:51 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/09 11:21:10 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ int	extract_path(const char *line, int start, char **path, int *after)
 	*path = NULL;
 	start = skip_ws(line, start);
 	if (line[start] == '\0' || line[start] == '\n')
-	{
-		ft_printf("error path");
-		return (0);
-	}
+		return (error_msg("Path not found"), 0);
 	i = start;
 	while (!is_whitespace(line[i]) && line[i] != '\n' && line[i] != '\0')
 		i++;
@@ -41,4 +38,20 @@ int	extract_path(const char *line, int start, char **path, int *after)
 		return (0);
 	*after = i;
 	return (1);
+}
+
+int	count_comma(char *str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == ',')
+			count++;
+		i++;
+	}
+	return (count);
 }

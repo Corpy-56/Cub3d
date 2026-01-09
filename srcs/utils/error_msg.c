@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 16:06:11 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/08 17:31:15 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/09 10:07:51 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,14 @@ void	error_elem_map(char elem, int line, int col)
 	ft_putnbr_fd(line, 2);
 	ft_putstr_fd(", col ", 2);
 	ft_putnbr_fd(col, 2);
+	ft_putstr_fd("\n", 2);
+}
+
+void	error_fd(char *path)
+{
+	ft_putstr_fd(RED, 2);
+	ft_putstr_fd("Error FD: ", 2);
+	ft_putstr_fd(DEFAULT, 2);
+	ft_putstr_fd(path, 2);
 	ft_putstr_fd("\n", 2);
 }
