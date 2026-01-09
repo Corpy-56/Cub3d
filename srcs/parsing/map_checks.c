@@ -6,23 +6,11 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 12:15:39 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/09 15:20:35 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/09 16:46:27 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-    // if started:
-    //     free(line)
-    //     free(map_tmp)
-    //     error_msg("Map must be last / content after map")
-    //     return (1)
-
-    // // cas théorique: parse_map appelée alors qu'on n'est pas sur une map
-    // free(line)
-    // free(map_tmp)
-    // error_msg("Invalid map")
-    // return (1)
 
 bool	check_empty_line_map(char *map)
 {
