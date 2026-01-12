@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:14:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/09 16:35:50 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/12 14:06:31 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,27 @@ bool	parsing_file(const char *path, t_game *game)
 				return (free(line), close(fd), false);
 			if (mode == MAP)
 			{
-				if (parse_map(line, fd, &game->map) != 0)
-					return (close(fd), false);
-				if (validate_map(game) == false)
+				if (parse_map(line, fd, &game->map) != 0 || !validate_map(game))
 					return (close(fd), false);
 				break ;
 			}
-			free(line);
-			line = get_next_line(fd);
+			free_and_gnl(&line, fd);
 		}
 	}
-	close(fd);
-	return (true);
+	return (close(fd), true);
+}
+
+static int	activate_map_mode(const char *line, t_config *config, int *mode)
+{
+	if (header_complete(config))
+	{
+		if (is_map_line(line) == false)
+			return (1);
+		ft_printf(GREEN"mode map activated !\n"DEFAULT); // a retirer
+		return (*mode = MAP, 0);
+	}
+	else
+		return (1);
 }
 
 int	parse_header(const char *line, t_config *config, int *mode)
@@ -58,31 +67,16 @@ int	parse_header(const char *line, t_config *config, int *mode)
 	texture = search_texture(line, i, config);
 	if (texture == -1)
 		return (1);
-	else if (texture == 0)
+	if (texture == 0 || line[i] == 'F' || line[i] == 'C')
 	{
-		*mode = HEADER;
-		return (0);
-	}
-	if (line[i] == 'F' || line[i] == 'C')
-	{
-		if (!parse_color(line, i, config))
-			return (1);
-		*mode = HEADER;
-		return (0);
+		if (line[i] == 'F' || line[i] == 'C')
+			if (!parse_color(line, i, config))
+				return (1);
+		return (*mode = HEADER, 0);
 	}
 	if (!ft_strchr("10NEWSFC", line[i]))
 		return (error_msg("Unknown element in header"), 1);
-	if (header_complete(config))
-	{
-		if (is_map_line(line) == false)
-			return (1);
-		ft_printf(GREEN"mode map activated !\n"DEFAULT); // a retirer
-		*mode = MAP;
-		return (0);
-	}
-	else
-		return (1);
-	return (0);
+	return (activate_map_mode(line, config, mode));
 }
 
 bool	header_complete(t_config *config)
