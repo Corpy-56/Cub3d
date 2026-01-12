@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/12 11:48:58 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/12 17:45:18 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	init_map(t_map *map)
 {
 	map->big_map = NULL;
-	map->map_height = 0;
-	map->map_width = 0;
+	map->rows = 0;
+	map->cols = 0;
 	map->player_x = -1;
 	map->player_y = -1;
 }
@@ -59,3 +59,4 @@ void	init_game(t_game *game)
 	init_config(&game->config);
 	init_map(&game->map);
 }
+

@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:11:02 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/12 12:35:38 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/12 17:45:10 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,9 @@ int	parse_map(char *line, int fd, t_map *map)
 	free(p.map_tmp);
 	if (!map->big_map || !map->big_map[0])
 		return (free_doublechar(map->big_map), 1);
-	ft_print_map(map->big_map);
+	// ft_print_map(map->big_map);
+	normalize_map(map);
+	// map_size(map);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/12 12:16:49 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/12 17:44:39 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ bool	line_is_empty(char *line);
 bool	one_elem_line(const char *line);
 bool	invalid_char_map(const char *line);
 
+/* ********* map grid ********* */
+char	**normalize_map(t_map *map);
+
 /* ******************************** UTILS ********************************** */
 
 /* ********* utils ********* */
@@ -86,13 +89,16 @@ int		count_comma(char *str);
 bool	can_open(char *path);
 size_t	line_len(const char *line, int start);
 
+/* ********* utils map ********* */
+void	map_size(t_map *map);
+int		ft_min(int a, int b);
+
 /* ********* free ********* */
 void	free_doublechar(char **to_free);
 void	free_paths(t_config *config);
 void	free_all(t_game *game);
 void	free_and_err(char *line, char *map_tmp, char *msg);
 void	free_and_gnl(char **line, int fd);
-
 
 /* ********* error ********* */
 void	error_msg(char *msg);

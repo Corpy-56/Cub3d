@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/12 11:45:31 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/12 17:13:24 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct s_tex
 typedef struct s_map
 {
 	char	**big_map;
-	int		map_height;
-	int		map_width;
+	int		rows;
+	int		cols;
 	int		player_x;
 	int		player_y;
 }			t_map;
@@ -45,6 +45,7 @@ typedef struct s_parse_map
 	bool	end;
 	int		fd;
 }			t_parse_map;
+
 
 typedef struct s_config
 {
