@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/08 15:42:46 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/12 11:48:58 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ void	init_color(t_color *color)
 	color->r = -1;
 	color->g = -1;
 	color->b = -1;
+}
+
+void	init_parse_map(t_parse_map *p_map)
+{
+	p_map->map_tmp = ft_strdup("");
+	p_map->started = false;
+	p_map->end = false;
 }
 
 void	init_game(t_game *game)

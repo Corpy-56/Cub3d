@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/12 10:17:36 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/12 12:16:49 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@
 # define RED "\033[31m"
 # define GREEN "\033[92m"
 
-
-
+# define ERR_EMPTY "Empty line(s) in map"
+# define ERR_LAST "Map must be the last element"
+# define ERR_ELEM "Unknown element in map"
+# define ERR_MAP "Invalid map"
 
 /* ******************************** SOURCES ******************************** */
 
@@ -37,10 +39,11 @@ void	init_config(t_config *config);
 void	init_tex(t_tex *tex);
 void	init_game(t_game *game);
 void	init_color(t_color *color);
+void	init_parse_map(t_parse_map *p_map);
 
 /* ******************************* PARSING ********************************* */
 
-/* ********* file ********* */
+/* ********* file & header ********* */
 bool	parsing_file(const char *path, t_game *game);
 int		parse_header(const char *line, t_config *config, int *mode);
 bool	header_complete(t_config *config);
@@ -63,7 +66,6 @@ bool	is_map_line(const char *line);
 bool	validate_map(t_game *game);
 
 /* ********* map checks ********* */
-bool	check_empty_line_map(char *map);
 int		check_elements(char **map);
 bool	line_is_empty(char *line);
 bool	one_elem_line(const char *line);
@@ -88,6 +90,9 @@ size_t	line_len(const char *line, int start);
 void	free_doublechar(char **to_free);
 void	free_paths(t_config *config);
 void	free_all(t_game *game);
+void	free_and_err(char *line, char *map_tmp, char *msg);
+void	free_and_gnl(char **line, int fd);
+
 
 /* ********* error ********* */
 void	error_msg(char *msg);

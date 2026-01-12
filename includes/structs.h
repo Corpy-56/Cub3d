@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/08 15:46:21 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/12 11:45:31 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ typedef struct s_color
 	int		b;
 }			t_color;
 
+typedef struct s_parse_map
+{
+	char	*map_tmp;
+	bool	started;
+	bool	end;
+	int		fd;
+}			t_parse_map;
 
 typedef struct s_config
 {

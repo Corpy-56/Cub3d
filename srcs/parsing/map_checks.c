@@ -6,35 +6,11 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 12:15:39 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/12 10:04:35 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/12 12:17:31 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-bool	check_empty_line_map(char *map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i + 1])
-	{
-		if (map[i] == '\n' && map[i + 1] == '\n')
-		{
-			free(map);
-			error_msg("Empty line(s) in the map");
-			return (false);
-		}
-		if (map[i] == ' ' && map[i + 1] == '\n')
-		{
-			free(map);
-			error_msg("Empty line(s) in the map");
-			return (false);
-		}
-		i++;
-	}
-	return (true);
-}
 
 int	check_elements(char **map)
 {
@@ -111,4 +87,30 @@ bool	invalid_char_map(const char *line)
 		i++;
 	}
 	return (false);
+}
+
+bool	is_map_line(const char *line)
+{
+	int		i;
+	bool	found_char;
+
+	found_char = false;
+	if (!line)
+		return (false);
+	i = skip_ws(line, 0);
+	if (line[i] == '\n' || line[i] == '\0')
+		return (false);
+	if (one_elem_line(line))
+		return (error_msg("Line(s) with only one element"), false);
+	while (line[i] != '\n' && line[i] != '\0')
+	{
+		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'W'
+			&& line[i] != 'E' && line[i] != 'S' && line[i] != ' ')
+			return (error_msg(ERR_MAP), false);
+		if (line[i] == '1' || line[i] == '0' || line[i] == 'N'
+			|| line[i] == 'W' || line[i] == 'E' || line[i] == 'S')
+				found_char = true;
+		i++;
+	}
+	return (found_char);
 }
