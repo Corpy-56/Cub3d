@@ -17,7 +17,7 @@ int	on_destroy(t_config *game)
 {
 	//free_image(game);
 	mlx_destroy_window(game->screen.mlx_ptr, game->screen.win_ptr);
-	mlx_destroy_display(game->screen.mlx_ptr);
+	//mlx_destroy_display(game->screen.mlx_ptr);
 	//free(game.screen.mlx_ptr);
 	//if (game->big_map != NULL || game->big_map->map != NULL)
 	//{
@@ -49,8 +49,10 @@ void	ft_init_screen(t_mlx *screen)
 	screen->mlx_ptr = mlx_init();
 	if (screen->mlx_ptr == NULL)
 		ft_error(0, NULL, "Mlx_init failed\n");
-	mlx_get_screen_size(screen->mlx_ptr, &screen->screen_size_width,
-		&screen->screen_size_height);
+	//mlx_get_screen_size(screen->mlx_ptr, &screen->screen_size_width,
+	//	&screen->screen_size_height);
+	screen->screen_size_width = 1920;
+	screen->screen_size_height = 1080;
 	screen->win_ptr = mlx_new_window(screen->mlx_ptr, screen->screen_size_width, screen->screen_size_height, "Cub3d");
 }
 
@@ -61,13 +63,13 @@ void	draw_vertical_line(t_config *config, int x, int start, int end, int color)
 	y = start;
 	while (y <= end)
 	{
-		mlx_pixel_put(&config->screen.mlx_ptr, &config->screen.win_ptr, x, y, color);
+		mlx_pixel_put(config->screen.mlx_ptr, config->screen.win_ptr, x, y, color);
 		y++;
 	}
 }
 
 
-void	test_raycast(t_config config)
+void	test_raycast(t_config *config)
 {
 	int i = 0;
 	double camera = 0.0;
@@ -94,38 +96,40 @@ void	test_raycast(t_config config)
 	wall_distance = 0.0;
 	draw_start = 0;
 	draw_end = 0;
-	while(i < config.screen.screen_size_width)
+	while(i < config->screen.screen_size_width)
 	{
 		hit = 0;
-		map_x = (int)config.dir.pos_x;
-		map_y = (int)config.dir.pos_y;
-		camera = 2.0 * i / (double)config.screen.screen_size_width - 1.0;
-		ray_dir_x = config.dir.dir_x + config.dir.plan_x * camera;
-		ray_dir_y = config.dir.dir_y + config.dir.plan_y * camera;
+		map_x = (int)config->dir.pos_x;
+		map_y = (int)config->dir.pos_y;
+		camera = 2.0 * i / (double)config->screen.screen_size_width - 1.0;
+		ray_dir_x = config->dir.dir_x + config->dir.plan_x * camera;
+		ray_dir_y = config->dir.dir_y + config->dir.plan_y * camera;
 		delta_dist_x = (ray_dir_x == 0) ? 1e30 : fabs(1 / ray_dir_x);
 		delta_dist_y = (ray_dir_y == 0) ? 1e30 : fabs(1 / ray_dir_y);
 		if (ray_dir_x < 0)
 		{
 			step_x = -1;
-			side_dist_x = (config.dir.pos_x - map_x) * delta_dist_x;
+			side_dist_x = (config->dir.pos_x - map_x) * delta_dist_x;
 		}
 		else
 		{
 			step_x = 1;
-			side_dist_x = (map_x + 1.0 - config.dir.pos_x) * delta_dist_x;
+			side_dist_x = (map_x + 1.0 - config->dir.pos_x) * delta_dist_x;
 		}
 		if (ray_dir_y < 0)
 		{
 			step_y = -1;
-			side_dist_y = (config.dir.pos_y - map_y) * delta_dist_y;
+			side_dist_y = (config->dir.pos_y - map_y) * delta_dist_y;
 		}
 		else
 		{
 			step_y = 1;
-			side_dist_y = (map_y + 1.0 - config.dir.pos_y) * delta_dist_y;
+			side_dist_y = (map_y + 1.0 - config->dir.pos_y) * delta_dist_y;
 		}
 		while(hit == 0)
 		{
+			if (map_x < 0 || map_y < 0 || map_y >= config->map.map_height || map_x >= config->map.map_width)
+    			break; 
 			if (side_dist_x < side_dist_y)
 			{
 				side_dist_x += delta_dist_x;
@@ -138,22 +142,24 @@ void	test_raycast(t_config config)
 				map_y += step_y;
 				side = 1;
 			}
-			if (config.map.big_map[map_x][map_y] > 0)
+			if (config->map.big_map[map_y][map_x] == '1')
 				hit = 1;
 		}
 		if (side == 0)
 			wall_distance = side_dist_x - delta_dist_x;
 		else
 			wall_distance = side_dist_y - delta_dist_y;
+		if (wall_distance <= 0.0001)
+   			 wall_distance = 0.0001;
 		//on calcul la hauteur du mur
-		line_height = (int)(config.screen.screen_size_height / wall_distance);
-		draw_start = -line_height / 2 + config.screen.screen_size_height / 2;
+		line_height = (int)(config->screen.screen_size_height / wall_distance);
+		draw_start = -line_height / 2 + config->screen.screen_size_height / 2;
 		if (draw_start < 0)
 			draw_start = 0;
-		draw_end = line_height / 2 + config.screen.screen_size_height / 2;
-		if (draw_end >= config.screen.screen_size_height)
-			draw_end = config.screen.screen_size_height -1;
-		//draw_vertical_line(&config, i, draw_start, draw_end, 0xFFFFFF);
+		draw_end = line_height / 2 + config->screen.screen_size_height / 2;
+		if (draw_end >= config->screen.screen_size_height)
+			draw_end = config->screen.screen_size_height -1;
+		draw_vertical_line(config, i, draw_start, draw_end, 0xFFFFFF);
 		i++;
 	}
 	return ;
@@ -202,10 +208,10 @@ int	main(int argc, char **argv)
 	//	printf("%s", config.map.big_map[i]);
 	//	i++;
 	//}
-	//ft_init_screen(&config.screen);
-	test_raycast(config);
-//	mlx_key_hook(config.screen.win_ptr, keyboard_key, &config);
-	//mlx_hook(&config.screen.win_ptr, 17, 0, on_destroy, &config);
-//	mlx_loop(config.screen.mlx_ptr);
+	ft_init_screen(&config.screen);
+	test_raycast(&config);
+	mlx_key_hook(config.screen.win_ptr, keyboard_key, &config);
+	mlx_hook(config.screen.win_ptr, 17, 0, on_destroy, &config);
+	mlx_loop(config.screen.mlx_ptr);
 	return (0);
 }
