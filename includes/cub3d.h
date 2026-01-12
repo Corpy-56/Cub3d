@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/09 16:25:11 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/12 10:17:36 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void	set_color(t_config *config, char id, t_color color);
 int		parse_map(char *line, int fd, t_map *map);
 bool	is_map_line(const char *line);
 bool	validate_map(t_game *game);
-bool	invalid_char_map(const char *line);
 
 /* ********* map checks ********* */
 bool	check_empty_line_map(char *map);
 int		check_elements(char **map);
-bool	check_end_map(char *map);
-
+bool	line_is_empty(char *line);
+bool	one_elem_line(const char *line);
+bool	invalid_char_map(const char *line);
 
 /* ******************************** UTILS ********************************** */
 
