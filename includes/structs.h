@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/12 17:13:24 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/12 18:22:36 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ typedef struct s_parse_map
 	int		fd;
 }			t_parse_map;
 
+typedef struct s_ext
+{
+	int		new_rows;
+	int		new_cols;
+	int		x;
+	int		y;
+}			t_ext;
 
 typedef struct s_config
 {

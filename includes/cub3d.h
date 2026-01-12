@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/12 17:44:39 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/12 18:21:03 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	init_tex(t_tex *tex);
 void	init_game(t_game *game);
 void	init_color(t_color *color);
 void	init_parse_map(t_parse_map *p_map);
+void	init_border(t_ext *ext, int rows, int cols);
 
 /* ******************************* PARSING ********************************* */
 

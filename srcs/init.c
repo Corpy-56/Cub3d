@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/12 17:45:18 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/12 18:23:28 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,3 +60,10 @@ void	init_game(t_game *game)
 	init_map(&game->map);
 }
 
+void	init_border(t_ext *ext, int rows, int cols)
+{
+	ext->new_rows = rows + 2;
+	ext->new_cols = cols + 2;
+	ext->x = 0;
+	ext->y = 0;
+}
