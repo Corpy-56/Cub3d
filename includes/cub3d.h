@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 16:45:57 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/13 17:52:50 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 /* ******************************** SOURCES ******************************** */
 
 /* ********* init ********* */
+void	init_map(t_map *map);
 void	init_config(t_config *config);
 void	init_tex(t_tex *tex);
 void	init_game(t_game *game);

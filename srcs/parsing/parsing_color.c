@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 15:08:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/09 12:27:34 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/13 17:39:33 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,9 @@ bool	parse_rgb_values(const char *line, int i, t_color *color)
 void	set_color(t_config *config, char id, t_color color)
 {
 	if (id == 'F')
-	{
 		config->floor = color;
-		ft_printf("floor_r : %d, floor_g : %d, floor_b : %d\n", config->floor.r, config->floor.g, config->floor.b); // a retirer 
-	}
 	else
-	{
 		config->ceiling = color;
-		ft_printf("ceiling_r : %d, ceiling_g : %d, ceiling_b : %d\n", config->ceiling.r, config->ceiling.g, config->ceiling.b); // a retirer
-	}
 }
 
 bool	parse_color(const char *line, int i, t_config *config)

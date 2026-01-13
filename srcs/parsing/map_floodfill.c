@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 12:07:23 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 17:08:04 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/13 17:37:45 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,3 @@ bool	check_closed_map(t_game *game)
 		return (error_msg("Map is open"), false);
 	return (true);
 }
-

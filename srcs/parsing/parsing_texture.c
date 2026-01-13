@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 08:57:38 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/09 16:24:18 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/13 17:39:10 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,3 @@ int	search_texture(const char *line, int i, t_config *config)
 	}
 	return (1);
 }
-
-
-
