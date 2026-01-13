@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 16:01:24 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/13 16:45:57 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	free_paths(t_config *config);
 void	free_all(t_game *game);
 void	free_and_err(char *line, char *map_tmp, char *msg);
 void	free_and_gnl(char **line, int fd);
+void	free_rows(char **grid, int i);
 
 /* ********* error ********* */
 void	error_msg(char *msg);

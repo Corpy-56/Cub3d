@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:35:04 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 15:49:46 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/13 16:46:03 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ char	**alloc_grid(int rows, int cols)
 		x = 0;
 		grid[y] = malloc(sizeof(char) * (cols + 1));
 		if (!grid[y])
-			return (NULL);
+			return (free_rows(grid, y), NULL);
 		while (x < cols)
 		{
-			grid[y][x] = ' '; // remplacer le '.' par un espace
+			grid[y][x] = ' ';
 			x++;
 		}
 		grid[y][cols] = '\0';
@@ -99,7 +99,7 @@ char	**normalize_map(t_map *map)
 	grid = alloc_grid(map->rows, map->cols);
 	map_in_grid(grid, map);
 	border = add_border(grid, map->rows, map->cols);
-	// free_doublechar(grid);
+	free_doublechar(grid);
 	return (border);
 }
 

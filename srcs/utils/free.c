@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 15:50:24 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 12:01:54 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/13 16:45:46 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,3 +74,17 @@ void	free_and_gnl(char **line, int fd)
 	free(*line);
 	*line = get_next_line(fd);
 }
+
+void	free_rows(char **grid, int i)
+{
+	int	j;
+
+	j = 0;
+	while (j < i)
+	{
+		free(grid[j]);
+		j++;
+	}
+	free(grid);
+}
+
