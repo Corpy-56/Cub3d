@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/07 16:19:40 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/13 14:48:11 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,45 @@ typedef struct s_mlx
 	void	*win_ptr;
 	int		screen_size_width;
 	int		screen_size_height;
+	int	bpp;
+	void	*img;
+	int	line_len;
+	int endian;
+	void *addr;
+	//void	
 }			t_mlx;
 
 typedef struct s_direction
 {
-	//char	**big_map;
-	//int		map_height;
-	//int		map_width;
 	double		pos_x;
-	double		pos_y;//position
+	double		pos_y;
 	double		dir_x;
-	double		dir_y;//ou il regarde
+	double		dir_y;
 	double		plan_x;
-	double		plan_y;//largeur de la camera FOV
+	double		plan_y;
 }			t_direction;
+
+typedef struct s_raycast
+{
+	double	camera;
+	double	ray_dir_x;
+	double ray_dir_y;
+	double side_dist_x;
+	double side_dist_y;
+	double delta_dist_x;
+	double delta_dist_y;
+	double wall_distance;
+	int step_x;
+	int step_y;
+	int draw_start;//debit entre de y dans un x(colonne) donne
+	int draw_end;//cest la fin jaffiche une colone
+	int hit;
+	int side;//mur touche verticalement ou horizontalement
+	int map_x;
+	int line_height;
+	int map_y;
+}			t_raycast;
+
 
 typedef struct s_map
 {
@@ -57,6 +82,7 @@ typedef struct s_config
 	t_map	map;
 	t_mlx	screen;
 	t_direction	dir;
+	t_raycast cast;
 	char	*no_path;
 	char	*so_path;
 	char	*we_path;

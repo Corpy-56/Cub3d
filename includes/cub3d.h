@@ -31,6 +31,7 @@
 /* ********* init ********* */
 void	init_config(t_config *config);
 void	init_tex(t_tex *tex);
+void	ft_init_ray(t_config *config);
 
 /* ********* parsing ********* */
 void	parse_header(const char *line, t_config *config, int *mode);
@@ -44,6 +45,13 @@ int	check_cub(char *temp, int i);
 int	ft_find_point(char *temp, int k);
 int	ft_error(int i, t_config *game, char *string);
 
+/* ********* raycast ********* */
+void		raycast(t_config *co);
+t_config	*hit_wall_boucle(t_config *co);
+t_config	*wall_height_calcul(t_config *co);
+t_config	*radius_calcul(t_config *co);
+t_config	*calcul_delta_dist(t_config *co);
+void	draw_vertical_line(t_config *config, int x, int start, int end, int color); //il faut lenlever
 
 /* ******************************** UTILS ********************************** */
 
