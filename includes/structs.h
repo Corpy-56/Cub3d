@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/12 18:22:36 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/13 15:09:35 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,15 @@ typedef struct s_ext
 	int		x;
 	int		y;
 }			t_ext;
+
+typedef struct s_flood
+{
+	char	**map;
+	int		rows;
+	int		cols;
+	bool	open;
+}			t_flood;
+
 
 typedef struct s_config
 {

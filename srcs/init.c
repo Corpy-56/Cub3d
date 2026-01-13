@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/12 18:23:28 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/13 16:10:09 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,11 @@ void	init_border(t_ext *ext, int rows, int cols)
 	ext->new_cols = cols + 2;
 	ext->x = 0;
 	ext->y = 0;
+}
+
+void	init_flood(t_flood *flood, t_map *map)
+{
+	flood->rows = map->rows + 2;
+	flood->cols = map->cols + 2;
+	flood->open = false;
 }

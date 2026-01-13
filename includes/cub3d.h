@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/12 18:21:03 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/13 16:01:24 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	init_game(t_game *game);
 void	init_color(t_color *color);
 void	init_parse_map(t_parse_map *p_map);
 void	init_border(t_ext *ext, int rows, int cols);
+void	init_flood(t_flood *flood, t_map *map);
+
 
 /* ******************************* PARSING ********************************* */
 
@@ -74,6 +76,10 @@ bool	invalid_char_map(const char *line);
 
 /* ********* map grid ********* */
 char	**normalize_map(t_map *map);
+
+/* ********* flood fill ********* */
+void	flood_fill(t_flood *f, int y, int x);
+bool	check_closed_map(t_game *game);
 
 /* ******************************** UTILS ********************************** */
 
