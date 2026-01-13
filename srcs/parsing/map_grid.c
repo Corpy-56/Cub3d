@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:35:04 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/12 18:41:59 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/13 12:02:01 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ char	**map_in_grid(char **grid, t_map *map)
 	{
 		line = map->big_map[y];
 		len = ft_strlen(line);
+		if (line[len - 1] == '\n')
+			len -= 1;
 		x = 0;
-		while (x < (ft_min(len, map->cols) - 1))
+		while (x < (ft_min(len, map->cols)))
 		{
 			grid[y][x] = line[x];
 			x++;
@@ -78,7 +80,7 @@ char	**add_border(char **grid, int rows, int cols)
 	while (y < rows)
 	{
 		x = 0;
-		while (x < cols - 1)
+		while (x < cols)
 		{
 			border[y + 1][x + 1] = grid[y][x];
 			x++;
@@ -98,7 +100,9 @@ char	**normalize_map(t_map *map)
 	map_in_grid(grid, map);
 	border = add_border(grid, map->rows, map->cols);
 	ft_print_map(border);
-	return (grid);
+	free_doublechar(grid);
+	free_doublechar(border);
+	return (border);
 }
 
 bool	validate_map(t_game *game)
