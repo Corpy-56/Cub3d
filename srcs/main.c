@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 15:57:38 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/13 17:43:44 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	on_destroy(t_config *game)
 {
 	//free_image(game);
 	mlx_destroy_window(game->screen.mlx_ptr, game->screen.win_ptr);
-	mlx_destroy_display(game->screen.mlx_ptr);
+	//mlx_destroy_display(game->screen.mlx_ptr);
 	//free(game.screen.mlx_ptr);
 	//if (game->big_map != NULL || game->big_map->map != NULL)
 	//{
@@ -56,8 +56,10 @@ void	ft_init_screen(t_mlx *screen, t_config *config)
 	screen->mlx_ptr = mlx_init();
 	if (screen->mlx_ptr == NULL)
 		ft_error(0, NULL, "Mlx_init failed\n");
-	mlx_get_screen_size(screen->mlx_ptr, &screen->screen_size_width,
-		&screen->screen_size_height);
+	//mlx_get_screen_size(screen->mlx_ptr, &screen->screen_size_width,
+	//	&screen->screen_size_height);
+	screen->screen_size_width = 1920;
+	screen->screen_size_height = 1080;
 	screen->win_ptr = mlx_new_window(screen->mlx_ptr, screen->screen_size_width, screen->screen_size_height, "Cub3d");
 	screen->img = mlx_new_image(config->screen.mlx_ptr, config->screen.screen_size_width, config->screen.screen_size_height);
 	screen->addr = mlx_get_data_addr(screen->img, &screen->bpp, &screen->line_len, &screen->endian);
