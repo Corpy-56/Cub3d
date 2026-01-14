@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 17:52:32 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/14 17:39:24 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,5 @@ void	init_parse_map(t_parse_map *p_map)
 	p_map->map_tmp = ft_strdup("");
 	p_map->started = false;
 	p_map->end = false;
+	p_map->rows = 0;
 }

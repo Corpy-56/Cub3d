@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:14:41 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/14 14:01:44 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/14 17:45:55 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,21 @@ void	free_rows(char **grid, int i)
 		j++;
 	}
 	free(grid);
+}
+
+int	check_size_map(char *line, t_parse_map *p)
+{
+	int	len;
+	int	max;
+
+	max = 0;
+	len = ft_strlen(line);
+	if (len > 0)
+	{
+		if (line[len - 1] == '\n')
+			len -= 1;
+	}
+	if (p->rows + 1 > 250 || len > 250)
+		return (error_msg("Map is too big"), 1);
+	return (0);
 }

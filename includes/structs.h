@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 15:09:35 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/14 17:43:34 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_parse_map
 	bool	started;
 	bool	end;
 	int		fd;
+	int		rows;
+	int		total_chars;
 }			t_parse_map;
 
 typedef struct s_ext
@@ -80,8 +82,6 @@ typedef struct s_game
 	t_map		map;
 	t_color		color;
 }			t_game;
-
-
 
 
 #endif

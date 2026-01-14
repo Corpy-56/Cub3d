@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 17:52:50 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/14 17:40:06 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ size_t	line_len(const char *line, int start);
 /* ********* utils map ********* */
 void	map_size(t_map *map);
 int		ft_min(int a, int b);
+int		check_size_map(char *line, t_parse_map *p);
+
 
 /* ********* free ********* */
 void	free_doublechar(char **to_free);

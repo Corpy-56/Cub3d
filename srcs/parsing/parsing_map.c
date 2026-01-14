@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:11:02 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 17:39:16 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/14 17:43:58 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ static int	handle_mapline(char **line, t_parse_map *p)
 	if (p->end)
 		return (free_and_err(*line, p->map_tmp, ERR_EMPTY), 1);
 	p->started = true;
+	if (check_size_map(*line, p))
+		return (free(*line), free(p->map_tmp), 1);
 	p->map_tmp = ft_strjoin_free(p->map_tmp, *line);
 	if (!p->map_tmp)
 		return (free(*line), 1);
+	p->rows++;
 	free_and_gnl(line, p->fd);
 	return (0);
 }
@@ -74,3 +77,4 @@ int	parse_map(char *line, int fd, t_map *map)
 	map_size(map);
 	return (0);
 }
+
