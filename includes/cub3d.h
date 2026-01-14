@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/14 18:34:55 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/14 18:48:58 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ char	**normalize_map(t_map *map);
 
 /* ********* flood fill ********* */
 void	flood_fill(t_flood *f, int y, int x);
+void	fill_space(char **map);
 bool	check_closed_map(t_game *game);
 
 /* ******************************** UTILS ********************************** */

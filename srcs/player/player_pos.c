@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:58:18 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/14 18:34:42 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/14 18:41:35 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	find_player(char **map, t_player *player)
 				ft_printf("PLAYER POSITION (col, row)\n");
 				ft_printf("Spawn orientation: %c\n", player->spawn_dir);
 				map[y][x] = '0';
+				ft_print_map(map);
 				return (1);
 			}
 			x++;
