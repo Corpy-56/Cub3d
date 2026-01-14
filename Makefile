@@ -6,11 +6,7 @@
 #    By: skuor <skuor@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 16:18:45 by skuor             #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2026/01/08 10:03:51 by skuor            ###   ########.fr        #
-=======
-#    Updated: 2026/01/13 17:36:25 by skuor            ###   ########.fr        #
->>>>>>> parsing
+#    Updated: 2026/01/14 13:51:31 by skuor            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,10 +53,6 @@ $(OBJ_DIR):
 $(NAME): $(OBJ)
 	@echo "$(MAGENTA)libft compiled!$(DEFAULT)"
 	@echo "$(GREEN)$(NAME) compiled!$(DEFAULT)"
-<<<<<<< HEAD
-	@echo "$(MAGENTA)libft compiled!$(DEFAULT)"
-=======
->>>>>>> parsing
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
 	@$(CC) $(CFLAGS) $(INC_H) $(OBJ) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
 
