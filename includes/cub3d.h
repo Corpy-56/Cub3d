@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/14 17:40:06 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/14 18:34:55 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	init_parse_map(t_parse_map *p_map);
 void	init_border(t_ext *ext, int rows, int cols);
 void	init_flood(t_flood *flood, t_map *map);
 
+/* ********* player ********* */
+int		find_player(char **map, t_player *player);
 
 /* ******************************* PARSING ********************************* */
 
@@ -101,7 +103,6 @@ size_t	line_len(const char *line, int start);
 void	map_size(t_map *map);
 int		ft_min(int a, int b);
 int		check_size_map(char *line, t_parse_map *p);
-
 
 /* ********* free ********* */
 void	free_doublechar(char **to_free);

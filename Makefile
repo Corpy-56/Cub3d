@@ -6,7 +6,7 @@
 #    By: skuor <skuor@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 16:18:45 by skuor             #+#    #+#              #
-#    Updated: 2026/01/14 13:51:31 by skuor            ###   ########.fr        #
+#    Updated: 2026/01/14 18:14:03 by skuor            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ OBJ_DIR = ./objects/
 INC_DIR = ./includes/
 UTILS_DIR = $(SRC_DIR)utils/
 PARSING_DIR = $(SRC_DIR)parsing/
+PLAYER_DIR = $(SRC_DIR)player/
 
 LIBFT_DIR = ./libft/
 
@@ -30,10 +31,12 @@ UTILS_FILES = utils.c free.c utils_parsing.c error_msg.c utils_map.c
 PARSING_FILES = parsing_texture.c parsing_color.c parsing_map.c \
 				parsing_file.c map_checks.c map_grid.c map_floodfill.c
 
+PLAYER_FILES = player_pos.c
 
 OBJ = 	$(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o)) \
 		$(addprefix $(OBJ_DIR), $(UTILS_FILES:.c=.o)) \
 		$(addprefix $(OBJ_DIR), $(PARSING_FILES:.c=.o)) \
+		$(addprefix $(OBJ_DIR), $(PLAYER_FILES:.c=.o)) \
 
 INC_H = -I $(INC_DIR) -I $(LIBFT_DIR)/includes/
 
@@ -65,6 +68,10 @@ $(OBJ_DIR)%.o: $(UTILS_DIR)%.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(INC_H) -c -o $@ $<
 
 $(OBJ_DIR)%.o: $(PARSING_DIR)%.c | $(OBJ_DIR)
+	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+	@$(CC) $(CFLAGS) $(INC_H) -c -o $@ $<
+
+$(OBJ_DIR)%.o: $(PLAYER_DIR)%.c | $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(INC_H) -c -o $@ $<
 

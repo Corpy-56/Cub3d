@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/14 17:43:43 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/14 18:12:53 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int argc, char **argv)
 	init_game(&game);
 	if (!parsing_file(argv[1], &game))
 		return (free_all(&game), error_msg("Invalid parsing file"), 1);
+	find_player(game.map.big_map, &game.player);
 	free_all(&game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/14 17:43:34 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/14 18:32:13 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ typedef struct s_map
 	char	**big_map;
 	int		rows;
 	int		cols;
-	int		player_x;
-	int		player_y;
 }			t_map;
 
 typedef struct s_color
@@ -64,6 +62,12 @@ typedef struct s_flood
 	bool	open;
 }			t_flood;
 
+typedef struct s_player
+{
+	int		pos_row;
+	int		pos_col;
+	char	spawn_dir;
+}			t_player;
 
 typedef struct s_config
 {
@@ -81,6 +85,7 @@ typedef struct s_game
 	t_config	config;
 	t_map		map;
 	t_color		color;
+	t_player	player;
 }			t_game;
 
 
