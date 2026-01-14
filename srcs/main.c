@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 17:43:44 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/14 14:07:42 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,19 +130,21 @@ void	clear_image(t_config *config)
 int	main(int argc, char **argv)
 {
 	t_config	config;
+	int i;
 
+	i = argc;
 	init_config(&config);
-	check_args(argc, argv);
+	check_args(i, argv);
 	//if (!parsing_file(argv[1], &config))
 	//	return (ft_printf("Error parsing file\n"), 1);
 	config.map.big_map = test(argv);
 	ft_init_screen(&config.screen, &config);
 	//clear_image(&config);
 	raycast(&config);
-	my_mlx_pixel_put1(&config, 100, 101, 0xFF0000);
-	my_mlx_pixel_put1(&config, 100, 102, 0xFF0000);
-	my_mlx_pixel_put1(&config, 100, 103, 0xFF0000);
-	my_mlx_pixel_put1(&config, 100, 104, 0xFF0000);
+	//my_mlx_pixel_put1(&config, 100, 101, 0xFF0000);
+	//my_mlx_pixel_put1(&config, 100, 102, 0xFF0000);
+	//my_mlx_pixel_put1(&config, 100, 103, 0xFF0000);
+	//my_mlx_pixel_put1(&config, 100, 104, 0xFF0000);
 	mlx_put_image_to_window(config.screen.mlx_ptr, config.screen.win_ptr, config.screen.img, 0, 0);
 	mlx_key_hook(config.screen.win_ptr, keyboard_key, &config);
 	mlx_hook(config.screen.win_ptr, 17, 0, on_destroy, &config);

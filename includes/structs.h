@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 14:48:11 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/14 14:01:25 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,21 @@ typedef struct s_map
 	int		player_y;
 }			t_map;
 
+typedef struct s_mini_map
+{
+	int start_x;
+	int end_x;
+	int start_y;
+	int	end_y;
+}			t_mini_map;
+
 typedef struct s_config
 {
 	t_map	map;
 	t_mlx	screen;
 	t_direction	dir;
 	t_raycast cast;
+	t_mini_map	mini;
 	char	*no_path;
 	char	*so_path;
 	char	*we_path;

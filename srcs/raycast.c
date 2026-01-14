@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:10:23 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/13 16:28:50 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/14 17:01:19 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ t_config	*wall_height_calcul(t_config *co)
 
 t_config	*hit_wall_boucle(t_config *co)
 {
-	//printf("%d - %d\n", co->cast.map_y, co->cast.map_x);
-	//printf("%d - %d\n", co->map.map_height, co->map.map_width);
 	while (co->cast.hit == 0)
 	{
 		if (co->cast.map_x < 0 || co->cast.map_y < 0)
@@ -96,30 +94,11 @@ t_config	*hit_wall_boucle(t_config *co)
 			co->cast.map_y += co->cast.step_y;
 			co->cast.side = 1;
 		}
-		//printf("%d - %d\n", co->cast.map_y, co->cast.map_x);
 		if (co->map.big_map[co->cast.map_y][co->cast.map_x] == '1')
 			co->cast.hit = 1;
-		//printf("start cell = %c\n", co->map.big_map[co->cast.map_y][co->cast.map_x]);
 	}
 	return (co);
 }
-
-//void	draw_vertical_line(t_config *config, int x, int start, int end, int color)
-//{
-//	int y;
-
-//	y = start;
-//	//config->screen.image_wall = mlx_get_data_addr(config->screen.image_wall, &config->screen.bpp, &config->screen.line_len, &config->screen.endian);
-//	while (y <= end)
-//	{
-//		//my_mlx_pixel_put(config, x, y, color);
-//		//mlx_pixel_put(config->screen.mlx_ptr, config->screen.win_ptr, x, y, color);
-//		//mlx_put_image_to_window(config->screen.mlx_ptr, config->screen.win_ptr, config->screen.image_wall,
-//		//	x * 1, y * 1);
-//		my_mlx_pixel_put(config, x, y, color);
-//		y++;
-//	}
-//}
 
 
 void	my_mlx_pixel_put(t_config *config, int x, int y, int color)
@@ -132,29 +111,84 @@ void	my_mlx_pixel_put(t_config *config, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void	ft_print_mini_map(t_config *c, int x, int y)
+{
+	int i;
+
+	i = 0;
+	while(y < c->screen.screen_size_height)
+	{
+		if(y >= c->mini.start_y && y <= c->mini.end_y)
+			i++;
+		else if (y < c->cast.draw_start && (y <= c->mini.start_y || y >= c->mini.end_y))
+			my_mlx_pixel_put(c, x, y, 0x87CEEB);
+		else if (y <= c->cast.draw_end && (y <= c->mini.start_y || y >= c->mini.end_y))
+			my_mlx_pixel_put(c, x, y, 0x8B4513);
+		else if (y < c->screen.screen_size_height && (y <= c->mini.start_y || y >= c->mini.end_y))
+			my_mlx_pixel_put(c, x, y, 0x228B22);
+		y++;
+	}
+}
+
 void	draw_wall_column(t_config *c, int x)
 {
 	int	y;
 
 	y = 0;
-	//printf("%d\n", c->cast.draw_start);
-//	printf("%d\n", c->cast.draw_end);
-	while (y < c->cast.draw_start)
+	if (x >= c->mini.start_x && x <= c->mini.end_x)
 	{
-	//	printf("A");
-		my_mlx_pixel_put(c, x, y, 0x87CEEB); // bleu ciel
+		ft_print_mini_map(c, x, y);
+		return ;
+	}
+	while(y < c->screen.screen_size_height)
+	{
+		if (y < c->cast.draw_start)
+			my_mlx_pixel_put(c, x, y, 0x87CEEB);
+		else if (y <= c->cast.draw_end)
+			my_mlx_pixel_put(c, x, y, 0x8B4513);
+		else if (y < c->screen.screen_size_height)
+			my_mlx_pixel_put(c, x, y, 0x228B22);
 		y++;
 	}
-	while (y <= c->cast.draw_end)
+}
+
+void draw_mini_map(t_config *co)
+{
+	int y;
+	int i;
+	int j;
+	int map_x;
+	int map_y;
+	int x;
+
+	y = 0;
+	while(y <= 300)
 	{
-		my_mlx_pixel_put(c, x, y, 0x8B4513); // marron
+		x = 0;
+		while(x <= 300)
+		{
+			map_x = co->map.player_x + (x / 10) - 15;
+			map_y = co->map.player_y + (y / 10) - 15;
+			if (map_x < 0 || map_y < 0 || map_x >= co->map.map_width || map_y >= co->map.map_height)
+				my_mlx_pixel_put(co, 10 + x, 10 + y, 0);
+			else if (co->map.big_map[map_y][map_x] == '1')
+				my_mlx_pixel_put(co, 10 + x, 10 + y, 0);
+			else if (co->map.big_map[map_y][map_x] == '0')
+				my_mlx_pixel_put(co, 10 + x, 10 + y, 0xFFFFFF);
+			x++;
+		}
 		y++;
-	}
-	while (y < c->screen.screen_size_height)
-	{
-	//	printf("b");
-		my_mlx_pixel_put(c, x, y, 0x228B22); // vert
-		y++;
+		 i = -3;
+    	while (i <= 3)
+		{
+			j = -3;
+			while (j <= 3)
+			{
+				my_mlx_pixel_put(co, 10 + 300 / 2 + j, 10 + 300 / 2 + i, 0xFF0000);
+				j++;
+			}
+			i++;
+		}
 	}
 }
 
@@ -167,7 +201,6 @@ void	raycast(t_config *co)
 	while (i < co->screen.screen_size_width)
 	{
 		co->cast.hit = 0;
-		//printf("ray=(%f,%f) side=%d dist=%f\n", co->cast.ray_dir_x, co->cast.ray_dir_y, co->cast.side, co->cast.wall_distance);
 		co->cast.map_x = (int)co->dir.pos_x;
 		co->cast.map_y = (int)co->dir.pos_y;
 		co->cast.camera = 2.0 * i / (double)co->screen.screen_size_width - 1.0;
@@ -181,12 +214,9 @@ void	raycast(t_config *co)
 				- co->cast.delta_dist_y;
 		if (co->cast.wall_distance <= 0.0001)
 			co->cast.wall_distance = 0.0001;
-	//	printf("dist = %f\n", co->cast.wall_distance);
 		co = wall_height_calcul(co);
 		draw_wall_column(co, i);
-		//draw_vertical_line(co, i, co->cast.draw_start, co->cast.draw_end, 0xFFFFFF);
-	//draw_vertical_line(co, i, co->cast.draw_start, co->cast.draw_end, (i % 2) ? 0xFF0000 : 0x00FF00);
 		i++;
 	}
-	mlx_put_image_to_window(co->screen.mlx_ptr, co->screen.win_ptr,	co->screen.img, 0, 0);
+	draw_mini_map(co);
 }

@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 16:34:51 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/14 17:31:23 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ void	init_config(t_config *config)
 	config->ceiling_r = -1;
 	config->ceiling_g = -1;
 	config->ceiling_b = -1;
-	config->dir.pos_x = 3.0;//peut etre changer en fonction de la map
-	config->dir.pos_y = 2.5;
+	config->dir.pos_x = 7.0;//peut etre changer en fonction de la map
+	config->dir.pos_y = 3.5;
 	config->dir.dir_x = -1.0;//il faut changer ca en fonction de la map cest ou il regarde
 	config->dir.dir_y = 0.0;
 	config->dir.plan_x = 0.0;
 	config->dir.plan_y = 0.66;
 	//config->map = NULL;
-	config->map.map_height = 10;//a changer 
-	config->map.map_width = 10;// achanger
-	//config->player_x = -1;
-	//config->player_y = -1;
+	config->map.map_height = 5;//a changer 
+	config->map.map_width = 9;// achanger
+	config->map.player_x = 7;
+	config->map.player_y = 1;
 }
 
 void	init_tex(t_tex *tex)
@@ -65,4 +65,8 @@ void	ft_init_ray(t_config *config)
 	config->cast.map_x = 0;
 	config->cast.line_height = 0;
 	config->cast.map_y = 0;
+	config->mini.start_x = 10;
+	config->mini.end_x = 310;
+	config->mini.start_y = 10;
+	config->mini.end_y = 310;
 }
