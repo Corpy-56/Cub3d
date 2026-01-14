@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:35:04 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 16:46:03 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/14 14:02:27 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,6 @@ bool	validate_map(t_game *game)
 		return (false);
 	if (check_elements(game->map.big_map))
 		return (false);
-	ft_printf(GREEN"Valid map !\n"DEFAULT);
+	ft_printf(GREEN"Valid map !\n"DEFAULT); // a retirer
 	return (true);
 }
