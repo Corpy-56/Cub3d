@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:14:41 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/14 11:16:35 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/14 14:01:44 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,17 @@ int	ft_min(int a, int b)
 	if (a < b)
 		return (a);
 	return (b);
+}
+
+void	free_rows(char **grid, int i)
+{
+	int	j;
+
+	j = 0;
+	while (j < i)
+	{
+		free(grid[j]);
+		j++;
+	}
+	free(grid);
 }
