@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/03 12:56:48 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/14 13:47:10 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,13 @@ int	check_args(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_config	config;
+	t_game		game;
 
 	if (argc != 2)
 		return (1);
-
-	init_config(&config);
-	if (!parsing_file(argv[1], &config))
-		return (ft_printf("Error parsing file\n"), 1);
+	init_game(&game);
+	if (!parsing_file(argv[1], &game))
+		return (free_all(&game), error_msg("Invalid parsing file"), 1);
+	free_all(&game);
 	return (0);
-	
 }
