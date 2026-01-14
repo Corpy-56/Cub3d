@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:14:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/12 14:06:31 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/14 11:18:03 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	activate_map_mode(const char *line, t_config *config, int *mode)
 	{
 		if (is_map_line(line) == false)
 			return (1);
-		ft_printf(GREEN"mode map activated !\n"DEFAULT); // a retirer
+		ft_printf(GREEN"Textures & colors ok!\n"DEFAULT); // a retirer
 		return (*mode = MAP, 0);
 	}
 	else

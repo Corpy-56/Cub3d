@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:14:41 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 16:02:54 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/14 11:16:35 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	map_size(t_map *map)
 	}
 	map->rows = i;
 	map->cols = max;
-	ft_printf("rows : %d\ncols : %d\n", map->rows, map->cols);
 }
 
 int	ft_min(int a, int b)
