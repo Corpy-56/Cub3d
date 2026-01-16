@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/14 14:07:42 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/16 11:55:33 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,25 +129,29 @@ void	clear_image(t_config *config)
 
 int	main(int argc, char **argv)
 {
-	t_config	config;
-	int i;
+	t_game		game;
 
-	i = argc;
-	init_config(&config);
-	check_args(i, argv);
+	init_game(&game);
+	check_args(argc, argv);
 	//if (!parsing_file(argv[1], &config))
 	//	return (ft_printf("Error parsing file\n"), 1);
-	config.map.big_map = test(argv);
-	ft_init_screen(&config.screen, &config);
+	if (!parsing_file(argv[1], &game))
+		return (free_all(&game), error_msg("Invalid parsing file"), 1);
+	ft_init_screen(&game.config.screen, &game.config);
+	find_player(game.map.big_map, &game.player);
+	raycast(&game.config);
+	mlx_put_image_to_window(game.config.screen.mlx_ptr, game.config.screen.win_ptr, game.config.screen.img, 0, 0);
+	mlx_key_hook(game.config.screen.win_ptr, keyboard_key, &game.config);
+	mlx_hook(game.config.screen.win_ptr, 17, 0, on_destroy, &game.config);
+	mlx_loop(game.config.screen.mlx_ptr);
+	free_all(&game);
+	//config.map.big_map = test(argv);
 	//clear_image(&config);
-	raycast(&config);
 	//my_mlx_pixel_put1(&config, 100, 101, 0xFF0000);
 	//my_mlx_pixel_put1(&config, 100, 102, 0xFF0000);
 	//my_mlx_pixel_put1(&config, 100, 103, 0xFF0000);
 	//my_mlx_pixel_put1(&config, 100, 104, 0xFF0000);
-	mlx_put_image_to_window(config.screen.mlx_ptr, config.screen.win_ptr, config.screen.img, 0, 0);
-	mlx_key_hook(config.screen.win_ptr, keyboard_key, &config);
-	mlx_hook(config.screen.win_ptr, 17, 0, on_destroy, &config);
-	mlx_loop(config.screen.mlx_ptr);
+	//init_game(&game);
+	free_all(&game);
 	return (0);
 }

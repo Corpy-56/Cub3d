@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 17:35:03 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/05 09:37:11 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/16 12:01:01 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ int	extract_path(const char *line, int start, char **path, int *after)
 	*path = NULL;
 	start = skip_ws(line, start);
 	if (line[start] == '\0' || line[start] == '\n')
-	{
-		ft_printf("error path");
-		return (0);
-	}
+		return (error_msg("Path not found"), 0);
 	i = start;
 	while (!is_whitespace(line[i]) && line[i] != '\n' && line[i] != '\0')
 		i++;
@@ -41,4 +38,41 @@ int	extract_path(const char *line, int start, char **path, int *after)
 		return (0);
 	*after = i;
 	return (1);
+}
+
+int	count_comma(char *str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == ',')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+bool	can_open(char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (error_fd(path), false);
+	close(fd);
+	return (true);
+}
+
+size_t	line_len(const char *line, int start)
+{
+	size_t	len;
+
+	len = 0;
+	while (line[start + len] != '\n' && line[start + len] != '\0')
+		len++;
+	return (len);
 }

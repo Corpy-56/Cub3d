@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_color.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 15:08:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/05 09:36:14 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/16 11:59:01 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,7 @@ bool	parse_3_rgb(char **parts, int *r, int *g, int *b)
 	return (true);
 }
 
-size_t	line_len(const char *line, int start)
-{
-	size_t	len;
-
-	len = 0;
-	while (line[start + len] != '\n' && line[start + len] != '\0')
-		len++;
-	return (len);
-}
-
-bool	parse_rgb_values(const char *line, int i, int *r, int *g, int *b)
+bool	parse_rgb_values(const char *line, int i, t_color *color)
 {
 	size_t	len;
 	char	*rgb_str;
@@ -65,6 +55,8 @@ bool	parse_rgb_values(const char *line, int i, int *r, int *g, int *b)
 	rgb_str = ft_substr(line, i, len);
 	if (!rgb_str)
 		return (false);
+	if (count_comma(rgb_str) != 2)
+		return (free(rgb_str), false);
 	parts = ft_split(rgb_str, ',');
 	free(rgb_str);
 	if (!parts)
@@ -74,48 +66,38 @@ bool	parse_rgb_values(const char *line, int i, int *r, int *g, int *b)
 		count++;
 	if (count != 3)
 		return (free_doublechar(parts), false);
-	if (!parse_3_rgb(parts, r, g, b))
+	if (!parse_3_rgb(parts, &color->r, &color->g, &color->b))
 		return (free_doublechar(parts), false);
 	free_doublechar(parts);
 	return (true);
 }
 
-void	set_color(t_config *config, char id, int r, int g, int b)
+void	set_color(t_config *config, char id, t_color color)
 {
 	if (id == 'F')
-	{
-		config->floor_r = r;
-		config->floor_g = g;
-		config->floor_b = b;
-	}
+		config->floor = color;
 	else
-	{
-		config->ceiling_r = r;
-		config->ceiling_g = g;
-		config->ceiling_b = b;
-	}
+		config->ceiling = color;
 }
 
 bool	parse_color(const char *line, int i, t_config *config)
 {
 	char	id;
-	int		r;
-	int		g;
-	int		b;
+	t_color	color;
 
 	id = line[i];
 	if (id != 'F' && id != 'C')
-		return (false);
-	if (id == 'F' && config->floor_r != -1)
-		return (false);
-	if (id == 'C' && config->ceiling_r != -1)
-		return (false);
+		return (error_msg("Invalid color line"), false);
+	if (id == 'F' && config->floor.r != -1)
+		return (error_msg("F color already loaded"), false);
+	if (id == 'C' && config->ceiling.r != -1)
+		return (error_msg("C color already loaded"), false);
 	i = i + 1;
 	i = skip_ws(line, i);
 	if (line[i] == '\n' || line[i] == '\0')
 		return (false);
-	if (!parse_rgb_values(line, i, &r, &g, &b))
-		return (false);
-	set_color(config, id, r, g, b);
+	if (!parse_rgb_values(line, i, &color))
+		return (error_msg("Invalid RGB value"), false);
+	set_color(config, id, color);
 	return (true);
 }

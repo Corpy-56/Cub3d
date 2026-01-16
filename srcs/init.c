@@ -6,13 +6,13 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/14 17:31:23 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/16 11:47:36 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_config(t_config *config)
+void	init_map(t_map *map)
 {
 	config->no_path = NULL;
 	config->so_path = NULL;
@@ -69,4 +69,30 @@ void	ft_init_ray(t_config *config)
 	config->mini.end_x = 310;
 	config->mini.start_y = 10;
 	config->mini.end_y = 310;
+}
+
+
+void	init_config(t_config *config)
+{
+	init_color(&config->floor);
+	init_color(&config->ceiling);
+	config->no_path = NULL;
+	config->so_path = NULL;
+	config->we_path = NULL;
+	config->ea_path = NULL;
+}
+
+void	init_color(t_color *color)
+{
+	color->r = -1;
+	color->g = -1;
+	color->b = -1;
+}
+
+void	init_parse_map(t_parse_map *p_map)
+{
+	p_map->map_tmp = ft_strdup("");
+	p_map->started = false;
+	p_map->end = false;
+	p_map->rows = 0;
 }

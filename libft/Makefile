@@ -6,7 +6,7 @@
 #    By: skuor <skuor@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 10:10:18 by skuor             #+#    #+#              #
-#    Updated: 2025/09/11 11:09:01 by skuor            ###   ########.fr        #
+#    Updated: 2026/01/08 17:06:44 by skuor            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ CONVERSION_FILES = ft_toupper.c ft_tolower.c ft_atoi.c ft_itoa.c ft_atol.c
 
 DISPLAY_FILES = ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 				ft_printf.c ft_hexadecimal.c ft_hexaptr.c ft_putchar.c ft_putstr.c \
-				ft_putnbr.c ft_putnbr_u.c ft_print_array.c
+				ft_putnbr.c ft_putnbr_u.c ft_print_array.c ft_print_map.c
 
 LINKED_LIST_FILES = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c \
 					ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
