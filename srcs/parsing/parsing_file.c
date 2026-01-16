@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:14:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 11:59:35 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/16 16:39:39 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	parsing_file(const char *path, t_game *game)
 	{
 		if (mode == HEADER)
 		{
-			if (parse_header(line, &game->config, &mode) != 0)
+			if (parse_header(line, &game->config, &mode, game) != 0)
 				return (free(line), close(fd), false);
 			if (mode == MAP)
 			{
@@ -41,20 +41,19 @@ bool	parsing_file(const char *path, t_game *game)
 	return (close(fd), true);
 }
 
-static int	activate_map_mode(const char *line, t_config *config, int *mode)
+static int	activate_map_mode(const char *line, t_config *config, int *mode, t_game *game)
 {
-	if (header_complete(config))
+	if (header_complete(config, game))
 	{
 		if (is_map_line(line) == false)
 			return (1);
-		ft_printf(GREEN"Textures & colors ok!\n"DEFAULT); // a retirer
 		return (*mode = MAP, 0);
 	}
 	else
 		return (1);
 }
 
-int	parse_header(const char *line, t_config *config, int *mode)
+int	parse_header(const char *line, t_config *config, int *mode, t_game *game)
 {
 	int	i;
 	int	texture;
@@ -70,16 +69,16 @@ int	parse_header(const char *line, t_config *config, int *mode)
 	if (texture == 0 || line[i] == 'F' || line[i] == 'C')
 	{
 		if (line[i] == 'F' || line[i] == 'C')
-			if (!parse_color(line, i, config))
+			if (!parse_color(line, i, game))
 				return (1);
 		return (*mode = HEADER, 0);
 	}
 	if (!ft_strchr("10NEWSFC", line[i]))
 		return (error_msg("Unknown element in header"), 1);
-	return (activate_map_mode(line, config, mode));
+	return (activate_map_mode(line, config, mode, game));
 }
 
-bool	header_complete(t_config *config)
+bool	header_complete(t_config *config, t_game *game)
 {
 	if (!config->no_path)
 		return (error_msg("Missing NO path"), false);
@@ -89,9 +88,9 @@ bool	header_complete(t_config *config)
 		return (error_msg("Missing WE path"), false);
 	if (!config->ea_path)
 		return (error_msg("Missing EA path"), false);
-	if (config->floor.r == -1)
+	if (game->floor.r == -1)
 		return (error_msg("Missing F color"), false);
-	if (config->ceiling.r == -1)
+	if (game->ceiling.r == -1)
 		return (error_msg("Missing C color"), false);
 	return (true);
 }

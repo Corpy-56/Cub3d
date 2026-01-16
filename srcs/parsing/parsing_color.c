@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 15:08:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 11:59:01 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/16 15:03:43 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,15 @@ bool	parse_rgb_values(const char *line, int i, t_color *color)
 	return (true);
 }
 
-void	set_color(t_config *config, char id, t_color color)
+void	set_color(t_game *game, char id, t_color color)
 {
 	if (id == 'F')
-		config->floor = color;
+		game->floor = color;
 	else
-		config->ceiling = color;
+		game->ceiling = color;
 }
 
-bool	parse_color(const char *line, int i, t_config *config)
+bool	parse_color(const char *line, int i, t_game *game)
 {
 	char	id;
 	t_color	color;
@@ -88,9 +88,9 @@ bool	parse_color(const char *line, int i, t_config *config)
 	id = line[i];
 	if (id != 'F' && id != 'C')
 		return (error_msg("Invalid color line"), false);
-	if (id == 'F' && config->floor.r != -1)
+	if (id == 'F' && game->floor.r != -1)
 		return (error_msg("F color already loaded"), false);
-	if (id == 'C' && config->ceiling.r != -1)
+	if (id == 'C' && game->ceiling.r != -1)
 		return (error_msg("C color already loaded"), false);
 	i = i + 1;
 	i = skip_ws(line, i);
@@ -98,6 +98,6 @@ bool	parse_color(const char *line, int i, t_config *config)
 		return (false);
 	if (!parse_rgb_values(line, i, &color))
 		return (error_msg("Invalid RGB value"), false);
-	set_color(config, id, color);
+	set_color(game, id, color);
 	return (true);
 }

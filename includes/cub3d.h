@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 11:56:49 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/16 17:07:02 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@
 /* ******************************** SOURCES ******************************** */
 
 /* ********* init ********* */
-void	init_map(t_map *map);
-void	init_config(t_config *config);
+void	init_map(t_direction *dir, t_map * map);
+void	init_config(t_config *config, t_game *game);
 void	init_tex(t_tex *tex);
-void	ft_init_ray(t_config *config);
+void	ft_init_ray(t_raycast *cast, t_mini_map *mini);
 void	init_game(t_game *game);
 void	init_color(t_color *color);
 void	init_parse_map(t_parse_map *p_map);
@@ -54,8 +54,8 @@ int		find_player(char **map, t_player *player);
 
 /* ********* file & header ********* */
 bool	parsing_file(const char *path, t_game *game);
-int		parse_header(const char *line, t_config *config, int *mode);
-bool	header_complete(t_config *config);
+int	parse_header(const char *line, t_config *config, int *mode, t_game *game);
+bool	header_complete(t_config *config, t_game *game);
 bool	is_header_id(char *line);
 
 /* ********* texture ********* */
@@ -63,11 +63,11 @@ bool	parse_texture(const char *line, const char *id, char **dest);
 int		search_texture(const char *line, int i, t_config *config);
 
 /* ********* color ********* */
-bool	parse_color(const char *line, int i, t_config *config);
+bool	parse_color(const char *line, int i, t_game *game);
 bool	parse_numbers(char *part, int *value);
 bool	parse_3_rgb(char **parts, int *r, int *g, int *b);
 bool	parse_rgb_values(const char *line, int i, t_color *color);
-void	set_color(t_config *config, char id, t_color color);
+void	set_color(t_game *game, char id, t_color color);
 
 /* ********* map ********* */
 int		parse_map(char *line, int fd, t_map *map);
@@ -86,7 +86,6 @@ char	**normalize_map(t_map *map);
 /* ********* flood fill ********* */
 void	flood_fill(t_flood *f, int y, int x);
 bool	check_closed_map(t_game *game);
-int		parse_map(char *line, int fd, t_map map);
 
 /* ********* parsing ********* */
 int	check_args(int argc, char **argv);
@@ -95,12 +94,18 @@ int	ft_find_point(char *temp, int k);
 int	ft_error(int i, t_config *game, char *string);
 
 /* ********* raycast ********* */
-void		raycast(t_config *co);
-t_config	*hit_wall_boucle(t_config *co);
-t_config	*wall_height_calcul(t_config *co);
-t_config	*radius_calcul(t_config *co);
-t_config	*calcul_delta_dist(t_config *co);
+void	raycast(t_game *game, t_raycast *cast);
+void	hit_wall_boucle(t_raycast *cast, t_game *game);
+void	wall_height_calcul(t_raycast *cast, t_mlx *screen);
+void	radius_calcul(t_raycast *cast, t_direction *dir, t_player *player);
+void	calcul_delta_dist(t_raycast *cast, t_player *player);
 void	draw_vertical_line(t_config *config, int x, int start, int end, int color); //il faut lenlever
+void draw_mini_map(t_map *map, t_mlx *screen, t_player *play);
+void	draw_wall_column(t_raycast *cast, t_mlx *screen, t_mini_map *mini, int x);
+void	ft_print_mini_map(t_raycast *cast, t_mlx *screen, t_mini_map *mini, int x, int y);
+void	my_mlx_pixel_put(t_mlx *screen, int x, int y, int color);
+
+
 
 /* ******************************** UTILS ********************************** */
 

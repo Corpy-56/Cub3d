@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_pos.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:58:18 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/14 18:34:42 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/16 15:07:51 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ int	find_player(char **map, t_player *player)
 				player->pos_col = x;
 				player->pos_row = y;
 				player->spawn_dir = map[y][x];
-				ft_printf("PLAYER POSITION (%d, %d)\n", (player->pos_col + 1), (player->pos_row + 1));
-				ft_printf("PLAYER POSITION (col, row)\n");
-				ft_printf("Spawn orientation: %c\n", player->spawn_dir);
 				map[y][x] = '0';
 				return (1);
 			}

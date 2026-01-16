@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 11:51:01 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/16 17:02:13 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_tex
 	char	*path;
 	int		fd;
 }			t_tex;
+
 
 typedef struct s_mlx
 {
@@ -38,8 +39,6 @@ typedef struct s_mlx
 
 typedef struct s_direction
 {
-	double		pos_x;
-	double		pos_y;
 	double		dir_x;
 	double		dir_y;
 	double		plan_x;
@@ -67,16 +66,6 @@ typedef struct s_raycast
 	int map_y;
 }			t_raycast;
 
-
-typedef struct s_map
-{
-	char	**big_map;
-	int		map_height;
-	int		map_width;
-	int		player_x;
-	int		player_y;
-}			t_map;
-
 typedef struct s_mini_map
 {
 	int start_x;
@@ -85,46 +74,16 @@ typedef struct s_mini_map
 	int	end_y;
 }			t_mini_map;
 
-typedef struct s_config
-{
-	t_map	map;
-	t_mlx	screen;
-	t_direction	dir;
-	t_raycast cast;
-	t_mini_map	mini;
-		t_map	map;
-	//char	*no_path;a voir parce que il y avait 2 t_config 
-	//char	*so_path;
-	//char	*we_path;
-	//char	*ea_path;
-	t_color	floor;
-	t_color	ceiling;
-	char	*no_path;
-	char	*so_path;
-	char	*we_path;
-	char	*ea_path;
-	int		floor_r;
-	int		floor_g;
-	int		floor_b;
-	int		ceiling_r;
-	int		ceiling_g;
-	int		ceiling_b;
-}			t_config;
-
-typedef struct s_tex
-{
-	int		i;
-	int		j;
-	int		start;
-	char	*path;
-	int		fd;
-}			t_tex;
 
 typedef struct s_map
 {
 	char	**big_map;
 	int		rows;
 	int		cols;
+//	int		map_height;//les miennes on pourra surement effacer
+	//int		map_width;
+	int		player_x;
+	int		player_y;//jusqueici
 }			t_map;
 
 typedef struct s_color
@@ -167,21 +126,24 @@ typedef struct s_player
 	char	spawn_dir;
 }			t_player;
 
-//typedef struct s_config
-//{
-//	t_map	map;
-//	char	*no_path;
-//	char	*so_path;
-//	char	*we_path;
-//	char	*ea_path;
-//	t_color	floor;
-//	t_color	ceiling;
-//}			t_config;
+typedef struct s_config
+{
+	char	*no_path;
+	char	*so_path;
+	char	*we_path;
+	char	*ea_path;
+}			t_config;
 
 typedef struct s_game
 {
+	t_map	map;
+	t_mlx	screen;
+	t_direction	dir;
+	t_raycast cast;
+	t_mini_map	mini;
+	t_color	floor;
+	t_color	ceiling;
 	t_config	config;
-	t_map		map;
 	t_color		color;
 	t_player	player;
 }			t_game;
