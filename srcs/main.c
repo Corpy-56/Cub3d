@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 18:11:44 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/16 18:14:58 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,11 @@ int	main(int argc, char **argv)
 		return (free_all(&game), error_msg("BUG"), 1);
 	raycast(&game, &game.cast);
 	mlx_put_image_to_window(game.screen.mlx_ptr, game.screen.win_ptr, game.screen.img, 0, 0);
-	mlx_key_hook(game.screen.win_ptr, keyboard_key, &game);
+	mlx_hook(game.screen.win_ptr, KeyPress, KeyPressMask, &keyboard_key, &game);
+	mlx_hook(game.screen.win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease,
+		&game);
+	mlx_loop_hook(game.screen.mlx_ptr, &watching_left_right, &game.dir);
+	//mlx_key_hook(game.screen.win_ptr, keyboard_key, &game);
 	mlx_hook(game.screen.win_ptr, 17, 0, on_destroy, &game);
 	mlx_loop(game.screen.mlx_ptr);
 	free_all(&game);
