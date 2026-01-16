@@ -6,7 +6,7 @@
 #    By: skuor <skuor@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 16:18:45 by skuor             #+#    #+#              #
-#    Updated: 2026/01/14 18:14:03 by skuor            ###   ########.fr        #
+#    Updated: 2026/01/16 12:14:12 by skuor            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,11 @@ OBJ = 	$(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o)) \
 
 INC_H = -I $(INC_DIR) -I $(LIBFT_DIR)/includes/
 
+MLX_DIR = minilibx-linux
+MLX_LIB = $(MLX_DIR)/libmlx.a
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+MLX_OBJ_DIR = $(MLX_DIR)/obj/
+
 DEFAULT = \033[0m
 DEF_COLOR = \033[0;90m
 WHITE = \033[1;37m
@@ -57,6 +62,7 @@ $(NAME): $(OBJ)
 	@echo "$(MAGENTA)libft compiled!$(DEFAULT)"
 	@echo "$(GREEN)$(NAME) compiled!$(DEFAULT)"
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
+	@$(MAKE) -C $(MLX_DIR) --no-print-directory
 	@$(CC) $(CFLAGS) $(INC_H) $(OBJ) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
@@ -77,11 +83,13 @@ $(OBJ_DIR)%.o: $(PLAYER_DIR)%.c | $(OBJ_DIR)
 
 clean:
 	@rm -rf $(OBJ_DIR)
+	@rm -rf $(MLX_OBJ_DIR)
 	@echo "$(GREEN)$(NAME) object directory cleaned!$(DEFAULT)"
 
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) fclean -C $(LIBFT_DIR) --no-print-directory
+	@$(MAKE) clean -C $(MLX_DIR) --no-print-directory
 	@echo "$(CYAN)$(NAME) executables and objects removed succesfully!$(DEFAULT)"
 	@echo "$(MAGENTA)libft executables and objects removed succesfully!$(DEFAULT)"
 
