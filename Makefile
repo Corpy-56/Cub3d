@@ -6,7 +6,7 @@
 #    By: agouin <agouin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 16:18:45 by skuor             #+#    #+#              #
-#    Updated: 2026/01/16 11:50:25 by agouin           ###   ########.fr        #
+#    Updated: 2026/01/16 18:04:30 by agouin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ UTILS_FILES = utils.c free.c utils_parsing.c error_msg.c utils_map.c
 PARSING_FILES = parsing_texture.c parsing_color.c parsing_map.c \
 				parsing_file.c map_checks.c map_grid.c map_floodfill.c
 
-PLAYER_FILES = player_pos.c
+PLAYER_FILES = player_pos.c player_movement.c handle_input.c
+
 
 OBJ = 	$(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o)) \
 		$(addprefix $(OBJ_DIR), $(UTILS_FILES:.c=.o)) \

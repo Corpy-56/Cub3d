@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 17:02:13 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/16 18:05:24 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ typedef struct s_mlx
 
 typedef struct s_direction
 {
+	double	angle;
+	double	rot_speed;
+	bool	turn_left;
+	bool	turn_right;
 	double		dir_x;
 	double		dir_y;
 	double		plan_x;

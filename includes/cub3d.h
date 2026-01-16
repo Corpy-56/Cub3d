@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 17:07:02 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/16 18:10:01 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdlib.h>
 # include <stdbool.h>
 #include <math.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include <sys/time.h>
 
 # include "../libft/includes/libft.h"
 # include "structs.h"
@@ -29,12 +32,16 @@
 # define RED "\033[31m"
 # define GREEN "\033[92m"
 
+# define PI 3.141592653589793
+
 # define ERR_EMPTY "Empty line(s) in map"
 # define ERR_LAST "Map must be the last element"
 # define ERR_ELEM "Unknown element in map"
 # define ERR_MAP "Invalid map"
 
 /* ******************************** SOURCES ******************************** */
+
+int	on_destroy(t_game *game);
 
 /* ********* init ********* */
 void	init_map(t_direction *dir, t_map * map);
@@ -47,8 +54,18 @@ void	init_parse_map(t_parse_map *p_map);
 void	init_border(t_ext *ext, int rows, int cols);
 void	init_flood(t_flood *flood, t_map *map);
 
-/* ********* player ********* */
-int		find_player(char **map, t_player *player);
+/* ******************************* PLAYER ********************************* */
+
+/* ********* position ********* */
+int		find_player(char **map, t_game *game);
+double	convert_angle(char orientation);
+
+/* ********* movement ********* */
+int		watching_left_right(void *dir);
+
+/* ********* handle input ********* */
+int		handle_keyrelease(int keycode, t_game *game);
+int		keyboard_key(int keycode, t_game *game);
 
 /* ******************************* PARSING ********************************* */
 

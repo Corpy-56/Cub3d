@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 16:39:48 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/16 18:11:44 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,6 @@ int	on_destroy(t_game *game)
 	//}
 	exit(0);
 	return (0);
-}
-
-int	keyboard_key(int keycode, t_game *game)//ici ca va etre les touches jouer
-{
-	if (keycode == 65307)
-		on_destroy(game);
-	//else if (keycode == 119)
-	//	ft_move_w(game);
-	//else if (keycode == 115)
-	//	ft_move_s(game);
-	//else if (keycode == 97)
-	//	ft_move_a(game);
-	//else if (keycode == 100)
-	//	ft_move_d(game);
-	return (-1);
 }
 
 void	ft_init_screen(t_mlx *screen)
@@ -65,7 +50,8 @@ int	main(int argc, char **argv)
 	if (!parsing_file(argv[1], &game))
 		return (free_all(&game), error_msg("Invalid parsing file"), 1);
 	ft_init_screen(&game.screen);
-	find_player(game.map.big_map, &game.player);
+	if (!find_player(game.map.big_map, &game))
+		return (free_all(&game), error_msg("BUG"), 1);
 	raycast(&game, &game.cast);
 	mlx_put_image_to_window(game.screen.mlx_ptr, game.screen.win_ptr, game.screen.img, 0, 0);
 	mlx_key_hook(game.screen.win_ptr, keyboard_key, &game);
@@ -74,3 +60,27 @@ int	main(int argc, char **argv)
 	free_all(&game);
 	return (0);
 }
+
+
+//int	main(int argc, char **argv)
+//{
+//	t_game		game;
+
+//	init_game(&game);
+//	check_args(argc, argv);
+//	if (!parsing_file(argv[1], &game))
+//		return (free_all(&game), error_msg("Invalid parsing file"), 1);
+//	ft_init_screen(&game.screen);
+//	if (!find_player(game.map.big_map, &game))
+//				return (free_all(&game), error_msg("BUG"), 1);
+//	raycast(&game, &game.cast);
+//	mlx_put_image_to_window(game.screen.mlx_ptr, game.screen.win_ptr, game.screen.img, 0, 0);
+//	mlx_hook(game.screen.win_ptr, KeyPress, KeyPressMask, &keyboard_key, &game);
+//	mlx_hook(game.screen.win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease,
+//		&game);
+//	mlx_loop_hook(game.screen.mlx_ptr, &watching_left_right, &game.dir);
+//	mlx_hook(game.screen.win_ptr, 17, 0, on_destroy, &game);
+//	mlx_loop(game.screen.mlx_ptr);
+//	free_all(&game);
+//	return (0);
+//}
