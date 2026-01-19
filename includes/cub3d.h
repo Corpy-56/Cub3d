@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 17:07:02 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/19 18:21:29 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdlib.h>
 # include <stdbool.h>
 #include <math.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include <sys/time.h>
 
 # include "../libft/includes/libft.h"
 # include "structs.h"
@@ -29,15 +32,21 @@
 # define RED "\033[31m"
 # define GREEN "\033[92m"
 
+
+# define PI 3.141592653589793
+
 # define ERR_EMPTY "Empty line(s) in map"
 # define ERR_LAST "Map must be the last element"
 # define ERR_ELEM "Unknown element in map"
 # define ERR_MAP "Invalid map"
 
+
+int	on_destroy(t_game *game);
+
 /* ******************************** SOURCES ******************************** */
 
 /* ********* init ********* */
-void	init_map(t_direction *dir, t_map * map);
+void	init_map(t_direction *dir, t_player *player);
 void	init_config(t_config *config, t_game *game);
 void	init_tex(t_tex *tex);
 void	ft_init_ray(t_raycast *cast, t_mini_map *mini);
@@ -47,8 +56,20 @@ void	init_parse_map(t_parse_map *p_map);
 void	init_border(t_ext *ext, int rows, int cols);
 void	init_flood(t_flood *flood, t_map *map);
 
-/* ********* player ********* */
-int		find_player(char **map, t_player *player);
+
+/* ******************************* PLAYER ********************************* */
+
+/* ********* position ********* */
+int		find_player(char **map, t_game *game);
+double	convert_angle(char orientation);
+
+/* ********* movement ********* */
+int		watching_left_right(void *dir);
+
+/* ********* handle input ********* */
+int		handle_keyrelease(int keycode, t_game *game);
+int		keyboard_key(int keycode, t_game *game);
+
 
 /* ******************************* PARSING ********************************* */
 
@@ -64,6 +85,7 @@ int		search_texture(const char *line, int i, t_config *config);
 
 /* ********* color ********* */
 bool	parse_color(const char *line, int i, t_game *game);
+void	fill_space(char **map);
 bool	parse_numbers(char *part, int *value);
 bool	parse_3_rgb(char **parts, int *r, int *g, int *b);
 bool	parse_rgb_values(const char *line, int i, t_color *color);
@@ -100,7 +122,7 @@ void	wall_height_calcul(t_raycast *cast, t_mlx *screen);
 void	radius_calcul(t_raycast *cast, t_direction *dir, t_player *player);
 void	calcul_delta_dist(t_raycast *cast, t_player *player);
 void	draw_vertical_line(t_config *config, int x, int start, int end, int color); //il faut lenlever
-void draw_mini_map(t_map *map, t_mlx *screen, t_player *play);
+void draw_mini_map(t_map *map, t_mlx *screen, t_player *play, t_direction *dir);
 void	draw_wall_column(t_raycast *cast, t_mlx *screen, t_mini_map *mini, int x);
 void	ft_print_mini_map(t_raycast *cast, t_mlx *screen, t_mini_map *mini, int x, int y);
 void	my_mlx_pixel_put(t_mlx *screen, int x, int y, int color);

@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 17:02:13 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/19 17:58:17 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,14 @@ typedef struct s_mlx
 	int	line_len;
 	int endian;
 	void *addr;
-	//void	
 }			t_mlx;
 
 typedef struct s_direction
 {
+	double angle;
+	double	rot_speed;
+	bool turn_left;
+	bool turn_right;
 	double		dir_x;
 	double		dir_y;
 	double		plan_x;
@@ -80,10 +83,6 @@ typedef struct s_map
 	char	**big_map;
 	int		rows;
 	int		cols;
-//	int		map_height;//les miennes on pourra surement effacer
-	//int		map_width;
-	int		player_x;
-	int		player_y;//jusqueici
 }			t_map;
 
 typedef struct s_color
@@ -121,8 +120,8 @@ typedef struct s_flood
 
 typedef struct s_player
 {
-	int		pos_row;
-	int		pos_col;
+	double		pos_row;
+	double		pos_col;
 	char	spawn_dir;
 }			t_player;
 

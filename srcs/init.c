@@ -6,22 +6,45 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 17:02:19 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/19 18:22:03 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_map(t_direction *dir, t_map * map)
+void	init_map(t_direction *dir, t_player *player)
 {
-	dir->dir_x = -1.0;//il faut changer ca en fonction de la map cest ou il regarde
-	dir->dir_y = 0.0;
-	dir->plan_x = 0.0;
-	dir->plan_y = 0.66;
-	//map->map_height = 5;//a changer 
-	//map->map_width = 9;// achanger
-	map->player_x = 7;
-	map->player_y = 1;
+	//printf("Player pos: (%f, %f)\n", player->pos_col, player->pos_row);
+	if (player->spawn_dir == 'N' || player->spawn_dir == 'S')
+	{
+		dir->dir_x = 0.0;
+		dir->plan_y = 0.0;
+	}
+	if (player->spawn_dir == 'E' || player->spawn_dir == 'W')
+	{
+		dir->dir_y = 0.0;
+		dir->plan_x = 0.0;
+	}
+	if (player->spawn_dir == 'N')
+	{
+		dir->dir_y = 1.0;
+		dir->plan_x = -0.66;
+	}
+	if (player->spawn_dir == 'E')
+	{
+		dir->dir_x = 1.0;
+		dir->plan_y = 0.66;
+	}
+	if (player->spawn_dir == 'S')
+	{
+		dir->dir_y = -1.0;
+		dir->plan_x = 0.66;
+	}
+	if (player->spawn_dir == 'W')
+	{
+		dir->dir_x = -1.0;
+		dir->plan_y = -0.66;
+	}
 }
 
 void	init_tex(t_tex *tex)
@@ -52,10 +75,10 @@ void	ft_init_ray(t_raycast *cast, t_mini_map *mini)
 	cast->map_x = 0;
 	cast->line_height = 0;
 	cast->map_y = 0;
-	mini->start_x = 10;
-	mini->end_x = 310;
-	mini->start_y = 10;
-	mini->end_y = 310;
+	mini->start_x = 20;
+	mini->end_x = 220;
+	mini->start_y = 20;
+	mini->end_y = 220;
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:35:04 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 16:17:09 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/19 15:04:04 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,7 @@ bool	validate_map(t_game *game)
 		return (false);
 	if (check_elements(game->map.big_map))
 		return (false);
+	fill_space(game->map.big_map);
+	ft_printf(GREEN"Valid map !\n"DEFAULT);
 	return (true);
 }

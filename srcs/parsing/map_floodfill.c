@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 12:07:23 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 17:14:02 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/19 14:59:15 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ bool	check_closed_map(t_game *game)
 	flood_fill(&flood, 0, 0);
 	if (flood.open == true)
 		return (error_msg("Map is open"), false);
-	fill_space(flood.map);
-//	ft_print_map(flood.map); // a retirer
+	ft_print_map(flood.map); // a retirer
 	free_doublechar(flood.map);
 	return (true);
 }
