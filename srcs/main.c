@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 18:14:58 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/19 11:58:24 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	ft_init_screen(t_mlx *screen)
 		ft_error(0, NULL, "Mlx_init failed\n");
 	mlx_get_screen_size(screen->mlx_ptr, &screen->screen_size_width,
 		&screen->screen_size_height);
+	screen->screen_size_width = 1920;
+	screen->screen_size_height = 1080;
 	screen->win_ptr = mlx_new_window(screen->mlx_ptr, screen->screen_size_width, screen->screen_size_height, "Cub3d");
 	screen->img = mlx_new_image(screen->mlx_ptr, screen->screen_size_width, screen->screen_size_height);
 	screen->addr = mlx_get_data_addr(screen->img, &screen->bpp, &screen->line_len, &screen->endian);
