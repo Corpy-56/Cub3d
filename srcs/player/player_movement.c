@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 11:30:10 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/19 12:05:19 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/19 12:27:36 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,33 +29,37 @@ static long	now_ms(void)
 	return (tv.tv_sec * 1000L + tv.tv_usec / 1000L);
 }
 
-int	watching_left_right(void *dir) // debug
+int	watching_left_right(void *game) // debug
 {
 	double		new_angle;
-	t_direction	*d;
+	// t_direction	*d;
+	t_game	*g;
 	double	angle_before;
 	long	now;
 	static long	last_print_ms = 0;
 
-
-	d = (t_direction *)dir;
-	angle_before = d->angle;
+	g = (t_game *)game;
+	// d = (t_direction *)dir;
+	angle_before = g->dir.angle;
 	new_angle = angle_before;
-	d->rot_speed = 0.05;
-	if (d->turn_left)
-		new_angle -= d->rot_speed;
-	if (d->turn_right)
-		new_angle += d->rot_speed;
+	g->dir.rot_speed = 0.05;
+	if (g->dir.turn_left)
+		new_angle -= g->dir.rot_speed;
+	if (g->dir.turn_right)
+		new_angle += g->dir.rot_speed;
 	new_angle = normalize_angle(new_angle);
-	d->angle = new_angle;
+	g->dir.angle = new_angle;
 	now = now_ms();
 	if (now - last_print_ms >= 100) /* 100ms = 10/s */
 	{
 		printf("L=%d R=%d | before=%.3f -> after=%.3f\n",
-			(int)d->turn_left, (int)d->turn_right,
-			angle_before, d->angle);
+			(int)g->dir.turn_left, (int)g->dir.turn_right,
+			angle_before, g->dir.angle);
 		last_print_ms = now;
 	}
+	raycast(g, &g->cast);
+	mlx_put_image_to_window(g->screen.mlx_ptr, g->screen.win_ptr, g->screen.img, 0, 0);
+
 	return (0);
 }
 

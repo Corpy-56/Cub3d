@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/19 11:58:24 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/19 12:26:16 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ int	main(int argc, char **argv)
 	ft_init_screen(&game.screen);
 	if (!find_player(game.map.big_map, &game))
 		return (free_all(&game), error_msg("BUG"), 1);
-	raycast(&game, &game.cast);
-	mlx_put_image_to_window(game.screen.mlx_ptr, game.screen.win_ptr, game.screen.img, 0, 0);
+	// raycast(&game, &game.cast);
+	// mlx_put_image_to_window(game.screen.mlx_ptr, game.screen.win_ptr, game.screen.img, 0, 0);
 	mlx_hook(game.screen.win_ptr, KeyPress, KeyPressMask, &keyboard_key, &game);
 	mlx_hook(game.screen.win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease,
 		&game);
-	mlx_loop_hook(game.screen.mlx_ptr, &watching_left_right, &game.dir);
+	mlx_loop_hook(game.screen.mlx_ptr, &watching_left_right, &game);
 	//mlx_key_hook(game.screen.win_ptr, keyboard_key, &game);
 	mlx_hook(game.screen.win_ptr, 17, 0, on_destroy, &game);
 	mlx_loop(game.screen.mlx_ptr);
