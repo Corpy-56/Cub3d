@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 12:15:39 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/13 18:09:12 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/19 18:00:55 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ bool	is_map_line(const char *line)
 	{
 		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'W'
 			&& line[i] != 'E' && line[i] != 'S' && line[i] != ' ')
-			return (error_msg(ERR_MAP), false);
+			return (error_msg(ERR_ELEM), false);
 		if (line[i] == '1' || line[i] == '0' || line[i] == 'N'
 			|| line[i] == 'W' || line[i] == 'E' || line[i] == 'S')
 				found_char = true;

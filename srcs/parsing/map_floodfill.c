@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 12:07:23 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/14 18:49:40 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/19 17:28:00 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,20 @@ void	flood_fill(t_flood *f, int y, int x)
 	flood_fill(f, y, x - 1);
 }
 
-void	fill_space(char **map)
+bool	voisins(char **map, int i, int j)
+{
+	if (ft_strchr("0NEWS", map[i + 1][j]))
+		return (true);
+	else if (ft_strchr("0NEWS", map[i - 1][j]))
+		return (true);
+	else if (ft_strchr("0NEWS", map[i][j + 1]))
+		return (true);
+	else if (ft_strchr("0NEWS", map[i][j - 1]))
+		return (true);
+	return (false);
+}
+
+bool	space_in_map(char **map)
 {
 	int	i;
 	int	j;
@@ -44,11 +57,13 @@ void	fill_space(char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] == ' ')
-				map[i][j] = '0';
+				if (voisins(map, i, j))
+					return (true);
 			j++;
 		}
 		i++;
 	}
+	return (false);
 }
 
 bool	check_closed_map(t_game *game)
@@ -61,8 +76,15 @@ bool	check_closed_map(t_game *game)
 	init_flood(&flood, &game->map);
 	flood_fill(&flood, 0, 0);
 	if (flood.open == true)
+	{
+		free_doublechar(flood.map);
 		return (error_msg("Map is open"), false);
-	ft_print_map(flood.map); // a retirer
+	}
+	if (space_in_map(flood.map))
+	{
+		free_doublechar(flood.map);
+		return (error_msg("Space in map"), false);
+	}
 	free_doublechar(flood.map);
 	return (true);
 }
