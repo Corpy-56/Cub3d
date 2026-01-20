@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 14:32:44 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/20 14:43:05 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <X11/keysym.h>
 # include <sys/time.h>
 
-# include "../libft/includes/libft.h"
 # include "structs.h"
+# include "../libft/includes/libft.h"
 # include "../minilibx-linux/mlx.h"
 
 # define HEADER 0

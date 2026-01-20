@@ -6,7 +6,7 @@
 #    By: skuor <skuor@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 16:18:45 by skuor             #+#    #+#              #
-#    Updated: 2026/01/20 10:55:39 by skuor            ###   ########.fr        #
+#    Updated: 2026/01/20 14:54:49 by skuor            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ INC_H = -I $(INC_DIR) -I $(LIBFT_DIR)/includes/
 
 MLX_DIR = minilibx-linux
 MLX_LIB = $(MLX_DIR)/libmlx.a
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -L/usr/lib/X11 -lXext -lX11
 MLX_OBJ_DIR = $(MLX_DIR)/obj/
 
 DEFAULT = \033[0m
@@ -64,7 +64,7 @@ $(NAME): $(OBJ)
 	@echo "$(GREEN)$(NAME) compiled!$(DEFAULT)"
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
 	@$(MAKE) -C $(MLX_DIR) --no-print-directory
-	@$(CC) $(CFLAGS) $(INC_H) $(OBJ) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
+	@$(CC) $(CFLAGS) $(INC_H) $(OBJ) -L$(LIBFT_DIR) -lft -lreadline  $(MLX_FLAGS) -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
