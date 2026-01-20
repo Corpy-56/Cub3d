@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:14:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 16:39:39 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/20 10:54:26 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static int	activate_map_mode(const char *line, t_config *config, int *mode, t_ga
 	{
 		if (is_map_line(line) == false)
 			return (1);
+		ft_printf(GREEN"Textures & colors ok!\n"DEFAULT);
 		return (*mode = MAP, 0);
 	}
 	else

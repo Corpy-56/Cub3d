@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 18:10:01 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/20 10:52:18 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ char	**normalize_map(t_map *map);
 
 /* ********* flood fill ********* */
 void	flood_fill(t_flood *f, int y, int x);
+void	fill_space(char **map);
 bool	check_closed_map(t_game *game);
 
 /* ********* parsing ********* */
