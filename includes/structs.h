@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 18:05:24 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/20 14:21:53 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ typedef struct s_mlx
 	void	*win_ptr;
 	int		screen_size_width;
 	int		screen_size_height;
-	int	bpp;
+	int		bpp;
 	void	*img;
-	int	line_len;
-	int endian;
-	void *addr;
+	int		line_len;
+	int		endian;
+	void	*addr;
 	//void	
 }			t_mlx;
 
@@ -43,39 +43,40 @@ typedef struct s_direction
 	double	rot_speed;
 	bool	turn_left;
 	bool	turn_right;
-	double		dir_x;
-	double		dir_y;
-	double		plan_x;
-	double		plan_y;
+	double	dir_x;
+	double	dir_y;
+	double	plan_x;
+	double	plan_y;
+	double	plane_len;
 }			t_direction;
 
 typedef struct s_raycast
 {
 	double	camera;
 	double	ray_dir_x;
-	double ray_dir_y;
-	double side_dist_x;
-	double side_dist_y;
-	double delta_dist_x;
-	double delta_dist_y;
-	double wall_distance;
-	int step_x;
-	int step_y;
-	int draw_start;//debit entre de y dans un x(colonne) donne
-	int draw_end;//cest la fin jaffiche une colone
-	int hit;
-	int side;//mur touche verticalement ou horizontalement
-	int map_x;
-	int line_height;
-	int map_y;
+	double	ray_dir_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	wall_distance;
+	int		step_x;
+	int		step_y;
+	int		draw_start;//debit entre de y dans un x(colonne) donne
+	int		draw_end;//cest la fin jaffiche une colone
+	int		hit;
+	int		side;//mur touche verticalement ou horizontalement
+	int		map_x;
+	int		line_height;
+	int		map_y;
 }			t_raycast;
 
 typedef struct s_mini_map
 {
-	int start_x;
-	int end_x;
-	int start_y;
-	int	end_y;
+	int		start_x;
+	int		end_x;
+	int		start_y;
+	int		end_y;
 }			t_mini_map;
 
 
@@ -84,10 +85,6 @@ typedef struct s_map
 	char	**big_map;
 	int		rows;
 	int		cols;
-//	int		map_height;//les miennes on pourra surement effacer
-	//int		map_width;
-	int		player_x;
-	int		player_y;//jusqueici
 }			t_map;
 
 typedef struct s_color
@@ -140,13 +137,13 @@ typedef struct s_config
 
 typedef struct s_game
 {
-	t_map	map;
-	t_mlx	screen;
+	t_color		floor;
+	t_color		ceiling;
+	t_map		map;
+	t_mlx		screen;
 	t_direction	dir;
-	t_raycast cast;
+	t_raycast	cast;
 	t_mini_map	mini;
-	t_color	floor;
-	t_color	ceiling;
 	t_config	config;
 	t_color		color;
 	t_player	player;

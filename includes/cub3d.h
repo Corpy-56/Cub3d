@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 10:52:18 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/20 14:32:44 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
-#include <math.h>
+# include <math.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <sys/time.h>
 
 # include "../libft/includes/libft.h"
 # include "structs.h"
-#include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 
 # define HEADER 0
 # define MAP 1
@@ -33,6 +33,7 @@
 # define GREEN "\033[92m"
 
 # define PI 3.141592653589793
+# define FOV 1.15
 
 # define ERR_EMPTY "Empty line(s) in map"
 # define ERR_LAST "Map must be the last element"
@@ -41,10 +42,10 @@
 
 /* ******************************** SOURCES ******************************** */
 
-int	on_destroy(t_game *game);
+int		on_destroy(t_game *game);
 
 /* ********* init ********* */
-void	init_map(t_direction *dir, t_map * map);
+// void	init_map(t_direction *dir, t_map * map);
 void	init_config(t_config *config, t_game *game);
 void	init_tex(t_tex *tex);
 void	ft_init_ray(t_raycast *cast, t_mini_map *mini);
@@ -53,6 +54,7 @@ void	init_color(t_color *color);
 void	init_parse_map(t_parse_map *p_map);
 void	init_border(t_ext *ext, int rows, int cols);
 void	init_flood(t_flood *flood, t_map *map);
+void	init_dir(t_direction *dir);
 
 /* ******************************* PLAYER ********************************* */
 
@@ -71,7 +73,7 @@ int		keyboard_key(int keycode, t_game *game);
 
 /* ********* file & header ********* */
 bool	parsing_file(const char *path, t_game *game);
-int	parse_header(const char *line, t_config *config, int *mode, t_game *game);
+int		parse_header(const char *line, t_config *config, int *mode, t_game *game);
 bool	header_complete(t_config *config, t_game *game);
 bool	is_header_id(char *line);
 
@@ -106,10 +108,10 @@ void	fill_space(char **map);
 bool	check_closed_map(t_game *game);
 
 /* ********* parsing ********* */
-int	check_args(int argc, char **argv);
-int	check_cub(char *temp, int i);
-int	ft_find_point(char *temp, int k);
-int	ft_error(int i, t_config *game, char *string);
+int		check_args(int argc, char **argv);
+int		check_cub(char *temp, int i);
+int		ft_find_point(char *temp, int k);
+int		ft_error(int i, t_config *game, char *string);
 
 /* ********* raycast ********* */
 void	raycast(t_game *game, t_raycast *cast);
@@ -118,7 +120,7 @@ void	wall_height_calcul(t_raycast *cast, t_mlx *screen);
 void	radius_calcul(t_raycast *cast, t_direction *dir, t_player *player);
 void	calcul_delta_dist(t_raycast *cast, t_player *player);
 void	draw_vertical_line(t_config *config, int x, int start, int end, int color); //il faut lenlever
-void draw_mini_map(t_map *map, t_mlx *screen, t_player *play);
+void 	draw_mini_map(t_map *map, t_mlx *screen, t_player *play);
 void	draw_wall_column(t_raycast *cast, t_mlx *screen, t_mini_map *mini, int x);
 void	ft_print_mini_map(t_raycast *cast, t_mlx *screen, t_mini_map *mini, int x, int y);
 void	my_mlx_pixel_put(t_mlx *screen, int x, int y, int color);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 14:49:12 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/20 14:31:34 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	init_game(t_game *game)
 {
 	init_config(&game->config, game);
-	init_map(&game->dir, &game->map);
+	init_dir(&game->dir);
+	// init_map(&game->dir, &game->map);
 }
 
 void	init_border(t_ext *ext, int rows, int cols)
