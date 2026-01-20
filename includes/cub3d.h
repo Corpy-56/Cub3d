@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 15:29:24 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/20 16:09:44 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int		find_player(char **map, t_game *game);
 double	convert_angle(char orientation);
 
 /* ********* movement ********* */
-int		watching_left_right(void *dir);
+void	watching_left_right(void *game);
+int		player_movement(void *game);
 void	calc_dir_plan(t_direction *dir);
 
 /* ********* handle input ********* */

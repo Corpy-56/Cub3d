@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 14:21:53 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/20 17:16:39 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,28 @@ typedef struct s_mlx
 	//void	
 }			t_mlx;
 
+typedef struct s_player
+{
+	int		pos_row;
+	int		pos_col;
+	char	spawn_dir;
+}			t_player;
+
 typedef struct s_direction
 {
-	double	angle;
-	double	rot_speed;
-	bool	turn_left;
-	bool	turn_right;
-	double	dir_x;
-	double	dir_y;
-	double	plan_x;
-	double	plan_y;
-	double	plane_len;
+	t_player	player;
+	double		angle;
+	double		rot_speed;
+	bool		turn_left;
+	bool		turn_right;
+	double		dir_x;
+	double		dir_y;
+	double		plan_x;
+	double		plan_y;
+	double		plane_len;
+	double		move_speed;
+	bool		forward;
+	bool		backward;
 }			t_direction;
 
 typedef struct s_raycast
@@ -119,13 +130,6 @@ typedef struct s_flood
 	int		cols;
 	bool	open;
 }			t_flood;
-
-typedef struct s_player
-{
-	int		pos_row;
-	int		pos_col;
-	char	spawn_dir;
-}			t_player;
 
 typedef struct s_config
 {

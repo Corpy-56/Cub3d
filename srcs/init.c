@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 15:26:46 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/20 16:50:27 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	init_dir(t_direction *dir)
 	// dir->plan_x = 0.0;
 	// dir->plan_y = 0.66;
 	dir->plane_len = tan(FOV / 2);
+	dir->rot_speed = 0.05;
+	dir->move_speed = 0.05;
 }
 
 void	init_tex(t_tex *tex)
