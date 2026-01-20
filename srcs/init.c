@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 14:28:06 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/20 15:26:46 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@
 
 void	init_dir(t_direction *dir)
 {
-	dir->dir_x = -1.0;//il faut changer ca en fonction de la map cest ou il regarde
-	dir->dir_y = 0.0;
-	dir->plan_x = 0.0;
-	dir->plan_y = 0.66;
+	// dir->dir_x = -1.0;//il faut changer ca en fonction de la map cest ou il regarde
+	// dir->dir_y = 0.0;
+	// dir->plan_x = 0.0;
+	// dir->plan_y = 0.66;
+	dir->plane_len = tan(FOV / 2);
 }
 
 void	init_tex(t_tex *tex)

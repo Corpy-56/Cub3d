@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 14:43:05 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/20 15:29:24 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ double	convert_angle(char orientation);
 
 /* ********* movement ********* */
 int		watching_left_right(void *dir);
+void	calc_dir_plan(t_direction *dir);
 
 /* ********* handle input ********* */
 int		handle_keyrelease(int keycode, t_game *game);

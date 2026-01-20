@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:58:18 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 10:54:53 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/20 15:34:45 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ int	find_player(char **map, t_game *game)
 			if (map[y][x] == 'N' || map[y][x] == 'E'
 				|| map[y][x] == 'W' || map[y][x] == 'S')
 			{
-				game->player.pos_col = x;
-				game->player.pos_row = y;
+				game->player.pos_col = x + 0.5;
+				game->player.pos_row = y + 0.5;
 				game->player.spawn_dir = map[y][x];
 				game->dir.angle = convert_angle(map[y][x]);
+				calc_dir_plan(&game->dir);
 				printf("PLAYER POSITION (%d, %d)\n", (game->player.pos_col), (game->player.pos_row));
 				printf("PLAYER +1 POSITION (%d, %d)\n", (game->player.pos_col + 1), (game->player.pos_row + 1));
 				ft_printf("PLAYER POSITION (col, row)\n");

@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 11:30:10 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 14:39:25 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/20 15:30:21 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ double	normalize_angle(double angle)
 	if (angle > (2 * PI))
 		angle -= 2 * PI;
 	return (angle);
+}
+
+void	calc_dir_plan(t_direction *dir)
+{
+	dir->dir_x = cos(dir->angle);
+	dir->dir_y = sin(dir->angle);
+	dir->plan_x = (-dir->dir_y) * dir->plane_len;
+	dir->plan_y = dir->dir_x * dir->plane_len;
 }
 
 // static long	now_ms(void)
@@ -69,7 +77,7 @@ int	watching_left_right(void *game)
 	t_game		*g;
 
 	g = (t_game *)game;
-	g->dir.plane_len = tan(FOV / 2);
+	// g->dir.plane_len = tan(FOV / 2);
 	new_angle = g->dir.angle;
 	g->dir.rot_speed = 0.05;
 	if (g->dir.turn_left == true)
@@ -78,10 +86,11 @@ int	watching_left_right(void *game)
 		new_angle = g->dir.angle + g->dir.rot_speed;
 	new_angle = normalize_angle(new_angle);
 	g->dir.angle = new_angle;
-	g->dir.dir_x = cos(g->dir.angle);
-	g->dir.dir_y = sin(g->dir.angle);
-	g->dir.plan_x = (-g->dir.dir_y) * g->dir.plane_len;
-	g->dir.plan_y = g->dir.dir_x * g->dir.plane_len;
+	calc_dir_plan(&g->dir);
+	// g->dir.dir_x = cos(g->dir.angle);
+	// g->dir.dir_y = sin(g->dir.angle);
+	// g->dir.plan_x = (-g->dir.dir_y) * g->dir.plane_len;
+	// g->dir.plan_y = g->dir.dir_x * g->dir.plane_len;
 	raycast(g, &g->cast);
 	mlx_put_image_to_window(g->screen.mlx_ptr, g->screen.win_ptr, g->screen.img, 0, 0);
 	return (0);

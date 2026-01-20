@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:10:23 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/16 17:13:43 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/20 15:44:30 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ void	radius_calcul(t_raycast *cast, t_direction *dir, t_player *player)
 	if (cast->ray_dir_y < 0)
 	{
 		cast->step_y = -1;
-		cast->side_dist_y = (player->pos_col - cast->map_y)
+		cast->side_dist_y = (player->pos_row - cast->map_y)
 			* cast->delta_dist_y;
 	}
 	else
 	{
 		cast->step_y = 1;
-		cast->side_dist_y = (cast->map_y + 1.0 - player->pos_col)
+		cast->side_dist_y = (cast->map_y + 1.0 - player->pos_row)
 			* cast->delta_dist_y;
 	}
 	return ;
