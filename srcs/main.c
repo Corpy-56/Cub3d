@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 16:10:51 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/21 17:55:26 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,12 @@
 
 int	on_destroy(t_game *game)
 {
-	//free_image(game);
+	free_all(game);
+	if (game->screen.img)
+		mlx_destroy_image(game->screen.mlx_ptr, game->screen.img);
 	mlx_destroy_window(game->screen.mlx_ptr, game->screen.win_ptr);
 	mlx_destroy_display(game->screen.mlx_ptr);
-	//free(game.screen.mlx_ptr);
-	//if (game->big_map != NULL || game->big_map->map != NULL)
-	//{
-	//	ft_free_tab(game->big_map->map);
-	//	free(game->big_map);
-	//	free(game);
-	//}
+	free(game->screen.mlx_ptr);
 	exit(0);
 	return (0);
 }
@@ -63,7 +59,8 @@ int	main(int argc, char **argv)
 	//mlx_key_hook(game.screen.win_ptr, keyboard_key, &game);
 	mlx_hook(game.screen.win_ptr, 17, 0, on_destroy, &game);
 	mlx_loop(game.screen.mlx_ptr);
-	free_all(&game);
+	// free(game.screen.mlx_ptr);
+	// free_all(&game);
 	return (0);
 }
 
