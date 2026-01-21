@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 16:09:44 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/21 15:27:42 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,12 @@ size_t	line_len(const char *line, int start);
 void	map_size(t_map *map);
 int		ft_min(int a, int b);
 int		check_size_map(char *line, t_parse_map *p);
+
+/* ********* utils player ********* */
+double	normalize_angle(double angle);
+void	calc_dir_plan(t_direction *dir);
+bool	check_walls(t_game *game, double new_x, double new_y);
+
 
 /* ********* free ********* */
 void	free_doublechar(char **to_free);

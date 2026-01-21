@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/21 10:26:38 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/21 16:41:43 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_player
 {
 	double		pos_row;
 	double		pos_col;
-	char	spawn_dir;
+	char		spawn_dir;
 }			t_player;
 
 typedef struct s_direction
@@ -59,6 +59,12 @@ typedef struct s_direction
 	double		move_speed;
 	bool		forward;
 	bool		backward;
+	bool		strafe_r;
+	bool		strafe_l;
+	double		dx;
+	double		dy;
+	double		sx;
+	double		sy;
 }			t_direction;
 
 typedef struct s_raycast

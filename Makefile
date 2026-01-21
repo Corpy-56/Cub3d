@@ -6,7 +6,7 @@
 #    By: skuor <skuor@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 16:18:45 by skuor             #+#    #+#              #
-#    Updated: 2026/01/20 14:54:49 by skuor            ###   ########.fr        #
+#    Updated: 2026/01/21 15:19:49 by skuor            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ LIBFT_DIR = ./libft/
 
 SRC_FILES = init.c init2.c main.c check_args.c raycast.c
 
-UTILS_FILES = utils.c free.c utils_parsing.c error_msg.c utils_map.c
+UTILS_FILES = utils.c utils_parsing.c utils_map.c utils_player.c \
+			  free.c error_msg.c 
 
 PARSING_FILES = parsing_texture.c parsing_color.c parsing_map.c \
 				parsing_file.c map_checks.c map_grid.c map_floodfill.c
