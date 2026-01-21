@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:08:42 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 17:32:34 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/21 10:24:45 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	handle_keyrelease(int keycode, t_game *game)
 
 int	keyboard_key(int keycode, t_game *game)
 {
-
 	if (keycode == 65307)
 		on_destroy(game);
 	if (keycode == XK_Left)
@@ -40,4 +39,3 @@ int	keyboard_key(int keycode, t_game *game)
 		game->dir.backward = true;
 	return (-1);
 }
-
