@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 14:31:34 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 11:41:24 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,43 @@ void	init_game(t_game *game)
 {
 	init_config(&game->config, game);
 	init_dir(&game->dir);
-	// init_map(&game->dir, &game->map);
+	init_map(&game->dir, &game->player);
+}
+
+
+void	init_map(t_direction *dir, t_player *player)
+{
+	//printf("Player pos: (%f, %f)\n", player->pos_col, player->pos_row);
+	if (player->spawn_dir == 'N' || player->spawn_dir == 'S')
+	{
+		dir->dir_x = 0.0;
+		dir->plan_y = 0.0;
+	}
+	if (player->spawn_dir == 'E' || player->spawn_dir == 'W')
+	{
+		dir->dir_y = 0.0;
+		dir->plan_x = 0.0;
+	}
+	if (player->spawn_dir == 'N')
+	{
+		dir->dir_y = 1.0;
+		dir->plan_x = -0.66;
+	}
+	if (player->spawn_dir == 'E')
+	{
+		dir->dir_x = 1.0;
+		dir->plan_y = 0.66;
+	}
+	if (player->spawn_dir == 'S')
+	{
+		dir->dir_y = -1.0;
+		dir->plan_x = 0.66;
+	}
+	if (player->spawn_dir == 'W')
+	{
+		dir->dir_x = -1.0;
+		dir->plan_y = -0.66;
+	}
 }
 
 void	init_border(t_ext *ext, int rows, int cols)

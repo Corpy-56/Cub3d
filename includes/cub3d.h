@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/21 15:27:42 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 11:41:05 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 int		on_destroy(t_game *game);
 
 /* ********* init ********* */
-// void	init_map(t_direction *dir, t_map * map);
+void	init_map(t_direction *dir, t_player *player);
 void	init_config(t_config *config, t_game *game);
 void	init_tex(t_tex *tex);
 void	ft_init_ray(t_raycast *cast, t_mini_map *mini);
@@ -122,7 +122,7 @@ void	wall_height_calcul(t_raycast *cast, t_mlx *screen);
 void	radius_calcul(t_raycast *cast, t_direction *dir, t_player *player);
 void	calcul_delta_dist(t_raycast *cast, t_player *player);
 void	draw_vertical_line(t_config *config, int x, int start, int end, int color); //il faut lenlever
-void 	draw_mini_map(t_map *map, t_mlx *screen, t_player *play);
+//void 	draw_mini_map(t_map *map, t_mlx *screen, t_player *play);
 void	draw_wall_column(t_raycast *cast, t_mlx *screen, t_mini_map *mini, int x);
 void	ft_print_mini_map(t_raycast *cast, t_mlx *screen, t_mini_map *mini, int x, int y);
 void	my_mlx_pixel_put(t_mlx *screen, int x, int y, int color);
