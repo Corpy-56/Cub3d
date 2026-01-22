@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 10:04:41 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 13:42:23 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ typedef struct s_direction
 	double		sy;
 }			t_direction;
 
+typedef struct s_time
+{
+	double		delta;
+	double		last;
+}				t_time;
+
 typedef struct s_raycast
 {
 	double	camera;
@@ -101,6 +107,9 @@ typedef struct s_mouse
 	int		last_x;
 	bool	init;
 	double	sens;
+	bool	lock;
+	int		center_x;
+	int		center_y;
 }		t_mouse;
 
 typedef struct s_map
@@ -164,6 +173,7 @@ typedef struct s_game
 	t_color		color;
 	t_player	player;
 	t_mouse		mouse;
+	t_time		time;
 }			t_game;
 
 #endif

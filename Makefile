@@ -6,7 +6,7 @@
 #    By: skuor <skuor@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 16:18:45 by skuor             #+#    #+#              #
-#    Updated: 2026/01/21 15:19:49 by skuor            ###   ########.fr        #
+#    Updated: 2026/01/22 11:47:21 by skuor            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ INC_H = -I $(INC_DIR) -I $(LIBFT_DIR)/includes/
 
 MLX_DIR = minilibx-linux
 MLX_LIB = $(MLX_DIR)/libmlx.a
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -L/usr/lib/X11 -lXext -lX11
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -L/usr/lib/X11 -lXfixes -lXext -lX11
 MLX_OBJ_DIR = $(MLX_DIR)/obj/
 
 DEFAULT = \033[0m

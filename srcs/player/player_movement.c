@@ -6,11 +6,39 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 11:30:10 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 10:18:30 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 13:53:28 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+// void	watching_mouse(void	*game)
+// {
+// 	int		x;
+// 	int		y;
+// 	int		dx;
+// 	t_game	*g;
+
+// 	g = (t_game *)game;
+// 	x = 0;
+// 	y = 0;
+// 	mlx_mouse_get_pos(g->screen.mlx_ptr, g->screen.win_ptr, &x, &y);
+// 	if (!g->mouse.lock)
+// 		return ;
+// 	if (!g->mouse.init)
+// 	{
+// 		mlx_mouse_move(g->screen.mlx_ptr, g->screen.win_ptr, g->mouse.center_x, g->mouse.center_y);
+// 		g->mouse.init = true;
+// 		return ;
+// 	}
+// 	dx = x - g->mouse.center_x;
+// 	if (dx != 0)
+// 	{
+// 		g->dir.angle = normalize_angle(g->dir.angle + dx * g->mouse.sens);
+// 		calc_dir_plan(&g->dir);
+// 	}
+// 	mlx_mouse_move(g->screen.mlx_ptr, g->screen.win_ptr, g->mouse.center_x, g->mouse.center_y);
+// }
 
 void	watching_mouse(void	*game)
 {
@@ -47,9 +75,9 @@ void	watching_left_right(void *game)
 	if (!g->dir.turn_left && !g->dir.turn_right)
 		return ;
 	if (g->dir.turn_left == true)
-		new_angle = g->dir.angle - g->dir.rot_speed;
+		new_angle = g->dir.angle - g->dir.rot_speed * g->time.delta;
 	if (g->dir.turn_right == true)
-		new_angle = g->dir.angle + g->dir.rot_speed;
+		new_angle = g->dir.angle + g->dir.rot_speed * g->time.delta;
 	new_angle = normalize_angle(new_angle);
 	g->dir.angle = new_angle;
 	calc_dir_plan(&g->dir);
@@ -62,8 +90,8 @@ void	move_forward_backward(void *game)
 	double	new_y;
 
 	g = (t_game *)game;
-	g->dir.dx = g->dir.dir_x * g->dir.move_speed;
-	g->dir.dy = g->dir.dir_y * g->dir.move_speed;
+	g->dir.dx = g->dir.dir_x * g->dir.move_speed * g->time.delta;
+	g->dir.dy = g->dir.dir_y * g->dir.move_speed * g->time.delta;
 	if ((!g->dir.forward && !g->dir.backward)
 		|| (g->dir.forward && g->dir.backward))
 		return ;
@@ -90,8 +118,8 @@ void	move_strafe(void *game)
 	double	new_y;
 
 	g = (t_game *)game;
-	g->dir.sx = -g->dir.dir_y * g->dir.move_speed;
-	g->dir.sy = g->dir.dir_x * g->dir.move_speed;
+	g->dir.sx = -g->dir.dir_y * g->dir.move_speed * g->time.delta;
+	g->dir.sy = g->dir.dir_x * g->dir.move_speed * g->time.delta;
 	if ((!g->dir.strafe_l && !g->dir.strafe_r)
 		|| (g->dir.strafe_l && g->dir.strafe_r))
 		return ;
@@ -111,11 +139,48 @@ void	move_strafe(void *game)
 		g->player.pos_row = new_y;
 }
 
+// int	player_movement(void *game)
+// {
+// 	t_game	*g;
+
+
+// 	g = (t_game *)game;
+// 	watching_mouse(game);
+// 	watching_left_right(game);
+// 	move_forward_backward(game);
+// 	move_strafe(game);
+// 	raycast(g, &g->cast);
+// 	mlx_put_image_to_window(g->screen.mlx_ptr,
+// 		g->screen.win_ptr, g->screen.img, 0, 0);
+// 	return (0);
+// }
+
+void	calc_delta(t_game *game)
+{
+	struct timeval	time;
+	double			now;
+
+	if (gettimeofday(&time, NULL) == -1)
+		return ;
+	now = time.tv_sec + time.tv_usec / 1000000.0;
+	if (game->time.last == 0)
+	{
+		game->time.last = now;
+		game->time.delta = 0;
+		return ;
+	}
+	game->time.delta = now - game->time.last;
+	if (game->time.delta > 0.5)
+		game->time.delta = 0.5;
+	game->time.last = now;
+}
+
 int	player_movement(void *game)
 {
 	t_game	*g;
 
 	g = (t_game *)game;
+	calc_delta(g);
 	watching_mouse(game);
 	watching_left_right(game);
 	move_forward_backward(game);

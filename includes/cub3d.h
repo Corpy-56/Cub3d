@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 10:04:14 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 13:44:59 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <sys/time.h>
+# include <X11/extensions/Xfixes.h>
 
+# include "../minilibx-linux/mlx_int.h"
 # include "structs.h"
 # include "../libft/includes/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -56,6 +58,7 @@ void	init_border(t_ext *ext, int rows, int cols);
 void	init_flood(t_flood *flood, t_map *map);
 void	init_dir(t_direction *dir);
 void	init_mouse(t_mouse *mouse);
+void	init_time(t_time *time);
 
 /* ******************************* PLAYER ********************************* */
 
@@ -170,6 +173,9 @@ void	error_elem_map(char elem, int line, int col);
 void	error_fd(char *path);
 void	error_texture(char *dest);
 void	error_nb_player(int nb_player);
+
+
+void	mlx_mouse_show_no_leak(void *mlx, void *win);
 
 
 #endif

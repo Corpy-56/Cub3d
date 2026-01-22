@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 15:18:15 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/21 15:19:00 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:17:00 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,3 +42,4 @@ bool	check_walls(t_game *game, double new_x, double new_y)
 		return (true);
 	return (false);
 }
+
