@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 14:00:36 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 14:35:51 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,13 +125,10 @@ void	hit_wall_boucle(t_raycast *cast, t_game *game);
 void	wall_height_calcul(t_raycast *cast, t_mlx *screen);
 void	radius_calcul(t_raycast *cast, t_direction *dir, t_player *player);
 void	calcul_delta_dist(t_raycast *cast, t_player *player);
-void	draw_vertical_line(t_config *config, int x, int start, int end, int color); //il faut lenlever
-void 	draw_mini_map(t_map *map, t_mlx *screen, t_player *play);
+void	draw_mini_map(t_map *map, t_mlx *screen, t_player *play);
 void	draw_wall_column(t_raycast *cast, t_mlx *screen, t_mini_map *mini, int x);
 void	ft_print_mini_map(t_raycast *cast, t_mlx *screen, t_mini_map *mini, int x, int y);
 void	my_mlx_pixel_put(t_mlx *screen, int x, int y, int color);
-
-
 
 /* ******************************** UTILS ********************************** */
 
@@ -159,7 +156,6 @@ void	calc_dir_plan(t_direction *dir);
 bool	check_walls(t_game *game, double new_x, double new_y);
 void	calc_delta(t_game *game);
 
-
 /* ********* free ********* */
 void	free_doublechar(char **to_free);
 void	free_paths(t_config *config);
@@ -174,9 +170,5 @@ void	error_elem_map(char elem, int line, int col);
 void	error_fd(char *path);
 void	error_texture(char *dest);
 void	error_nb_player(int nb_player);
-
-
-void	mlx_mouse_show_no_leak(void *mlx, void *win);
-
 
 #endif

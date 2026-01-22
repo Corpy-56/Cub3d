@@ -6,13 +6,13 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:08:42 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 14:16:03 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 14:36:14 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	mlx_mouse_hide_no_leak(void *mlx, void *win)
+static void	mlx_mouse_hide_no_leak(void *mlx, void *win)
 {
 	t_xvar		*xvar;
 	t_win_list	*xwin;
@@ -24,7 +24,7 @@ void	mlx_mouse_hide_no_leak(void *mlx, void *win)
 	XFixesHideCursor(xvar->display, xwin->window);
 }
 
-void	mlx_mouse_show_no_leak(void *mlx, void *win)
+static void	mlx_mouse_show_no_leak(void *mlx, void *win)
 {
 	t_xvar		*xvar;
 	t_win_list	*xwin;
@@ -53,7 +53,7 @@ int	handle_keyrelease(int keycode, t_game *game)
 	return (0);
 }
 
-void	mouse_lock(t_game *game)
+static void	mouse_lock(t_game *game)
 {
 	game->mouse.lock = !game->mouse.lock;
 	if (game->mouse.lock == true)
