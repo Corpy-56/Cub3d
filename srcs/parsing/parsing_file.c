@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:14:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 10:54:26 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 16:24:13 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ bool	parsing_file(const char *path, t_game *game)
 	return (close(fd), true);
 }
 
-static int	activate_map_mode(const char *line, t_config *config, int *mode, t_game *game)
+static int	activate_map_mode(const char *li, t_config *co, int *mo, t_game *ga)
 {
-	if (header_complete(config, game))
+	if (header_complete(co, ga))
 	{
-		if (is_map_line(line) == false)
+		if (is_map_line(li) == false)
 			return (1);
 		ft_printf(GREEN"Textures & colors ok!\n"DEFAULT);
-		return (*mode = MAP, 0);
+		return (*mo = MAP, 0);
 	}
 	else
 		return (1);

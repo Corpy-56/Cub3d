@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/21 16:41:43 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 16:34:54 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct s_tex
 	int		fd;
 }			t_tex;
 
-
 typedef struct s_mlx
 {
 	void	*mlx_ptr;
@@ -34,7 +33,6 @@ typedef struct s_mlx
 	int		line_len;
 	int		endian;
 	void	*addr;
-	//void	
 }			t_mlx;
 
 typedef struct s_player
@@ -79,10 +77,10 @@ typedef struct s_raycast
 	double	wall_distance;
 	int		step_x;
 	int		step_y;
-	int		draw_start;//debit entre de y dans un x(colonne) donne
-	int		draw_end;//cest la fin jaffiche une colone
+	int		draw_start;
+	int		draw_end;
 	int		hit;
-	int		side;//mur touche verticalement ou horizontalement
+	int		side;
 	int		map_x;
 	int		line_height;
 	int		map_y;
@@ -95,7 +93,6 @@ typedef struct s_mini_map
 	int		start_y;
 	int		end_y;
 }			t_mini_map;
-
 
 typedef struct s_map
 {
@@ -158,6 +155,5 @@ typedef struct s_game
 	t_color		color;
 	t_player	player;
 }			t_game;
-
 
 #endif

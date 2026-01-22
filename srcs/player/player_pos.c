@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_pos.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:58:18 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 15:49:55 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 16:24:35 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,3 @@ double	convert_angle(char orientation)
 		angle = PI / 2;
 	return (angle);
 }
-

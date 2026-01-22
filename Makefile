@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skuor <skuor@student.42.fr>                +#+  +:+       +#+         #
+#    By: agouin <agouin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 16:18:45 by skuor             #+#    #+#              #
-#    Updated: 2026/01/21 15:19:49 by skuor            ###   ########.fr        #
+#    Updated: 2026/01/22 16:36:52 by agouin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,24 +21,32 @@ INC_DIR = ./includes/
 UTILS_DIR = $(SRC_DIR)utils/
 PARSING_DIR = $(SRC_DIR)parsing/
 PLAYER_DIR = $(SRC_DIR)player/
+RAYCAST_DIR = $(SRC_DIR)raycast/
+INIT_DIR = $(SRC_DIR)initialisation/
 
 LIBFT_DIR = ./libft/
 
-SRC_FILES = init.c init2.c main.c check_args.c raycast.c
+SRC_FILES = main.c 
 
 UTILS_FILES = utils.c utils_parsing.c utils_map.c utils_player.c \
 			  free.c error_msg.c 
 
 PARSING_FILES = parsing_texture.c parsing_color.c parsing_map.c \
-				parsing_file.c map_checks.c map_grid.c map_floodfill.c
+				parsing_file.c map_checks.c map_grid.c map_floodfill.c check_args.c 
 
 PLAYER_FILES = player_pos.c player_movement.c handle_input.c
+
+RAYCAST_FILES = raycast.c mini_map.c print_wall.c
+
+INIT_FILES = init.c init2.c init3.c
 
 
 OBJ = 	$(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o)) \
 		$(addprefix $(OBJ_DIR), $(UTILS_FILES:.c=.o)) \
 		$(addprefix $(OBJ_DIR), $(PARSING_FILES:.c=.o)) \
 		$(addprefix $(OBJ_DIR), $(PLAYER_FILES:.c=.o)) \
+		$(addprefix $(OBJ_DIR), $(RAYCAST_FILES:.c=.o)) \
+		$(addprefix $(OBJ_DIR), $(INIT_FILES:.c=.o)) \
 
 INC_H = -I $(INC_DIR) -I $(LIBFT_DIR)/includes/
 
@@ -80,6 +88,14 @@ $(OBJ_DIR)%.o: $(PARSING_DIR)%.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(INC_H) -c -o $@ $<
 
 $(OBJ_DIR)%.o: $(PLAYER_DIR)%.c | $(OBJ_DIR)
+	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+	@$(CC) $(CFLAGS) $(INC_H) -c -o $@ $<
+
+$(OBJ_DIR)%.o: $(RAYCAST_DIR)%.c | $(OBJ_DIR)
+	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+	@$(CC) $(CFLAGS) $(INC_H) -c -o $@ $<
+
+$(OBJ_DIR)%.o: $(INIT_DIR)%.c | $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(INC_H) -c -o $@ $<
 
