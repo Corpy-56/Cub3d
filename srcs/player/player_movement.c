@@ -6,11 +6,36 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 11:30:10 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/21 17:02:39 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 10:18:30 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	watching_mouse(void	*game)
+{
+	int		x;
+	int		y;
+	int		dx;
+	t_game	*g;
+
+	g = (t_game *)game;
+	x = 0;
+	y = 0;
+	mlx_mouse_get_pos(g->screen.mlx_ptr, g->screen.win_ptr, &x, &y);
+	if (!g->mouse.init)
+	{
+		g->mouse.last_x = x;
+		g->mouse.init = true;
+		return ;
+	}
+	dx = x - g->mouse.last_x;
+	g->mouse.last_x = x;
+	if (dx == 0)
+		return ;
+	g->dir.angle = normalize_angle(g->dir.angle + dx * g->mouse.sens);
+	calc_dir_plan(&g->dir);
+}
 
 void	watching_left_right(void *game)
 {
@@ -91,6 +116,7 @@ int	player_movement(void *game)
 	t_game	*g;
 
 	g = (t_game *)game;
+	watching_mouse(game);
 	watching_left_right(game);
 	move_forward_backward(game);
 	move_strafe(game);

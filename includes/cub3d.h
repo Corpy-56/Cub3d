@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/21 15:27:42 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 10:04:14 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	init_parse_map(t_parse_map *p_map);
 void	init_border(t_ext *ext, int rows, int cols);
 void	init_flood(t_flood *flood, t_map *map);
 void	init_dir(t_direction *dir);
+void	init_mouse(t_mouse *mouse);
 
 /* ******************************* PLAYER ********************************* */
 

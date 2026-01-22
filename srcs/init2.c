@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 14:31:34 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 10:19:18 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	init_game(t_game *game)
 {
 	init_config(&game->config, game);
 	init_dir(&game->dir);
+	init_mouse(&game->mouse);
 	// init_map(&game->dir, &game->map);
 }
 
@@ -32,4 +33,11 @@ void	init_flood(t_flood *flood, t_map *map)
 	flood->rows = map->rows + 2;
 	flood->cols = map->cols + 2;
 	flood->open = false;
+}
+
+void	init_mouse(t_mouse *mouse)
+{
+	mouse->init = false;
+	mouse->last_x = 0;
+	mouse->sens = 0.002;
 }
