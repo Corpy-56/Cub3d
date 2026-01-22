@@ -1,0 +1,223 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/13 11:10:23 by agouin            #+#    #+#             */
+/*   Updated: 2026/01/20 15:44:30 by skuor            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+void	calcul_delta_dist(t_raycast *cast, t_player *player)
+{
+	if (cast->ray_dir_x == 0)
+		cast->delta_dist_x = 1e30;
+	else
+		cast->delta_dist_x = fabs(1 / cast->ray_dir_x);
+	if (cast->ray_dir_y == 0)
+		cast->delta_dist_y = 1e30;
+	else
+		cast->delta_dist_y = fabs(1 / cast->ray_dir_y);
+	if (cast->ray_dir_x < 0)
+	{
+		cast->step_x = -1;
+		cast->side_dist_x = (player->pos_col - cast->map_x)
+			* cast->delta_dist_x;
+	}
+	else
+	{
+		cast->step_x = 1;
+		cast->side_dist_x = (cast->map_x + 1.0 - player->pos_col)
+			* cast->delta_dist_x;
+	}
+	return ;
+}
+
+void	radius_calcul(t_raycast *cast, t_direction *dir, t_player *player)
+{
+	cast->ray_dir_x = dir->dir_x + dir->plan_x * cast->camera;
+	cast->ray_dir_y = dir->dir_y + dir->plan_y * cast->camera;
+	calcul_delta_dist(cast, player);
+	if (cast->ray_dir_y < 0)
+	{
+		cast->step_y = -1;
+		cast->side_dist_y = (player->pos_row - cast->map_y)
+			* cast->delta_dist_y;
+	}
+	else
+	{
+		cast->step_y = 1;
+		cast->side_dist_y = (cast->map_y + 1.0 - player->pos_row)
+			* cast->delta_dist_y;
+	}
+	return ;
+}
+
+void	wall_height_calcul(t_raycast *cast, t_mlx *screen)
+{
+	cast->line_height = (int)(screen->screen_size_height
+			/ cast->wall_distance);
+	cast->draw_start = -cast->line_height
+		/ 2 + screen->screen_size_height / 2;
+
+	if (cast->draw_start < 0)
+		cast->draw_start = 0;
+	cast->draw_end = cast->line_height
+		/ 2 + screen->screen_size_height / 2;
+	if (cast->draw_end >= screen->screen_size_height)
+		cast->draw_end = screen->screen_size_height -1;
+	return ;
+}
+
+void	hit_wall_boucle(t_raycast *cast, t_game *game)
+{
+	while (cast->hit == 0)
+	{
+		if (cast->map_x < 0 || cast->map_y < 0)
+			break ;
+		if (cast->map_y >= game->map.rows
+			|| cast->map_x >= game->map.cols)
+			break ;
+		if (cast->side_dist_x < cast->side_dist_y)
+		{
+			cast->side_dist_x += cast->delta_dist_x;
+			cast->map_x += cast->step_x;
+			cast->side = 0;
+		}
+		else
+		{
+			cast->side_dist_y += cast->delta_dist_y;
+			cast->map_y += cast->step_y;
+			cast->side = 1;
+		}
+		if (game->map.big_map[cast->map_y][cast->map_x] == '1')
+			cast->hit = 1;
+	}
+	return ;
+}
+
+
+void	my_mlx_pixel_put(t_mlx *screen, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x < 0 || y < 0 || x >= screen->screen_size_width || y >= screen->screen_size_height)
+		return;
+	dst = screen->addr + (y * screen->line_len + x * (screen->bpp / 8));
+	*(unsigned int *)dst = color;
+}
+
+void	ft_print_mini_map(t_raycast *cast, t_mlx *screen, t_mini_map *mini, int x, int y)
+{
+	int i;
+
+	i = 0;
+	while(y < screen->screen_size_height)
+	{
+		if(y >= mini->start_y && y <= mini->end_y)
+			i++;
+		else if (y < cast->draw_start && (y <= mini->start_y || y >= mini->end_y))
+			my_mlx_pixel_put(screen, x, y, 0x87CEEB);
+		else if (y <= cast->draw_end && (y <= mini->start_y || y >= mini->end_y))
+			my_mlx_pixel_put(screen, x, y, 0x8B4513);
+		else if (y < screen->screen_size_height && (y <= mini->start_y || y >= mini->end_y))
+			my_mlx_pixel_put(screen, x, y, 0x228B22);
+		y++;
+	}
+}
+
+void	draw_wall_column(t_raycast *cast, t_mlx *screen, t_mini_map *mini, int x)
+{
+	int	y;
+
+	y = 0;
+	if (x >= mini->start_x && x <= mini->end_x)
+	{
+		ft_print_mini_map(cast, screen, mini, x, y);
+		return ;
+	}
+	while(y < screen->screen_size_height)
+	{
+		if (y < cast->draw_start)
+			my_mlx_pixel_put(screen, x, y, 0x87CEEB);
+		else if (y <= cast->draw_end)
+			my_mlx_pixel_put(screen, x, y, 0x8B4513);
+		else if (y < screen->screen_size_height)
+			my_mlx_pixel_put(screen, x, y, 0x228B22);
+		y++;
+	}
+}
+
+void draw_mini_map(t_map *map, t_mlx *screen, t_player *play)
+{
+	int y;
+	int i;
+	int j;
+	int map_x;
+	int map_y;
+	int x;
+
+	y = 0;
+	while(y <= 300)
+	{
+		x = 0;
+		while(x <= 300)
+		{
+			map_x = play->pos_col + (x / 10) - 15;
+			map_y = play->pos_row+ (y / 10) - 15;
+			if (map_x < 0 || map_y < 0 || map_x >= map->cols || map_y >= map->rows)
+				my_mlx_pixel_put(screen, 10 + x, 10 + y, 0);
+			else if (map->big_map[map_y][map_x] == '1')
+				my_mlx_pixel_put(screen, 10 + x, 10 + y, 0);
+			else if (map->big_map[map_y][map_x] == '0')
+				my_mlx_pixel_put(screen, 10 + x, 10 + y, 0xFFFFFF);
+			x++;
+		}
+		y++;
+		 i = -3;
+    	while (i <= 3)
+		{
+			j = -3;
+			while (j <= 3)
+			{
+				my_mlx_pixel_put(screen, 10 + 300 / 2 + j, 10 + 300 / 2 + i, 0xFF0000);
+				j++;
+			}
+			i++;
+		}
+	}
+}
+
+void	raycast(t_game *game, t_raycast *cast)
+{
+	int	i;
+
+	(void)game;
+	ft_init_ray(cast, &game->mini);
+	i = 0;
+	while (i < game->screen.screen_size_width)
+	{
+		cast->hit = 0;
+		cast->map_x = (int)game->player.pos_col;
+		cast->map_y = (int)game->player.pos_row;
+		cast->camera = 2.0 * i / (double)game->screen.screen_size_width - 1.0;
+		radius_calcul(cast, &game->dir, &game->player);
+		hit_wall_boucle(cast, game);
+		if (cast->side == 0)
+			cast->wall_distance = cast->side_dist_x
+				- cast->delta_dist_x;
+		else
+			cast->wall_distance = cast->side_dist_y
+				- cast->delta_dist_y;
+		if (cast->wall_distance <= 0.0001)
+			cast->wall_distance = 0.0001;
+		wall_height_calcul(cast, &game->screen);
+		draw_wall_column(cast, &game->screen, &game->mini, i);
+		i++;
+	}
+	draw_mini_map(&game->map, &game->screen, &game->player);
+}

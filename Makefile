@@ -6,7 +6,7 @@
 #    By: skuor <skuor@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 16:18:45 by skuor             #+#    #+#              #
-#    Updated: 2026/01/20 14:56:47 by skuor            ###   ########.fr        #
+#    Updated: 2026/01/22 14:46:45 by skuor            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,14 +24,16 @@ PLAYER_DIR = $(SRC_DIR)player/
 
 LIBFT_DIR = ./libft/
 
-SRC_FILES = init.c init2.c main.c
+SRC_FILES = init.c init2.c main.c check_args.c raycast.c
 
-UTILS_FILES = utils.c free.c utils_parsing.c error_msg.c utils_map.c
+UTILS_FILES = utils.c utils_parsing.c utils_map.c utils_player.c \
+			  free.c error_msg.c 
 
 PARSING_FILES = parsing_texture.c parsing_color.c parsing_map.c \
 				parsing_file.c map_checks.c map_grid.c map_floodfill.c
 
-PLAYER_FILES = player_pos.c
+PLAYER_FILES = player_pos.c player_movement.c handle_input.c
+
 
 OBJ = 	$(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o)) \
 		$(addprefix $(OBJ_DIR), $(UTILS_FILES:.c=.o)) \
@@ -42,7 +44,7 @@ INC_H = -I $(INC_DIR) -I $(LIBFT_DIR)/includes/
 
 MLX_DIR = minilibx-linux
 MLX_LIB = $(MLX_DIR)/libmlx.a
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -L/usr/lib/X11 -lXfixes -lXext -lX11
 MLX_OBJ_DIR = $(MLX_DIR)/obj/
 
 DEFAULT = \033[0m
