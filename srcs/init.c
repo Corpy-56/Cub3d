@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 13:50:18 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 14:26:01 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	ft_init_ray(t_raycast *cast, t_mini_map *mini)
 	mini->start_y = 10;
 	mini->end_y = 310;
 }
-
 
 void	init_config(t_config *config, t_game *game)
 {

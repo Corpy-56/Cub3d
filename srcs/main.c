@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 13:57:27 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 14:25:19 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	on_destroy(t_game *game)
 {
-	// mlx_mouse_show_no_leak(game->screen.mlx_ptr, game->screen.win_ptr);
 	free_all(game);
 	if (game->screen.img)
 		mlx_destroy_image(game->screen.mlx_ptr, game->screen.img);
@@ -36,9 +35,12 @@ void	ft_init_screen(t_game *g, t_mlx *screen)
 	// screen->screen_size_height = 1080;
 	g->mouse.center_x = g->screen.screen_size_width / 2;
 	g->mouse.center_y = g->screen.screen_size_height / 2;
-	screen->win_ptr = mlx_new_window(screen->mlx_ptr, screen->screen_size_width, screen->screen_size_height, "Cub3d");
-	screen->img = mlx_new_image(screen->mlx_ptr, screen->screen_size_width, screen->screen_size_height);
-	screen->addr = mlx_get_data_addr(screen->img, &screen->bpp, &screen->line_len, &screen->endian);
+	screen->win_ptr = mlx_new_window(screen->mlx_ptr, screen->screen_size_width,
+			screen->screen_size_height, "Cub3d");
+	screen->img = mlx_new_image(screen->mlx_ptr, screen->screen_size_width,
+			screen->screen_size_height);
+	screen->addr = mlx_get_data_addr(screen->img, &screen->bpp,
+			&screen->line_len, &screen->endian);
 }
 
 
@@ -53,16 +55,12 @@ int	main(int argc, char **argv)
 	ft_init_screen(&game, &game.screen);
 	if (!find_player(game.map.big_map, &game))
 		return (free_all(&game), error_msg("BUG"), 1);
-	// mlx_mouse_hide(game.screen.mlx_ptr, game.screen.win_ptr);
 	mlx_hook(game.screen.win_ptr, KeyPress, KeyPressMask, &keyboard_key, &game);
 	mlx_hook(game.screen.win_ptr, KeyRelease, KeyReleaseMask,
 		&handle_keyrelease, &game);
 	mlx_loop_hook(game.screen.mlx_ptr, &player_movement, &game);
-	//mlx_key_hook(game.screen.win_ptr, keyboard_key, &game);
 	mlx_hook(game.screen.win_ptr, 17, 0, on_destroy, &game);
 	mlx_loop(game.screen.mlx_ptr);
-	// free(game.screen.mlx_ptr);
-	// free_all(&game);
 	return (0);
 }
 
