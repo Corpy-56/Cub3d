@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 14:17:57 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 14:22:43 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_direction
 	double		dy;
 	double		sx;
 	double		sy;
-}			t_direction;
+}				t_direction;
 
 typedef struct s_time
 {

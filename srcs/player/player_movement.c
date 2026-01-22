@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 11:30:10 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 14:19:38 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 14:22:58 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,31 +38,6 @@ void	watching_mouse(void	*game)
 	mlx_mouse_move(g->screen.mlx_ptr, g->screen.win_ptr,
 		g->mouse.center_x, g->mouse.center_y);
 }
-
-// void	watching_mouse(void	*game)
-// {
-// 	int		x;
-// 	int		y;
-// 	int		dx;
-// 	t_game	*g;
-
-// 	g = (t_game *)game;
-// 	x = 0;
-// 	y = 0;
-// 	mlx_mouse_get_pos(g->screen.mlx_ptr, g->screen.win_ptr, &x, &y);
-// 	if (!g->mouse.init)
-// 	{
-// 		g->mouse.last_x = x;
-// 		g->mouse.init = true;
-// 		return ;
-// 	}
-// 	dx = x - g->mouse.last_x;
-// 	g->mouse.last_x = x;
-// 	if (dx == 0)
-// 		return ;
-// 	g->dir.angle = normalize_angle(g->dir.angle + dx * g->mouse.sens);
-// 	calc_dir_plan(&g->dir);
-// }
 
 void	watching_left_right(void *game)
 {
