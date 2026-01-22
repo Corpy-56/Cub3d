@@ -6,11 +6,38 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 11:30:10 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 13:53:28 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 14:19:38 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	watching_mouse(void	*game)
+{
+	int		dx;
+	t_game	*g;
+
+	g = (t_game *)game;
+	mlx_mouse_get_pos(g->screen.mlx_ptr, g->screen.win_ptr,
+		&g->mouse.x, &g->mouse.y);
+	if (!g->mouse.lock)
+		return ;
+	if (!g->mouse.init)
+	{
+		mlx_mouse_move(g->screen.mlx_ptr, g->screen.win_ptr,
+			g->mouse.center_x, g->mouse.center_y);
+		g->mouse.init = true;
+		return ;
+	}
+	dx = g->mouse.x - g->mouse.center_x;
+	if (dx != 0)
+	{
+		g->dir.angle = normalize_angle(g->dir.angle + dx * g->mouse.sens);
+		calc_dir_plan(&g->dir);
+	}
+	mlx_mouse_move(g->screen.mlx_ptr, g->screen.win_ptr,
+		g->mouse.center_x, g->mouse.center_y);
+}
 
 // void	watching_mouse(void	*game)
 // {
@@ -23,47 +50,19 @@
 // 	x = 0;
 // 	y = 0;
 // 	mlx_mouse_get_pos(g->screen.mlx_ptr, g->screen.win_ptr, &x, &y);
-// 	if (!g->mouse.lock)
-// 		return ;
 // 	if (!g->mouse.init)
 // 	{
-// 		mlx_mouse_move(g->screen.mlx_ptr, g->screen.win_ptr, g->mouse.center_x, g->mouse.center_y);
+// 		g->mouse.last_x = x;
 // 		g->mouse.init = true;
 // 		return ;
 // 	}
-// 	dx = x - g->mouse.center_x;
-// 	if (dx != 0)
-// 	{
-// 		g->dir.angle = normalize_angle(g->dir.angle + dx * g->mouse.sens);
-// 		calc_dir_plan(&g->dir);
-// 	}
-// 	mlx_mouse_move(g->screen.mlx_ptr, g->screen.win_ptr, g->mouse.center_x, g->mouse.center_y);
+// 	dx = x - g->mouse.last_x;
+// 	g->mouse.last_x = x;
+// 	if (dx == 0)
+// 		return ;
+// 	g->dir.angle = normalize_angle(g->dir.angle + dx * g->mouse.sens);
+// 	calc_dir_plan(&g->dir);
 // }
-
-void	watching_mouse(void	*game)
-{
-	int		x;
-	int		y;
-	int		dx;
-	t_game	*g;
-
-	g = (t_game *)game;
-	x = 0;
-	y = 0;
-	mlx_mouse_get_pos(g->screen.mlx_ptr, g->screen.win_ptr, &x, &y);
-	if (!g->mouse.init)
-	{
-		g->mouse.last_x = x;
-		g->mouse.init = true;
-		return ;
-	}
-	dx = x - g->mouse.last_x;
-	g->mouse.last_x = x;
-	if (dx == 0)
-		return ;
-	g->dir.angle = normalize_angle(g->dir.angle + dx * g->mouse.sens);
-	calc_dir_plan(&g->dir);
-}
 
 void	watching_left_right(void *game)
 {
@@ -137,42 +136,6 @@ void	move_strafe(void *game)
 		g->player.pos_col = new_x;
 	if (!check_walls(g, g->player.pos_col, new_y))
 		g->player.pos_row = new_y;
-}
-
-// int	player_movement(void *game)
-// {
-// 	t_game	*g;
-
-
-// 	g = (t_game *)game;
-// 	watching_mouse(game);
-// 	watching_left_right(game);
-// 	move_forward_backward(game);
-// 	move_strafe(game);
-// 	raycast(g, &g->cast);
-// 	mlx_put_image_to_window(g->screen.mlx_ptr,
-// 		g->screen.win_ptr, g->screen.img, 0, 0);
-// 	return (0);
-// }
-
-void	calc_delta(t_game *game)
-{
-	struct timeval	time;
-	double			now;
-
-	if (gettimeofday(&time, NULL) == -1)
-		return ;
-	now = time.tv_sec + time.tv_usec / 1000000.0;
-	if (game->time.last == 0)
-	{
-		game->time.last = now;
-		game->time.delta = 0;
-		return ;
-	}
-	game->time.delta = now - game->time.last;
-	if (game->time.delta > 0.5)
-		game->time.delta = 0.5;
-	game->time.last = now;
 }
 
 int	player_movement(void *game)

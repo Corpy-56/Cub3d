@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:14:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 13:56:31 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 14:00:30 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	activate_map_mode(const char *line, t_config *c, int *mode, t_game *g)
 		return (1);
 }
 
-int	parse_header(const char *line, t_config *config, int *mode, t_game *game)
+int	parse_header(const char *line, t_config *c, int *mode, t_game *game)
 {
 	int	i;
 	int	texture;
@@ -63,7 +63,7 @@ int	parse_header(const char *line, t_config *config, int *mode, t_game *game)
 	i = skip_ws(line, 0);
 	if (line[i] == '\n' || line[i] == '\0')
 		return (0);
-	texture = search_texture(line, i, config);
+	texture = search_texture(line, i, c);
 	if (texture == -1)
 		return (1);
 	if (texture == 0 || line[i] == 'F' || line[i] == 'C')
@@ -75,7 +75,7 @@ int	parse_header(const char *line, t_config *config, int *mode, t_game *game)
 	}
 	if (!ft_strchr("10NEWSFC", line[i]))
 		return (error_msg("Unknown element in header"), 1);
-	return (activate_map_mode(line, config, mode, game));
+	return (activate_map_mode(line, c, mode, game));
 }
 
 bool	header_complete(t_config *config, t_game *game)

@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 13:44:53 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 14:18:19 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	init_mouse(t_mouse *mouse)
 	mouse->sens = 0.01;
 	mouse->lock = false;
 	mouse->last_x = 0;
+	mouse->x = 0;
+	mouse->y = 0;
 }
 
 void	init_time(t_time *time)

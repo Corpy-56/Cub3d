@@ -6,35 +6,35 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:08:42 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 13:57:11 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 14:16:03 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-// void	mlx_mouse_hide_no_leak(void *mlx, void *win)
-// {
-// 	t_xvar		*xvar;
-// 	t_win_list	*xwin;
+void	mlx_mouse_hide_no_leak(void *mlx, void *win)
+{
+	t_xvar		*xvar;
+	t_win_list	*xwin;
 
-// 	if (mlx == NULL || win == NULL)
-// 		return ;
-// 	xvar = (t_xvar *)mlx;
-// 	xwin = (t_win_list *)win;
-// 	XFixesHideCursor(xvar->display, xwin->window);
-// }
+	if (mlx == NULL || win == NULL)
+		return ;
+	xvar = (t_xvar *)mlx;
+	xwin = (t_win_list *)win;
+	XFixesHideCursor(xvar->display, xwin->window);
+}
 
-// void	mlx_mouse_show_no_leak(void *mlx, void *win)
-// {
-// 	t_xvar		*xvar;
-// 	t_win_list	*xwin;
+void	mlx_mouse_show_no_leak(void *mlx, void *win)
+{
+	t_xvar		*xvar;
+	t_win_list	*xwin;
 
-// 	if (mlx == NULL || win == NULL)
-// 		return ;
-// 	xvar = (t_xvar *)mlx;
-// 	xwin = (t_win_list *)win;
-// 	XFixesShowCursor(xvar->display, xwin->window);
-// }
+	if (mlx == NULL || win == NULL)
+		return ;
+	xvar = (t_xvar *)mlx;
+	xwin = (t_win_list *)win;
+	XFixesShowCursor(xvar->display, xwin->window);
+}
 
 int	handle_keyrelease(int keycode, t_game *game)
 {
@@ -51,6 +51,20 @@ int	handle_keyrelease(int keycode, t_game *game)
 	if (keycode == XK_d)
 		game->dir.strafe_r = false;
 	return (0);
+}
+
+void	mouse_lock(t_game *game)
+{
+	game->mouse.lock = !game->mouse.lock;
+	if (game->mouse.lock == true)
+	{
+		game->mouse.init = false;
+		mlx_mouse_hide_no_leak(game->screen.mlx_ptr, game->screen.win_ptr);
+		mlx_mouse_move(game->screen.mlx_ptr, game->screen.win_ptr,
+			game->mouse.center_x, game->mouse.center_y);
+	}
+	else
+		mlx_mouse_show_no_leak(game->screen.mlx_ptr, game->screen.win_ptr);
 }
 
 int	keyboard_key(int keycode, t_game *game)
@@ -70,16 +84,6 @@ int	keyboard_key(int keycode, t_game *game)
 	if (keycode == XK_d)
 		game->dir.strafe_r = true;
 	if (keycode == XK_m)
-	{
-		game->mouse.lock = !game->mouse.lock;
-		if (game->mouse.lock == true)
-		{
-			game->mouse.init = false;
-			// mlx_mouse_hide(game->screen.mlx_ptr, game->screen.win_ptr);
-			// mlx_mouse_hide_no_leak(game->screen.mlx_ptr, game->screen.win_ptr);
-			mlx_mouse_move(game->screen.mlx_ptr, game->screen.win_ptr, game->mouse.center_x, game->mouse.center_y);
-		}
-		// mlx_mouse_show_no_leak(game->screen.mlx_ptr, game->screen.win_ptr);
-	}
-	return (-1);
+		mouse_lock(game);
+	return (0);
 }

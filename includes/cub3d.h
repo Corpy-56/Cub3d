@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 13:44:59 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/22 14:00:36 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		keyboard_key(int keycode, t_game *game);
 
 /* ********* file & header ********* */
 bool	parsing_file(const char *path, t_game *game);
-int		parse_header(const char *line, t_config *config, int *mode, t_game *game);
+int		parse_header(const char *line, t_config *c, int *mode, t_game *game);
 bool	header_complete(t_config *config, t_game *game);
 bool	is_header_id(char *line);
 
@@ -157,6 +157,7 @@ int		check_size_map(char *line, t_parse_map *p);
 double	normalize_angle(double angle);
 void	calc_dir_plan(t_direction *dir);
 bool	check_walls(t_game *game, double new_x, double new_y);
+void	calc_delta(t_game *game);
 
 
 /* ********* free ********* */
