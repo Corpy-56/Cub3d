@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/23 11:22:58 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/23 17:44:49 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 
 # define PI 3.141592653589793
 # define FOV 1.15
+# define OFFSET 0.1
 
 # define ERR_EMPTY "Empty line(s) in map"
 # define ERR_LAST "Map must be the last element"
@@ -134,7 +135,7 @@ void	wall_height_calcul(t_raycast *cast, t_mlx *screen);
 void	radius_calcul(t_raycast *cast, t_direction *dir, t_player *player);
 void	calcul_delta_dist(t_raycast *cast, t_player *player);
 void	draw_wall_column(t_raycast *cast, t_mlx *screen,
-			t_mini_map *mini, int x);
+			int x, t_game *game);
 void	my_mlx_pixel_put(t_mlx *screen, int x, int y, int color);
 
 /* ********* mini - map ********* */
@@ -162,7 +163,6 @@ size_t	line_len(const char *line, int start);
 /* ********* utils map ********* */
 void	map_size(t_map *map);
 int		ft_min(int a, int b);
-int		check_size_map(char *line, t_parse_map *p);
 
 /* ********* utils player ********* */
 double	normalize_angle(double angle);

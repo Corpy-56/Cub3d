@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 15:07:56 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/22 16:08:10 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/23 16:16:10 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	draw_wall_mini_map(t_player *play, t_map *map, t_mlx *screen, int y)
 				my_mlx_pixel_put(screen, 20 + x, 20 + y, 0);
 			else if (map->big_map[map_y][map_x] == '0')
 				my_mlx_pixel_put(screen, 20 + x, 20 + y, 0xFFFFFF);
+			else
+				my_mlx_pixel_put(screen, 20 + x, 20 + y, 0);
 			x++;
 		}
 		y++;
@@ -108,4 +110,31 @@ void	draw_mini_map( t_mlx *screen, t_player *play, t_game *game)
 		i++;
 	}
 	draw_rayon(&game->map, play, screen, game);
+}
+
+void	hit_wall_boucle(t_raycast *cast, t_game *game)
+{
+	while (cast->hit == 0)
+	{
+		if (cast->map_x < 0 || cast->map_y < 0)
+			break ;
+		if (cast->map_y >= game->map.rows
+			|| cast->map_x >= game->map.cols)
+			break ;
+		if (cast->side_dist_x < cast->side_dist_y)
+		{
+			cast->side_dist_x += cast->delta_dist_x;
+			cast->map_x += cast->step_x;
+			cast->side = 0;
+		}
+		else
+		{
+			cast->side_dist_y += cast->delta_dist_y;
+			cast->map_y += cast->step_y;
+			cast->side = 1;
+		}
+		if (game->map.big_map[cast->map_y][cast->map_x] == '1')
+			cast->hit = 1;
+	}
+	return ;
 }

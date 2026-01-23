@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:11:02 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/23 10:50:44 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/23 17:44:54 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static int	handle_mapline(char **line, t_parse_map *p)
 	if (p->end)
 		return (free_and_err(*line, p->map_tmp, ERR_EMPTY), 1);
 	p->started = true;
-	if (check_size_map(*line, p))
-		return (free(*line), free(p->map_tmp), 1);
 	p->map_tmp = ft_strjoin_free(p->map_tmp, *line);
 	if (!p->map_tmp)
 		return (free(*line), 1);

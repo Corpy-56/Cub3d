@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:20:46 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/23 11:17:05 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/23 16:25:26 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,30 @@ void	ft_init_ray(t_raycast *cast, t_mini_map *mini)
 	mini->end_y = 220;
 }
 
+void	init_tex_1(t_texture *tex, t_game *game)
+{
+	int	y;
+	int	x;
+
+	y = 64;
+	x = 64;
+	tex->tex_x = 0;
+	tex->tex_y = 0;
+	tex->test = 0.0;
+	tex->t_lar = 0;
+	tex->wall_t = 0.0;
+	tex->img_n = mlx_xpm_file_to_image(game->screen.mlx_ptr,
+			game->config.no_path, &y, &x);
+	tex->img_s = mlx_xpm_file_to_image(game->screen.mlx_ptr,
+			game->config.so_path, &y, &x);
+	tex->img_e = mlx_xpm_file_to_image(game->screen.mlx_ptr,
+			game->config.ea_path, &y, &x);
+	tex->img_w = mlx_xpm_file_to_image(game->screen.mlx_ptr,
+			game->config.we_path, &y, &x);
+	if (!tex->img_n || !tex->img_w || !tex->img_e || !tex->img_s)
+		ft_error(2, NULL, "Probleme with asset\n");
+}
+
 void	ft_init_screen(t_game *g, t_mlx *screen)
 {
 	screen->mlx_ptr = mlx_init();
@@ -56,8 +80,7 @@ void	ft_init_screen(t_game *g, t_mlx *screen)
 		ft_error(0, NULL, "Mlx_init failed\n");
 	mlx_get_screen_size(screen->mlx_ptr, &screen->screen_size_width,
 		&screen->screen_size_height);
-	//screen->screen_size_width = 1920;
-	//screen->screen_size_height = 1080;
+	init_tex_1(&g->tex, g);
 	g->mouse.center_x = g->screen.screen_size_width / 2;
 	g->mouse.center_y = g->screen.screen_size_height / 2;
 	screen->win_ptr = mlx_new_window(screen->mlx_ptr,
@@ -66,4 +89,14 @@ void	ft_init_screen(t_game *g, t_mlx *screen)
 			screen->screen_size_width, screen->screen_size_height);
 	screen->addr = mlx_get_data_addr(screen->img, &screen->bpp,
 			&screen->line_len, &screen->endian);
+}
+
+void	init_mouse(t_mouse *mouse)
+{
+	mouse->init = false;
+	mouse->sens = 0.01;
+	mouse->lock = false;
+	mouse->last_x = 0;
+	mouse->x = 0;
+	mouse->y = 0;
 }

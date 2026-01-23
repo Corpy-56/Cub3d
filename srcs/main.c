@@ -6,12 +6,17 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/23 11:17:32 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/23 16:24:16 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	init_time(t_time *time)
+{
+	time->delta = 0;
+	time->last = 0;
+}
 
 int	main(int argc, char **argv)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_player.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 15:18:15 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 13:59:12 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/23 17:26:55 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,19 @@ void	calc_dir_plan(t_direction *dir)
 bool	check_walls(t_game *game, double new_x, double new_y)
 {
 	char	next_tile;
-	int		map_x;
-	int		map_y;
 
-	map_x = new_x;
-	map_y = new_y;
-	next_tile = game->map.big_map[map_y][map_x];
+	next_tile = game->map.big_map[(int)(new_y + OFFSET)][(int)new_x];
 	if (next_tile == '1')
-		return (true);
+			return (true);
+	next_tile = game->map.big_map[(int)(new_y - OFFSET)][(int)new_x];
+	if (next_tile == '1')
+			return (true);
+	next_tile = game->map.big_map[(int)new_y][(int)(new_x  + OFFSET)];
+	if (next_tile == '1')
+			return (true);
+	next_tile = game->map.big_map[(int)new_y][(int)(new_x  - OFFSET)];
+	if (next_tile == '1')
+			return (true);
 	return (false);
 }
 

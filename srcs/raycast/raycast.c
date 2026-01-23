@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:10:23 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/22 16:11:20 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/23 16:15:54 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,31 +72,17 @@ void	wall_height_calcul(t_raycast *cast, t_mlx *screen)
 	return ;
 }
 
-void	hit_wall_boucle(t_raycast *cast, t_game *game)
+void	ft_calcul(t_game *game, t_texture *tex, t_raycast *cast)
 {
-	while (cast->hit == 0)
-	{
-		if (cast->map_x < 0 || cast->map_y < 0)
-			break ;
-		if (cast->map_y >= game->map.rows
-			|| cast->map_x >= game->map.cols)
-			break ;
-		if (cast->side_dist_x < cast->side_dist_y)
-		{
-			cast->side_dist_x += cast->delta_dist_x;
-			cast->map_x += cast->step_x;
-			cast->side = 0;
-		}
-		else
-		{
-			cast->side_dist_y += cast->delta_dist_y;
-			cast->map_y += cast->step_y;
-			cast->side = 1;
-		}
-		if (game->map.big_map[cast->map_y][cast->map_x] == '1')
-			cast->hit = 1;
-	}
-	return ;
+	if (cast->side == 0)
+		tex->wall_t = game->player.pos_row
+			+ cast->wall_distance * cast->ray_dir_y;
+	else
+		tex->wall_t = game->player.pos_col
+			+ cast->wall_distance * cast->ray_dir_x;
+	tex->wall_t -= floor(tex->wall_t);
+	game->tex.tex_x = (int)(game->tex.wall_t * 64);
+	wall_height_calcul(cast, &game->screen);
 }
 
 void	raycast(t_game *game, t_raycast *cast)
@@ -121,8 +107,8 @@ void	raycast(t_game *game, t_raycast *cast)
 				- cast->delta_dist_y;
 		if (cast->wall_distance <= 0.0001)
 			cast->wall_distance = 0.0001;
-		wall_height_calcul(cast, &game->screen);
-		draw_wall_column(cast, &game->screen, &game->mini, i);
+		ft_calcul(game, &game->tex, cast);
+		draw_wall_column(cast, &game->screen, i, game);
 		i++;
 	}
 	draw_mini_map(&game->screen, &game->player, game);
