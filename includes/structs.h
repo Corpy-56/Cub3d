@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 14:32:06 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/23 10:51:50 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ typedef struct s_tex
 	char	*path;
 	int		fd;
 }			t_tex;
-
 
 typedef struct s_mlx
 {
@@ -84,10 +83,10 @@ typedef struct s_raycast
 	double	wall_distance;
 	int		step_x;
 	int		step_y;
-	int		draw_start;//debit entre de y dans un x(colonne) donne
-	int		draw_end;//cest la fin jaffiche une colone
+	int		draw_start;
+	int		draw_end;
 	int		hit;
-	int		side;//mur touche verticalement ou horizontalement
+	int		side;
 	int		map_x;
 	int		line_height;
 	int		map_y;

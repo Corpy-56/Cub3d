@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_pos.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:58:18 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 14:33:48 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/23 11:23:06 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	find_player(char **map, t_game *game)
 				game->dir.angle = convert_angle(map[y][x]);
 				calc_dir_plan(&game->dir);
 				map[y][x] = '0';
-				return (1);
+				return (init_map(&game->dir, &game->player));
 			}
 			x++;
 		}

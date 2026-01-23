@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/18 12:50:57 by agouin             #+#    #+#             */
-/*   Updated: 2026/01/05 14:44:57 by agouin           ###   ########.fr       */
+/*   Created: 2025/12/18 12:50:57 by agouin            #+#    #+#             */
+/*   Updated: 2026/01/22 16:35:54 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,8 @@
 int	ft_error(int i, t_config *game, char *string)
 {
 	(void)game;
-
-	//if (game != NULL && i != 9 && i != 6)
-	//	ft_free_struct(game);
 	if (i == 6)
-	{
 		write(2, "Error\nProblem with Assets\n", 27);
-	//	on_destroy(game);
-	}
 	write(2, string, ft_strlen(string));
 	exit (1);
 }

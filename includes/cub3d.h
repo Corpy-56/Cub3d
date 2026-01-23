@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 14:35:51 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/23 11:22:58 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,27 @@
 
 /* ******************************** SOURCES ******************************** */
 
-int		on_destroy(t_game *game);
+/* ******************************* INITIALISATION ************************* */
 
-/* ********* init ********* */
-// void	init_map(t_direction *dir, t_map * map);
-void	init_config(t_config *config, t_game *game);
+/* ********* init - 1 ********* */
+void	init_dir(t_direction *dir);
 void	init_tex(t_tex *tex);
-void	ft_init_ray(t_raycast *cast, t_mini_map *mini);
-void	init_game(t_game *game);
 void	init_color(t_color *color);
+void	init_config(t_config *config, t_game *game);
 void	init_parse_map(t_parse_map *p_map);
+
+/* ********* init - 2 ********* */
+void	init_game(t_game *game);
+int		init_map(t_direction *dir, t_player *player);
 void	init_border(t_ext *ext, int rows, int cols);
 void	init_flood(t_flood *flood, t_map *map);
-void	init_dir(t_direction *dir);
 void	init_mouse(t_mouse *mouse);
 void	init_time(t_time *time);
+
+/* ********* init - 3 ********* */
+int		on_destroy(t_game *game);
+void	ft_init_ray(t_raycast *cast, t_mini_map *mini);
+void	ft_init_screen(t_game *game, t_mlx *screen);
 
 /* ******************************* PLAYER ********************************* */
 
@@ -68,6 +74,8 @@ double	convert_angle(char orientation);
 
 /* ********* movement ********* */
 void	watching_left_right(void *game);
+void	move_forward_backward(void *game);
+void	move_strafe(void *game);
 int		player_movement(void *game);
 void	calc_dir_plan(t_direction *dir);
 
@@ -125,10 +133,16 @@ void	hit_wall_boucle(t_raycast *cast, t_game *game);
 void	wall_height_calcul(t_raycast *cast, t_mlx *screen);
 void	radius_calcul(t_raycast *cast, t_direction *dir, t_player *player);
 void	calcul_delta_dist(t_raycast *cast, t_player *player);
-void	draw_mini_map(t_map *map, t_mlx *screen, t_player *play);
-void	draw_wall_column(t_raycast *cast, t_mlx *screen, t_mini_map *mini, int x);
-void	ft_print_mini_map(t_raycast *cast, t_mlx *screen, t_mini_map *mini, int x, int y);
+void	draw_wall_column(t_raycast *cast, t_mlx *screen,
+			t_mini_map *mini, int x);
 void	my_mlx_pixel_put(t_mlx *screen, int x, int y, int color);
+
+/* ********* mini - map ********* */
+void	draw_mini_map( t_mlx *screen, t_player *play, t_game *game);
+void	draw_wall_mini_map(t_player *play, t_map *map, t_mlx *screen, int y);
+void	draw_rayon(t_map *map, t_player *play, t_mlx *screen, t_game *game);
+void	ft_print_mini_map(t_raycast *cast, t_mlx *screen,
+			t_mini_map *mini, int x);
 
 /* ******************************** UTILS ********************************** */
 
