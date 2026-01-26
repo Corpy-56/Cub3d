@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:09:07 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/26 12:28:04 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 14:06:20 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	ft_draw_texture(t_game *game, t_raycast *cast, int x, int y)
 					game->tex.tex_x, 'W');
 			my_mlx_pixel_put(&game->screen, x, y, color);
 			game->tex.tex_pos += game->tex.step;
-		}		
+		}
 	}
 	else
 		ft_draw_texture_2(game, cast, x, y);

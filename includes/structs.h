@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/26 12:22:04 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 14:05:52 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,13 @@ typedef struct s_raycast
 typedef struct s_texture
 {
 	int		tex_x;
-	int 	tex_y;
+	int		tex_y;
 	double	test;
-	int 	t_lar;
-	void	 *img_n;
-	void	 *img_s;
-	void	 *img_e;
-	void	 *img_w;
+	int		t_lar;
+	void	*img_n;
+	void	*img_s;
+	void	*img_e;
+	void	*img_w;
 	int		bpp;
 	int		line_len;
 	int		endian;

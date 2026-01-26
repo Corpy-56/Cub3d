@@ -6,7 +6,7 @@
 #    By: agouin <agouin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/08 16:18:45 by skuor             #+#    #+#              #
-#    Updated: 2026/01/23 10:59:38 by agouin           ###   ########.fr        #
+#    Updated: 2026/01/26 13:26:13 by agouin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ LIBFT_DIR = ./libft/
 SRC_FILES = main.c 
 
 UTILS_FILES = utils.c utils_parsing.c utils_map.c utils_player.c \
-			  free.c error_msg.c 
+			  free.c error_msg.c utils_raycast.c
 
 PARSING_FILES = parsing_texture.c parsing_color.c parsing_map.c \
 				parsing_file.c map_checks.c map_grid.c map_floodfill.c check_args.c 
