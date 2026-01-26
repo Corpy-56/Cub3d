@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:09:07 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/26 11:42:05 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/26 13:24:07 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_draw_texture_2(t_game *game, t_raycast *cast, int x, int y)
 		game->tex.tex_y = (int)game->tex.tex_pos & 63;
 		color = ft_get_color(&game->tex, game->tex.tex_y, game->tex.tex_x, 'S');
 		my_mlx_pixel_put(&game->screen, x, y, color);
-		game->tex.tex_pos += game->tex.step;	
+		game->tex.tex_pos += game->tex.step;
 	}
 	else
 	{
@@ -91,7 +91,6 @@ void	ft_draw_texture(t_game *game, t_raycast *cast, int x, int y)
 	else
 		ft_draw_texture_2(game, cast, x, y);
 }
-
 
 void	draw_wall_column(t_raycast *cast, t_mlx *scre, int x, t_game *game)
 {

@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/26 11:39:48 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/26 13:27:19 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void	my_mlx_pixel_put(t_mlx *screen, int x, int y, int color);
 
 /* ********* mini - map ********* */
 void	draw_mini_map( t_mlx *screen, t_player *play, t_game *game);
-void	draw_wall_mini_map(t_player *play, t_map *map, t_mlx *screen, t_game *game);
+void	draw_wall_mini_map(t_player *play, t_map *map, t_mlx *scr, t_game *g);
 void	draw_rayon(t_map *map, t_player *play, t_mlx *screen, t_game *game);
 void	ft_print_mini_map(t_raycast *cast, t_mlx *screen,
 			t_mini_map *mini, int x);
