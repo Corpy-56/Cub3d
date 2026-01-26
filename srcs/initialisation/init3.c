@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:20:46 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/26 16:37:47 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 17:00:37 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,11 @@ void	init_tex_1(t_texture *tex, t_game *game)
 	tex->img_w = mlx_xpm_file_to_image(game->screen.mlx_ptr,
 			game->config.we_path, &y, &x);
 	if (!tex->img_n || !tex->img_w || !tex->img_e || !tex->img_s)
-		ft_error(2, NULL, "Probleme with asset\n");
+	{
+		error_msg("Problem with assets");
+		free_all(game);
+		on_destroy(game);
+	}
 }
 
 void	ft_init_screen(t_game *g, t_mlx *screen)
