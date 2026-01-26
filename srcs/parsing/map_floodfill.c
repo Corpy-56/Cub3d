@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 12:07:23 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/20 10:53:37 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 16:46:07 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	flood_fill(t_flood *f, int y, int x)
 		f->open = true;
 		return ;
 	}
-	else if (f->map[y][x] == ' ')
+	else if (f->map[y][x] == ' ' || f->map[y][x] == '	')
 		f->map[y][x] = '.';
 	flood_fill(f, y + 1, x);
 	flood_fill(f, y - 1, x);

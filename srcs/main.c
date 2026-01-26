@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/26 14:35:58 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 17:25:53 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	main(int argc, char **argv)
 		return (false);
 	if (!parsing_file(&game, fd))
 		return (free_all(&game), error_msg("Invalid parsing file"), 1);
-	ft_init_screen(&game, &game.screen);
+	if (!ft_init_screen(&game, &game.screen))
+		return (on_destroy(&game), 1);
 	if (!find_player(game.map.big_map, &game))
 		return (free_all(&game), error_msg("BUG"), 1);
 	mlx_hook(game.screen.win_ptr, KeyPress, KeyPressMask, &keyboard_key, &game);

@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/26 17:58:28 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/26 18:20:36 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	init_time(t_time *time);
 /* ********* init - 3 ********* */
 int		on_destroy(t_game *game);
 void	ft_init_ray(t_raycast *cast, t_mini_map *mini);
-void	ft_init_screen(t_game *game, t_mlx *screen);
+bool	ft_init_screen(t_game *game, t_mlx *screen);
 
 /* ******************************* PLAYER ********************************* */
 
