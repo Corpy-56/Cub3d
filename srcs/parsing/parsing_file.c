@@ -6,13 +6,13 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:14:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/26 14:06:12 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 14:07:15 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	parsing_file(const char *path, t_game *game, int fd)
+bool	parsing_file(t_game *game, int fd)
 {
 	int			mode;
 	char		*line;

@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/26 14:05:44 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 14:07:28 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		keyboard_key(int keycode, t_game *game);
 /* ******************************* PARSING ********************************* */
 
 /* ********* file & header ********* */
-bool	parsing_file(const char *path, t_game *game, int fd);
+bool	parsing_file(t_game *game, int fd);
 int		parse_header(const char *line, t_config *c, int *mode, t_game *game);
 bool	header_complete(t_config *config, t_game *game);
 bool	is_header_id(char *line);

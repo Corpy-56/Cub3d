@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:20:46 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/26 13:43:53 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 14:16:21 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	ft_init_screen(t_game *g, t_mlx *screen)
 	{
 		on_destroy(g);
 	}
-		//ft_error(0, NULL, "Mlx_init failed\n");
+	//ft_error(0, NULL, "Mlx_init failed\n");
 	mlx_get_screen_size(screen->mlx_ptr, &screen->screen_size_width,
 		&screen->screen_size_height);
 	init_tex_1(&g->tex, g);

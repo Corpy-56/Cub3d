@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 15:18:15 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/26 14:06:27 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 14:39:48 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_parse(t_game *game, t_config *c)
 	i = 0;
 	if (!c->no_path || !c->ea_path || !c->so_path || !c->we_path)
 		return (1);
-	if (!game->floor.r || !game->ceiling.r)
+	if (game->floor.r == -1 || game->ceiling.r == -1)
 		return (1);
 	if (!game->map.big_map)
 		return (1);

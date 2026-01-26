@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/26 14:05:31 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 14:35:58 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	init_time(t_time *time)
 int	main(int argc, char **argv)
 {
 	t_game		game;
-	int 		fd;
+	int			fd;
 
 	init_game(&game);
 	check_args(argc, argv);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (false);
-	if (!parsing_file(argv[1], &game, fd))
+	if (!parsing_file(&game, fd))
 		return (free_all(&game), error_msg("Invalid parsing file"), 1);
 	ft_init_screen(&game, &game.screen);
 	if (!find_player(game.map.big_map, &game))
