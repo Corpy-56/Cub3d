@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 15:07:56 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/23 16:16:10 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/26 11:40:30 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,31 @@ void	ft_print_mini_map(t_raycast *cast, t_mlx *scre, t_mini_map *mini, int x)
 	}
 }
 
+void	draw_wall_mini_map_2(t_player *play, t_map *map, t_mlx *screen, int y)
+{
+	int	map_x;
+	int	map_y;
+	int	x;
+
+	x = 0;
+	while (y < 200)
+	{
+		x = 0;
+		while (x < 200)
+		{
+			map_x = play->pos_col + (x / 10) - 10;
+			map_y = play->pos_row + (y / 10) - 10;
+			if (map_x < 0 || map_y < 0 || map_x >= map->cols
+				|| map_y >= map->rows)
+				my_mlx_pixel_put(screen, 20 + x, 20 + y, 0);
+			else if (map->big_map[map_y][map_x] == '1')
+				my_mlx_pixel_put(screen, 20 + x, 20 + y, 0);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	draw_rayon(t_map *map, t_player *play, t_mlx *screen, t_game *game)
 {
 	double	ray_x;
@@ -61,16 +86,19 @@ void	draw_rayon(t_map *map, t_player *play, t_mlx *screen, t_game *game)
 			25 + 100 + (ray_y - play->pos_row) * 10, 0xFF0000);
 		i++;
 	}
+	draw_wall_mini_map_2(play, map, screen, 0);
 }
 
-void	draw_wall_mini_map(t_player *play, t_map *map, t_mlx *screen, int y)
+void	draw_wall_mini_map(t_player *play, t_map *map, t_mlx *screen, t_game *game)
 {
 	int	map_x;
 	int	map_y;
+	int	y;
 	int	x;
 
+	y = 0;
 	x = 0;
-	while (y < 200)
+	while (y++ < 200)
 	{
 		x = 0;
 		while (x < 200)
@@ -80,16 +108,14 @@ void	draw_wall_mini_map(t_player *play, t_map *map, t_mlx *screen, int y)
 			if (map_x < 0 || map_y < 0 || map_x >= map->cols
 				|| map_y >= map->rows)
 				my_mlx_pixel_put(screen, 20 + x, 20 + y, 0);
-			else if (map->big_map[map_y][map_x] == '1')
-				my_mlx_pixel_put(screen, 20 + x, 20 + y, 0);
 			else if (map->big_map[map_y][map_x] == '0')
 				my_mlx_pixel_put(screen, 20 + x, 20 + y, 0xFFFFFF);
 			else
 				my_mlx_pixel_put(screen, 20 + x, 20 + y, 0);
 			x++;
 		}
-		y++;
 	}
+	draw_rayon(map, play, screen, game);
 }
 
 void	draw_mini_map( t_mlx *screen, t_player *play, t_game *game)
@@ -97,7 +123,7 @@ void	draw_mini_map( t_mlx *screen, t_player *play, t_game *game)
 	int	i;
 	int	j;
 
-	draw_wall_mini_map(play, &game->map, screen, 0);
+	draw_wall_mini_map(play, &game->map, screen, game);
 	i = -3;
 	while (i <= 3)
 	{
@@ -109,7 +135,6 @@ void	draw_mini_map( t_mlx *screen, t_player *play, t_game *game)
 		}
 		i++;
 	}
-	draw_rayon(&game->map, play, screen, game);
 }
 
 void	hit_wall_boucle(t_raycast *cast, t_game *game)

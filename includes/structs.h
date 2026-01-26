@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:48:34 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/23 15:20:50 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/23 18:28:35 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_direction
 	double		sy;
 }				t_direction;
 
-typedef struct s_time
+typedef struct s_time// je suis sur on en a pas besoin 
 {
 	double		delta;
 	double		last;

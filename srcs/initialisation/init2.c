@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/23 16:09:04 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/26 12:05:50 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_game(t_game *game)
 	init_dir(&game->dir);
 	init_mouse(&game->mouse);
 	init_time(&game->time);
+	game->map.big_map = NULL;
 }
 
 static void	init_map2(t_direction *dir, t_player *player)

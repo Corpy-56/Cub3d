@@ -6,13 +6,13 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:50:57 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/23 16:24:16 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/23 18:25:21 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_time(t_time *time)
+void	init_time(t_time *time)// regarder avec Sarah mais cette fonction sert a rien 
 {
 	time->delta = 0;
 	time->last = 0;
