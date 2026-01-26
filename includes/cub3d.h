@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/23 17:44:49 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/26 12:13:37 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ bool	is_whitespace(char ws);
 int		skip_ws(const char *line, int i);
 bool	ws_eol(const char *line, int i);
 bool	no_digit(char *str);
+int		rgb_to_int(int r, int g, int b);
 
 /* ********* utils parsing ********* */
 int		match_id(const char *line, int i, const char *id);

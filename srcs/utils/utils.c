@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 13:52:37 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/16 12:00:43 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/26 11:41:53 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,12 @@ bool	no_digit(char *str)
 		i++;
 	}
 	return (false);
+}
+
+int	rgb_to_int(int r, int g, int b)
+{
+	int	color;
+
+	color = (r << 16) | (g << 8) | b;
+	return (color);
 }

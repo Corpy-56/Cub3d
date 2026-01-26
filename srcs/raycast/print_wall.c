@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_wall.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:09:07 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/23 17:08:54 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/26 12:28:04 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_draw_texture_2(t_game *game, t_raycast *cast, int x, int y)
 		game->tex.tex_y = (int)game->tex.tex_pos & 63;
 		color = ft_get_color(&game->tex, game->tex.tex_y, game->tex.tex_x, 'S');
 		my_mlx_pixel_put(&game->screen, x, y, color);
-		game->tex.tex_pos += game->tex.step;	
+		game->tex.tex_pos += game->tex.step;
 	}
 	else
 	{
@@ -100,18 +100,18 @@ void	draw_wall_column(t_raycast *cast, t_mlx *scre, int x, t_game *game)
 	game->tex.step = 1.0 * 64 / cast->line_height;
 	game->tex.tex_pos = (cast->draw_start - scre->screen_size_height
 			/ 2 + cast->line_height / 2) * game->tex.step;
-	if (cast->side == 0 && cast->ray_dir_x > 0)// a voir permet de mettre les images a lendroit 
+	if (cast->side == 0 && cast->ray_dir_x > 0)
 		game->tex.tex_x = 64 - game->tex.tex_x - 1;
 	if (cast->side == 1 && cast->ray_dir_y < 0)
 		game->tex.tex_x = 64 - game->tex.tex_x - 1;
 	while (y < scre->screen_size_height)
 	{
 		if (y < cast->draw_start)
-			my_mlx_pixel_put(scre, x, y, 0x87CEEB);
+			my_mlx_pixel_put(scre, x, y, game->color.int_ceiling);
 		else if (y <= cast->draw_end)
 			ft_draw_texture(game, cast, x, y);
 		else if (y < scre->screen_size_height)
-			my_mlx_pixel_put(scre, x, y, 0x228B22);
+			my_mlx_pixel_put(scre, x, y, game->color.int_floor);
 		y++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_player.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 15:18:15 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/23 17:26:55 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/23 17:59:24 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ bool	check_walls(t_game *game, double new_x, double new_y)
 
 	next_tile = game->map.big_map[(int)(new_y + OFFSET)][(int)new_x];
 	if (next_tile == '1')
-			return (true);
+		return (true);
 	next_tile = game->map.big_map[(int)(new_y - OFFSET)][(int)new_x];
 	if (next_tile == '1')
-			return (true);
-	next_tile = game->map.big_map[(int)new_y][(int)(new_x  + OFFSET)];
+		return (true);
+	next_tile = game->map.big_map[(int)new_y][(int)(new_x + OFFSET)];
 	if (next_tile == '1')
-			return (true);
-	next_tile = game->map.big_map[(int)new_y][(int)(new_x  - OFFSET)];
+		return (true);
+	next_tile = game->map.big_map[(int)new_y][(int)(new_x - OFFSET)];
 	if (next_tile == '1')
-			return (true);
+		return (true);
 	return (false);
 }
 
