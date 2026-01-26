@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:58:43 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/26 14:05:59 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 17:09:01 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init_game(t_game *game)
 {
+	// ft_bzero(&game, sizeof(*game));
 	init_config(&game->config, game);
 	init_dir(&game->dir);
 	init_mouse(&game->mouse);

@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:20:46 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/26 17:00:37 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 17:25:57 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,30 @@
 
 int	on_destroy(t_game *game)
 {
+	void	*mlx;
+
+	if (!game)
+		exit(1);
+	mlx = game->screen.mlx_ptr;
 	free_all(game);
-	if (game->screen.img)
-		mlx_destroy_image(game->screen.mlx_ptr, game->screen.img);
-	if (game->tex.img_n)
-		mlx_destroy_image(game->screen.mlx_ptr, game->tex.img_n);
-	if (game->tex.img_s)
-		mlx_destroy_image(game->screen.mlx_ptr, game->tex.img_s);
-	if (game->tex.img_e)
-		mlx_destroy_image(game->screen.mlx_ptr, game->tex.img_e);
-	if (game->tex.img_w)
-		mlx_destroy_image(game->screen.mlx_ptr, game->tex.img_w);
-	if (game->screen.win_ptr)
-		mlx_destroy_window(game->screen.mlx_ptr, game->screen.win_ptr);
-	if (game->screen.mlx_ptr)
+	if (mlx)
 	{
-		mlx_destroy_display(game->screen.mlx_ptr);
-		free(game->screen.mlx_ptr);
+		if (game->screen.img)
+			mlx_destroy_image(mlx, game->screen.img);
+		if (game->tex.img_n)
+			mlx_destroy_image(mlx, game->tex.img_n);
+		if (game->tex.img_s)
+			mlx_destroy_image(mlx, game->tex.img_s);
+		if (game->tex.img_e)
+			mlx_destroy_image(mlx, game->tex.img_e);
+		if (game->tex.img_w)
+			mlx_destroy_image(mlx, game->tex.img_w);
+		if (game->screen.win_ptr)
+			mlx_destroy_window(mlx, game->screen.win_ptr);
+		mlx_destroy_display(mlx);
+		free(mlx);
 	}
 	exit(0);
-	return (0);
 }
 
 void	ft_init_ray(t_raycast *cast, t_mini_map *mini)
@@ -89,18 +93,15 @@ void	init_tex_1(t_texture *tex, t_game *game)
 	}
 }
 
-void	ft_init_screen(t_game *g, t_mlx *screen)
+bool	ft_init_screen(t_game *g, t_mlx *screen)
 {
 	g->color.int_floor = rgb_to_int(g->floor.r, g->floor.g, g->floor.b);
 	g->color.int_ceiling = rgb_to_int(g->ceiling.r, g->ceiling.g, g->ceiling.b);
 	ft_bzero(screen, sizeof(t_mlx));
 	screen->mlx_ptr = mlx_init();
-	// screen->mlx_ptr = NULL;
+	screen->mlx_ptr = NULL;
 	if (screen->mlx_ptr == NULL)
-	{
-		on_destroy(g);
-	}
-	//ft_error(0, NULL, "Mlx_init failed\n");
+		return (error_msg("mlx_ptr is NULL"), false);
 	mlx_get_screen_size(screen->mlx_ptr, &screen->screen_size_width,
 		&screen->screen_size_height);
 	init_tex_1(&g->tex, g);
@@ -112,6 +113,7 @@ void	ft_init_screen(t_game *g, t_mlx *screen)
 			screen->screen_size_width, screen->screen_size_height);
 	screen->addr = mlx_get_data_addr(screen->img, &screen->bpp,
 			&screen->line_len, &screen->endian);
+	return (true);
 }
 
 void	init_mouse(t_mouse *mouse)
