@@ -6,7 +6,7 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 15:07:56 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/26 13:29:32 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/26 17:57:41 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,22 @@ void	draw_wall_mini_map_2(t_player *play, t_map *map, t_mlx *screen, int y)
 	int	x;
 
 	x = 0;
-	while (y < 200)
+	while (y++ < 200)
 	{
 		x = 0;
 		while (x < 200)
 		{
 			map_x = play->pos_col + (x / 10) - 10;
 			map_y = play->pos_row + (y / 10) - 10;
-			if (map_x < 0 || map_y < 0 || map_x >= map->cols
-				|| map_y >= map->rows)
+			if (map_x < 0 || map_y < 0 || map_y >= map->rows)
 				my_mlx_pixel_put(screen, 20 + x, 20 + y, 0);
-			else if (map->big_map[map_y][map_x] == '1')
-				my_mlx_pixel_put(screen, 20 + x, 20 + y, 0);
-			else if (map->big_map[map_y][map_x] != '0')
-				my_mlx_pixel_put(screen, 20 + x, 20 + y, 0);
+			else
+			{
+				if (draw_the_line_mp(map, map_y, map_x, 2) == 2)
+					my_mlx_pixel_put(screen, 20 + x, 20 + y, 0);
+			}
 			x++;
 		}
-		y++;
 	}
 }
 
@@ -99,22 +98,22 @@ void	draw_wall_mini_map(t_player *play, t_map *map, t_mlx *screen, t_game *g)
 	int	x;
 
 	y = 0;
-	x = 0;
 	while (y++ < 200)
 	{
 		x = 0;
-		while (x < 200)
+		while (x++ < 200)
 		{
 			map_x = play->pos_col + (x / 10) - 10;
 			map_y = play->pos_row + (y / 10) - 10;
-			if (map_x < 0 || map_y < 0 || map_x >= map->cols
-				|| map_y >= map->rows)
+			if (map_x < 0 || map_y < 0 || map_y >= map->rows)
 				my_mlx_pixel_put(screen, 20 + x, 20 + y, 0);
-			else if (map->big_map[map_y][map_x] == '0')
-				my_mlx_pixel_put(screen, 20 + x, 20 + y, 0xFFFFFF);
 			else
-				my_mlx_pixel_put(screen, 20 + x, 20 + y, 0);
-			x++;
+			{
+				if (draw_the_line_mp(map, map_y, map_x, 1) == 1)
+					my_mlx_pixel_put(screen, 20 + x, 20 + y, 0);
+				else
+					my_mlx_pixel_put(screen, 20 + x, 20 + y, 0xFFFFFF);
+			}
 		}
 	}
 	draw_rayon(map, play, screen, g);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:44:58 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/26 14:07:28 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 17:58:28 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ void	calcul_delta_dist(t_raycast *cast, t_player *player);
 void	draw_wall_column(t_raycast *cast, t_mlx *screen,
 			int x, t_game *game);
 void	my_mlx_pixel_put(t_mlx *screen, int x, int y, int color);
+int		draw_the_line_mp(t_map *map, int map_y, int map_x, int k);
 
 /* ********* mini - map ********* */
 void	draw_mini_map( t_mlx *screen, t_player *play, t_game *game);

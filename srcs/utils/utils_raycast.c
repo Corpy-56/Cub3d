@@ -6,11 +6,33 @@
 /*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 13:25:31 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/26 13:26:19 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/26 17:57:50 by agouin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	draw_the_line_mp(t_map *map, int map_y, int map_x, int k)
+{
+	int	max_x;
+
+	max_x = ft_strlen(map->big_map[map_y]);
+	if (map_x >= max_x)
+		return (1);
+	if (k == 1)
+	{
+		if (map->big_map[map_y][map_x] == '0')
+			return (0);
+		else
+			return (1);
+	}
+	else
+	{
+		if (map->big_map[map_y][map_x] != '0')
+			return (2);
+	}
+	return (-1);
+}
 
 void	hit_wall_boucle(t_raycast *cast, t_game *game)
 {
