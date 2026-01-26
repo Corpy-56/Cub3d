@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:20:46 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/26 14:16:21 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 15:29:57 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,13 @@ int	on_destroy(t_game *game)
 		mlx_destroy_image(game->screen.mlx_ptr, game->tex.img_e);
 	if (game->tex.img_w)
 		mlx_destroy_image(game->screen.mlx_ptr, game->tex.img_w);
-	mlx_destroy_window(game->screen.mlx_ptr, game->screen.win_ptr);
-	mlx_destroy_display(game->screen.mlx_ptr);
-	free(game->screen.mlx_ptr);
+	if (game->screen.win_ptr)
+		mlx_destroy_window(game->screen.mlx_ptr, game->screen.win_ptr);
+	if (game->screen.mlx_ptr)
+	{
+		mlx_destroy_display(game->screen.mlx_ptr);
+		free(game->screen.mlx_ptr);
+	}
 	exit(0);
 	return (0);
 }
@@ -85,6 +89,7 @@ void	ft_init_screen(t_game *g, t_mlx *screen)
 {
 	g->color.int_floor = rgb_to_int(g->floor.r, g->floor.g, g->floor.b);
 	g->color.int_ceiling = rgb_to_int(g->ceiling.r, g->ceiling.g, g->ceiling.b);
+	ft_bzero(screen, sizeof(t_mlx));
 	screen->mlx_ptr = mlx_init();
 	if (screen->mlx_ptr == NULL)
 	{

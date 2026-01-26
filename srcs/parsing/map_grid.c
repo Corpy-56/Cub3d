@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:35:04 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/22 13:55:53 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 15:22:30 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ char	**add_border(char **grid, int rows, int cols)
 	new_rows = rows + 2;
 	new_cols = cols + 2;
 	border = alloc_grid(new_rows, new_cols);
+	if (!border)
+		return (NULL);
 	y = 0;
 	while (y < rows)
 	{
@@ -97,6 +99,8 @@ char	**normalize_map(t_map *map)
 
 	map_size(map);
 	grid = alloc_grid(map->rows, map->cols);
+	if (!grid)
+		return (NULL);
 	map_in_grid(grid, map);
 	border = add_border(grid, map->rows, map->cols);
 	free_doublechar(grid);

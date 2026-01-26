@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:15:46 by skuor             #+#    #+#             */
-/*   Updated: 2025/10/13 12:29:18 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 15:33:42 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*ft_read(int fd, char *res)
 		res = ft_strjoin_free(res, buf);
 	}
 	free(buf);
+	if (!res)
+		return (NULL);
 	if (*res)
 		return (res);
 	free(res);
