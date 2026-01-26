@@ -6,7 +6,7 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:20:46 by agouin            #+#    #+#             */
-/*   Updated: 2026/01/26 13:35:09 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 13:43:53 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ void	ft_init_screen(t_game *g, t_mlx *screen)
 	g->color.int_ceiling = rgb_to_int(g->ceiling.r, g->ceiling.g, g->ceiling.b);
 	screen->mlx_ptr = mlx_init();
 	if (screen->mlx_ptr == NULL)
-		ft_error(0, NULL, "Mlx_init failed\n");
+	{
+		on_destroy(g);
+	}
+		//ft_error(0, NULL, "Mlx_init failed\n");
 	mlx_get_screen_size(screen->mlx_ptr, &screen->screen_size_width,
 		&screen->screen_size_height);
 	init_tex_1(&g->tex, g);

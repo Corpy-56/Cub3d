@@ -3,26 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agouin <agouin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 12:14:46 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/23 10:51:28 by agouin           ###   ########.fr       */
+/*   Updated: 2026/01/26 13:56:32 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	parsing_file(const char *path, t_game *game)
+bool	parsing_file(const char *path, t_game *game, int fd)
 {
 	int			mode;
-	int			fd;
 	char		*line;
 
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		return (false);
 	mode = HEADER;
 	line = get_next_line(fd);
+	if (line == NULL)
+		return (false);
 	while (line)
 	{
 		if (mode == HEADER)
@@ -38,6 +36,8 @@ bool	parsing_file(const char *path, t_game *game)
 			free_and_gnl(&line, fd);
 		}
 	}
+	if (check_parse(game, &game->config) != 0)
+		return (close(fd), false);
 	return (close(fd), true);
 }
 

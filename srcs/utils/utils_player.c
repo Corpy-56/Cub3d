@@ -6,11 +6,25 @@
 /*   By: skuor <skuor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 15:18:15 by skuor             #+#    #+#             */
-/*   Updated: 2026/01/23 17:59:24 by skuor            ###   ########.fr       */
+/*   Updated: 2026/01/26 13:56:43 by skuor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	check_parse(t_game *game, t_config *c)
+{
+	int	i;
+
+	i = 0;
+	if (!c->no_path || !c->ea_path || !c->so_path || !c->we_path)
+		return (1);
+	if (!game->floor.r || !game->ceiling.r)
+		return (1);
+	if (!game->map.big_map)
+		return (1);
+	return (0);
+}
 
 double	normalize_angle(double angle)
 {
